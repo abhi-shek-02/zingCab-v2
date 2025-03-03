@@ -1,74 +1,925 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { FontAwesome6 } from "@expo/vector-icons";
+import {
+  Image,
+  StyleSheet,
+  Platform,
+  ScrollView,
+  TouchableOpacity,
+  SafeAreaView,
+  Text,
+  View,
+  Touchable,
+  Pressable,
+  Dimensions,
+  FlatList,
+  ImageBackground,
+  Animated,
+} from "react-native";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import LottieView from "lottie-react-native";
+import Carousel from "react-native-reanimated-carousel";
+import { useEffect, useRef, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const ListData = [
+  {
+    id: "28",
+    category: "Beaches",
+    title: "Digha Beach",
+    location: "Digha",
+    image:
+      "https://www.travelescape.in/wp-content/uploads/2017/08/Digha-Beach.jpg",
+  },
+  {
+    id: "29",
+    category: "Beaches",
+    title: "Mandarmani Beach",
+    location: "Mandarmani",
+    image:
+      "https://lekhakpravin.com/wp-content/uploads/2024/04/Mandarmani-Beach-Mandarmani-Sea-Beach.png",
+  },
+  {
+    id: "10",
+    category: "Wildlife",
+    title: "Sundarbans Tiger Safari",
+    location: "Sundarbans",
+    image:
+      "https://www.sundarbanwildlifetourism.com/wp-content/uploads/2022/06/tiger-safari-india.jpg",
+  },
+  {
+    id: "1",
+    category: "Hill Stations",
+    title: "Darjeeling Himalayan Retreat",
+    location: "Darjeeling",
+    image:
+      "https://media.istockphoto.com/id/896324660/photo/toy-train.jpg?s=612x612&w=0&k=20&c=z2BYZhzj3RhUNSfDeAnFwfkm-jPU-CNU4lTdQxRqMQM=",
+  },
+  {
+    id: "11",
+    category: "Wildlife",
+    title: "Gorumara National Park",
+    location: "Dooars",
+    image:
+      "https://www.shutterstock.com/image-photo/elephant-jaldapara-national-park-260nw-2310416677.jpg",
+  },
+  {
+    id: "12",
+    category: "Wildlife",
+    title: "Jaldapara Wildlife Sanctuary",
+    location: "Jaldapara",
+    image:
+      "https://www.travelchhutichhuti.com/blog/wp-content/uploads/2020/09/Jaldapara-1.png",
+  },
+];
 
+const data = [
+  {
+    id: 1,
+    title: "City Rides",
+    image: "https://static.toiimg.com/photo/107166486.cms",
+  },
+  {
+    id: 2,
+    title: "Rentals",
+    image:
+      "https://media.istockphoto.com/id/1175862440/photo/family-enjoying-summer-picnic-in-the-nature-stock-photo.jpg?s=612x612&w=0&k=20&c=royTmUhsW1MN82lq7w2WHVQhPzOdRbulonyiaBv5g1k=",
+  },
+  {
+    id: 3,
+    title: "Airport Rides",
+    image:
+      "https://d1hk373emqoob6.cloudfront.net/media/images/rental-cars.width-600.jpg",
+    // description:'ONE RENTAL FOR ALL YOUR LOCATION'
+  },
+];
+const listItem = [
+  {
+    id: 1,
+    title: "Now in Kolkata",
+    image:
+      "https://blog.uber-cdn.com/cdn-cgi/image/width=2160,quality=80,onerror=redirect,format=auto/wp-content/uploads/2018/08/Screen-Shot-2018-08-27-at-11.42.41-AM-1024x510.png",
+  },
+  {
+    id: 3,
+    title: "Schedule Intercity",
+    image:
+      "https://quickride.in/quickRideHomeLandingPage/taxiAssets/rentalImage.png",
+    // description:'ONE RENTAL FOR ALL YOUR LOCATION'
+  },
+  {
+    id: 2,
+    title: "Schedule City Rides",
+    image:
+      "https://media.assettype.com/outlooktraveller%2Fimport%2Foutlooktraveller%2Fpublic%2Fuploads%2Farticles%2Ftravelnews%2Fa1.jpg?w=480&auto=format%2Ccompress&fit=max",
+  },
+
+  {
+    id: 4,
+    title: "Schedule Rentals",
+    image:
+      "https://s3-eu-west-1.amazonaws.com/carla-blog-images-webp/uber-car-rental-ridesharing.webp",
+    // description:'ONE RENTAL FOR ALL YOUR LOCATION'
+  },
+  {
+    id: 5,
+    title: "Book for Someone else",
+    image:
+      "https://t4.ftcdn.net/jpg/05/08/07/71/360_F_508077111_ZHFjcVoXe5QGIcwY1GOcCGcru7AmeLiC.jpg",
+    // description:'ONE RENTAL FOR ALL YOUR LOCATION'
+  },
+  {
+    id: 6,
+    title: "Schedule Airport Rides",
+    image:
+      "https://media.istockphoto.com/id/696113732/photo/the-back-of-an-airplane-to-take-off.jpg?s=612x612&w=0&k=20&c=_gz8147mDBeJP-EZ5f-yYfOV62LdcT3kJ6bAUHlslog=",
+    // description:'ONE RENTAL FOR ALL YOUR LOCATION'
+  },
+  {
+    id: 7,
+    title: "Schedule City Tour",
+    image:
+      "https://media.istockphoto.com/id/1005830448/photo/howrah-bridge.jpg?s=612x612&w=0&k=20&c=g5Zbl2IKWsKdkrxxfDs4zSYQjStH0xvNuq0pc6WH_vk=",
+    // description:'ONE RENTAL FOR ALL YOUR LOCATION'
+  },
+  {
+    id: 8,
+    title: "Add Multiple Stops",
+    image:
+      "https://media.istockphoto.com/id/1483218108/photo/happy-smiling-family-with-sibling-kids-standing-in-front-of-car-for-picnic-by-looking-camera.jpg?s=612x612&w=0&k=20&c=UfuvkCGrCkyL8XnEoORur4c4e_2eGHLQlCM0reRIYec=",
+    // description:'ONE RENTAL FOR ALL YOUR LOCATION'
+  },
+];
+const { width } = Dimensions.get("window");
 export default function HomeScreen() {
+  const navigation = useNavigation();
+  const router = useRouter();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const fadeAnim1 = useRef(new Animated.Value(0)).current;
+  const fadeAnim2 = useRef(new Animated.Value(0)).current;
+  const fadeAnim3 = useRef(new Animated.Value(0)).current;
+
+  const translateY1 = useRef(new Animated.Value(10)).current;
+  const translateY2 = useRef(new Animated.Value(10)).current;
+  const translateY3 = useRef(new Animated.Value(10)).current;
+
+  useEffect(() => {
+    const animateText = (fadeAnim, translateY, delay) => {
+      return Animated.loop(
+        Animated.sequence([
+          Animated.delay(delay),
+          Animated.parallel([
+            Animated.timing(fadeAnim, {
+              toValue: 1,
+              duration: 800,
+              useNativeDriver: true,
+            }),
+            Animated.timing(translateY, {
+              toValue: 0,
+              duration: 800,
+              useNativeDriver: true,
+            }),
+          ]),
+          Animated.delay(1000), // Stay visible for some time
+          Animated.parallel([
+            Animated.timing(fadeAnim, {
+              toValue: 0,
+              duration: 800,
+              useNativeDriver: true,
+            }),
+            Animated.timing(translateY, {
+              toValue: -10,
+              duration: 800,
+              useNativeDriver: true,
+            }),
+          ]),
+        ])
+      ).start();
+    };
+
+    animateText(fadeAnim1, translateY1, 0);
+    animateText(fadeAnim2, translateY2, 800);
+    animateText(fadeAnim3, translateY3, 1600);
+  }, []);
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
+    <View style={{ flex: 1, backgroundColor: "white" }}>
+      <ScrollView
+        style={{ flex: 1, backgroundColor: "white" }}
+        keyboardShouldPersistTaps="handled"
+      >
+        <TouchableOpacity
+          onPress={() => navigation.navigate("bookingScreen")}
+          style={{
+            // flex: 0.5,
+            backgroundColor: "#0045ff",
+            justifyContent: "center",
+            alignItems: "center",
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10,
+            shadowColor: "#000",
+            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: 0.2,
+            shadowRadius: 5,
+            height: 250,
+            // Shadow for Android
+            elevation: 5,
+          }}
+        >
+          {/* <View style={{ marginTop: 90 }}>
+            <Text
+              style={{ color: "#fff", fontFamily: "Poppins", fontSize: 12.5 }}
+            >
+              Reliable Pricing | Effortless Booking | Simplicity{" "}
+            </Text>
+          </View> */}
+          <View
+            style={{
+              marginTop: 90,
+              alignItems: "center",
+              flexDirection: "row",
+            }}
+          >
+            <Animated.Text
+              style={{
+                color: "#fff",
+                fontFamily: "Poppins",
+                fontSize: 12.5,
+                opacity: fadeAnim1,
+                transform: [{ translateY: translateY1 }],
+              }}
+            >
+              Reliable Pricing{" "}
+            </Animated.Text>
+
+            <Animated.Text
+              style={{
+                color: "#fff",
+                fontFamily: "Poppins",
+                fontSize: 12.5,
+                opacity: fadeAnim2,
+                transform: [{ translateY: translateY2 }],
+              }}
+            >
+              | Effortless Booking{" "}
+            </Animated.Text>
+
+            <Animated.Text
+              style={{
+                color: "#fff",
+                fontFamily: "Poppins",
+                fontSize: 12.5,
+                opacity: fadeAnim3,
+                transform: [{ translateY: translateY3 }],
+              }}
+            >
+              | Simplicity
+            </Animated.Text>
+          </View>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#fff",
+              width: "70%",
+              marginTop: 8,
+              flexDirection: "row",
+              padding: 12,
+              borderRadius: 10,
+              alignContent: "center",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.2,
+              shadowRadius: 5,
+
+              // Shadow for Android
+              // elevation: 5,
+            }}
+          >
+            <Text style={{ color: "#878ca8", alignContent: "center" }}>
+              Introducing
+            </Text>
+            <Text
+              style={{
+                marginLeft: 5,
+                alignContent: "center",
+                fontWeight: "bold",
+                color: "#435b8e",
+              }}
+            >
+              Seamless Rides
+            </Text>
+          </TouchableOpacity>
+          <Text
+            style={{
+              color: "#fff",
+              fontFamily: "Poppins",
+              marginLeft: 120,
+              marginTop: 3,
+              fontSize: 10,
+            }}
+          >
+            *Gold Standard of Ride
+          </Text>
+          <View
+            style={{
+              // backgroundColor: "grey",
+              width: "90%",
+              // height: 80,
+              top: 10,
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {[
+              {
+                title: "City Rides",
+                rideLottie: require("../../assets/A3.json"),
+              },
+              {
+                title: "Rentals",
+                rideLottie: require("../../assets/A2.json"),
+              },
+              {
+                title: "Airport Rides",
+                rideLottie: require("../../assets/AirportRide.json"),
+              },
+            ]?.map((item, index) => {
+              return (
+                <View
+                  style={{
+                    height: "80%",
+                    width: "30%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "white",
+                    margin: 10,
+                    borderRadius: 10,
+                    shadowColor: "#000",
+                    shadowOffset: { width: 0, height: 4 },
+                    shadowOpacity: 0.2,
+                    shadowRadius: 5,
+
+                    // Shadow for Android
+                    elevation: 5,
+                  }}
+                >
+                  <View
+                    style={{
+                      flex: 1,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {/* <View
+                      style={{
+                        flex: 0.3,
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      {index == 1 && (
+                        <Text
+                          style={{
+                            fontSize: 11,
+                            color: "#212529",
+                            marginTop: 3,
+                          }}
+                        >
+                          Extra slots
+                        </Text>
+                      )}{" "}
+                      {index == 2 && (
+                        <Text style={{ fontSize: 11, marginTop: 3 }}>
+                          Upto 50% off
+                        </Text>
+                      )}
+                    </View> */}
+                    {/* fffr */}
+                    <View
+                      style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        // backgroundColor: "red",
+                      }}
+                    >
+                      <LottieView
+                        source={item.rideLottie} // Replace with your JSON file path
+                        // source={require("../../assets/AirportRide.json")}
+                        autoPlay
+                        loop
+                        style={{
+                          alignContent: "center",
+                          width: 80,
+                          height: 100,
+                        }} // Adjust size
+                      />
+                    </View>
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        color: "#435b8e",
+                        flex: 0.3,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        fontSize: 11,
+                      }}
+                    >
+                      {item?.title}
+                    </Text>
+                  </View>
+                </View>
+              );
             })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+          </View>
+        </TouchableOpacity>
+
+        <View
+          style={{
+            // flex: 1,
+            marginTop: 30,
+            justifyContent: "center",
+            alignItems: "center",
+            // marginBottom: 105,
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => navigation.navigate("zingDarshan")}
+            style={{
+              // flex: 0.3,
+              // height: "20%",
+              width: "95%",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#f9faff",
+              margin: 10,
+              borderRadius: 10,
+              shadowColor: "#505672",
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.2,
+              shadowRadius: 5,
+              height: 40,
+              // Shadow for Android
+              elevation: 5,
+              marginTop: 10,
+              // padding:10,
+            }}
+          >
+            <View
+              style={{
+                flex: 0.6,
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                // backgroundColor: "red",
+              }}
+            >
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  // backgroundColor: "black",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  alignContent: "center",
+                }}
+              >
+                <LottieView
+                  source={require("../../assets/Location.json")} // Replace with your JSON file path
+                  // source={require("../../assets/AirportRide.json")}
+                  autoPlay
+                  loop
+                  style={{
+                    alignContent: "center",
+                    width: 30,
+                    height: 100,
+                    alignSelf: "center",
+                  }} // Adjust size
+                />
+              </View>
+              <View
+                style={{
+                  flex: 4,
+                  flexDirection: "column",
+                }}
+              >
+                <Text style={{ color: "#01001c" }}>
+                  Explore Bengal like never before
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 0.8,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <AntDesign name="arrowright" size={15} color="#2d78ff" />
+              </View>
+            </View>
+          </TouchableOpacity>
+
+          {/* <TouchableOpacity
+            style={{
+              // flex: 0.3,
+              // height: "20%",
+              width: "95%",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#f9faff",
+              margin: 10,
+              borderRadius: 10,
+              shadowColor: "#a49c9c",
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.2,
+              shadowRadius: 5,
+              height: 120,
+              // Shadow for Android
+              elevation: 5,
+              marginTop: 5,
+            }}
+          >
+            <View
+              style={{
+                flex: 0.6,
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                // backgroundColor: "red",
+              }}
+            >
+              <View
+                style={{
+                  flex: 2,
+                  flexDirection: "row",
+                  // backgroundColor: "black",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  alignContent: "center",
+                }}
+              >
+                <LottieView
+                  source={require("../../assets/ExpressCar.json")} // Replace with your JSON file path
+                  // source={require("../../assets/AirportRide.json")}
+                  autoPlay
+                  loop
+                  style={{
+                    alignContent: "center",
+                    width: 80,
+                    height: 100,
+                    alignSelf: "center",
+                  }} // Adjust size
+                />
+              </View>
+              <View style={{ flex: 4, flexDirection: "column" }}>
+                <Text style={{ color: "#01001c" }}>
+                  Get an Express Ride in few minutes
+                </Text>
+                <Text style={{ color: "#959595" }}>
+                  Experience gold standard
+                </Text>
+              </View>
+              <View
+                style={{
+                  flex: 0.8,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <AntDesign name="right" size={15} color="#959595" />
+              </View>
+            </View>
+
+            <View
+              style={{
+                flex: 0.01,
+                backgroundColor: "#dbdbdb75",
+                height: "10%",
+                width: "90%",
+              }}
+            ></View>
+            <TouchableOpacity
+              style={{
+                flex: 0.3,
+                justifyContent: "center",
+                alignContent: "center",
+              }}
+            >
+              <Text
+                style={{
+                  justifyContent: "center",
+                  alignContent: "center",
+                  fontWeight: "bold",
+                  color: "#2d78ff",
+                  alignSelf: "center",
+                }}
+              >
+                Book Now
+              </Text>
+            </TouchableOpacity>
+          </TouchableOpacity> */}
+          <View style={{ height: 100 }}>
+            <FlatList
+              data={ListData}
+              horizontal
+              renderItem={({ item, index }) => {
+                console.log("item", item);
+                return (
+                  <View>
+                    <Text>{item?.title}</Text>
+                  </View>
+                );
+              }}
+              keyExtractor={item=>item.id}
+            />
+          </View>
+          <TouchableOpacity
+            style={{
+              height: 200,
+              width: "95%",
+              borderRadius: 10,
+              // borderRadius: 10,
+              // shadowColor: "#a49c9c",
+              // shadowOffset: { width: 0, height: 4 },
+              // shadowOpacity: 0.2,
+              // shadowRadius: 5,
+              // // height: 120,
+              // // Shadow for Android
+              // elevation: 5,
+              marginTop: 5,
+
+              justifyContent: "center",
+              // alignItems: "center",
+              backgroundColor: "#f9faff",
+              margin: 10,
+
+              shadowColor: "#a49c9c",
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.2,
+              shadowRadius: 5,
+
+              // Shadow for Android
+              elevation: 5,
+            }}
+          >
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: "#2d78ff",
+                  fontFamily: "Poppins",
+                }}
+              >
+                Welcome to ZingCab
+              </Text>
+              <Text style={{ fontSize: 10 }}>Tap to see how ZingCab works</Text>
+              <LottieView
+                source={require("../../assets/SUV.json")}
+                autoPlay
+                loop
+                style={{
+                  alignContent: "center",
+                  width: "100%",
+                  height: 140,
+                  alignSelf: "center",
+                }}
+              />
+            </View>
+          </TouchableOpacity>
+
+          <View
+            style={{
+              // backgroundColor: "blue",
+              height: 190,
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 10,
+            }}
+          >
+            <Text
+              style={{
+                justifyContent: "flex-start",
+                textAlign: "left",
+                fontSize: 17,
+                fontWeight: "600",
+              }}
+            >
+              Travel Smart with Zingcab!
+            </Text>
+            {/* <FlatList
+              data={listItem}
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => (
+                <View
+                  style={{
+                    width: width * 0.7,
+                    margin: 10,
+                    borderRadius: 10,
+                    overflow: "hidden",
+                    alignSelf: "center",
+                    justifyContent: "center",
+                    // alignItems: "center",
+                    backgroundColor: "#f9faff",
+
+                    shadowColor: "#a49c9c",
+                    shadowOffset: { width: 0, height: 4 },
+                    shadowOpacity: 0.2,
+                    shadowRadius: 5,
+
+                    // Shadow for Android
+                    elevation: 5,
+                    padding: 10,
+                  }}
+                >
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: 10,
+                      left: 10,
+                      backgroundColor: "rgba(0,0,0,0.6)", // Semi-transparent background
+                      color: "white",
+                      paddingHorizontal: 8,
+                      paddingVertical: 5,
+                      borderRadius: 5,
+                      fontWeight: "bold",
+                      fontSize: 14,
+                      marginTop: 10,
+                    }}
+                  >
+                    {item.title}
+                  </Text>
+
+                  <Image
+                    src={item.image}
+                    style={{
+                      alignContent: "center",
+                      width: '100%',
+                      height: '100%',
+                      alignSelf: "center",
+                      resizeMode: "contain", // Ensures the image scales properly
+                    }}
+                  />
+                </View>
+              )}
+              horizontal
+            /> */}
+            <FlatList
+              data={listItem}
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => (
+                <View style={styles.card}>
+                  <ImageBackground
+                    src={item.image}
+                    style={styles.image}
+                    resizeMode="cover" // Ensures the image covers the whole area
+                  >
+                    <Text style={styles.text}>{item.title}</Text>
+                  </ImageBackground>
+                </View>
+              )}
+              horizontal
+            />
+          </View>
+
+          <Carousel
+            loop
+            width={width}
+            height={270}
+            autoPlay={true}
+            autoPlayInterval={2000}
+            data={data}
+            scrollAnimationDuration={1000}
+            mode="parallax"
+            modeConfig={{
+              parallaxScrollingScale: 0.9,
+              parallaxScrollingOffset: 50,
+            }}
+            renderItem={({ item }) => (
+              <View
+                style={{
+                  borderRadius: 15,
+                  overflow: "hidden",
+                  backgroundColor: "white",
+                  shadowColor: "#000",
+                  shadowOffset: { width: 0, height: 4 },
+                  shadowOpacity: 0.2,
+                  shadowRadius: 5,
+                  elevation: 5,
+                  alignItems: "center",
+                  marginBottom: 40,
+                }}
+              >
+                {/* <LottieView
+                  source={item.image}
+                  autoPlay
+                  loop
+                  style={{
+                    alignContent: "center",
+                    width: 80,
+                    height: 100,
+                    alignSelf: "center",
+                  }}
+                /> */}
+                <Image
+                  // source={{uri :item.image}}
+                  source={{ uri: item.image }}
+                  style={{
+                    marginTop: 10,
+                    alignContent: "center",
+                    width: "80%",
+                    height: "70%",
+                    alignSelf: "center",
+                    borderRadius: 10,
+                  }}
+                  resizeMode="cover" // Ensures the image covers the whole area
+                />
+                <Text
+                  style={{
+                    fontSize: 15,
+                    fontWeight: "bold",
+                    color: "#435b8e",
+                    textAlign: "center",
+                    // marginTop: 2,
+                    // marginBottom: 10,
+                  }}
+                >
+                  {item.title}
+                </Text>
+              </View>
+            )}
+          />
+        </View>
+      </ScrollView>
+    </View>
   );
 }
-
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  card: {
+    width: width * 0.7,
+    margin: 10,
+    borderRadius: 10,
+    overflow: "hidden",
+    alignSelf: "center",
+    justifyContent: "center",
+    backgroundColor: "#f9faff",
+    shadowColor: "#a49c9c",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  image: {
+    width: "100%",
+    height: 150, // Fixed height for proper display
+    justifyContent: "flex-start", // Aligns text at the top
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  text: {
+    position: "absolute",
+    top: 10,
+    left: 10,
+    backgroundColor: "rgba(0,0,0,0.6)", // Semi-transparent background
+    color: "white",
+    paddingHorizontal: 8,
+    paddingVertical: 5,
+    borderRadius: 5,
+    fontWeight: "bold",
+    fontSize: 14,
   },
 });
+// const styles = StyleSheet.create({
+//   container: {
+//     alignItems: "center",
+//     justifyContent: "center",
+//     paddingVertical: 20,
+//   },
+// card: {
+//   borderRadius: 15,
+//   overflow: "hidden",
+//   backgroundColor: "white",
+//   shadowColor: "#000",
+//   shadowOffset: { width: 0, height: 4 },
+//   shadowOpacity: 0.2,
+//   shadowRadius: 5,
+//   elevation: 5,
+//   alignItems: "center",
+// },
+//   image: {
+// width: "100%",
+// height: 150,
+// borderRadius: 10,
+//   },
+//   text: {
+// fontSize: 15,
+// fontWeight: "bold",
+// color: "#435b8e",
+// textAlign: "center",
+// // marginTop: 2,
+// marginBottom: 10,
+//   },
+// });
