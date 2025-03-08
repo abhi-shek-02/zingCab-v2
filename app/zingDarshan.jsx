@@ -322,7 +322,8 @@ const events = [
     category: "Adventure",
     title: "Rock Climbing in Susunia Hills",
     location: "Bankura",
-    image: "https://www.shutterstock.com/editorial/image-editorial/N4zcY338MajaY3z2MTEzNg==/indian-rock-climber-makes-difficult-move-on-440nw-7621598a.jpg",
+    image:
+      "https://www.shutterstock.com/editorial/image-editorial/N4zcY338MajaY3z2MTEzNg==/indian-rock-climber-makes-difficult-move-on-440nw-7621598a.jpg",
   },
 
   // City Tours
@@ -331,21 +332,24 @@ const events = [
     category: "City Tour",
     title: "Kolkata Heritage Walk",
     location: "Kolkata",
-    image: "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/72/f7/b5.jpg",
+    image:
+      "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/72/f7/b5.jpg",
   },
   {
     id: "34",
     category: "City Tour",
     title: "Science City Exploration",
     location: "Kolkata",
-    image: "https://files.yappe.in/place/full/science-city-kolkata-1959515.webp",
+    image:
+      "https://files.yappe.in/place/full/science-city-kolkata-1959515.webp",
   },
   {
     id: "35",
     category: "City Tour",
     title: "Howrah Bridge",
     location: "Kolkata",
-    image: "https://s7ap1.scene7.com/is/image/incredibleindia/howrah-bridge-howrah-west-bengal-1-attr-hero?qlt=82&ts=1726642836188",
+    image:
+      "https://s7ap1.scene7.com/is/image/incredibleindia/howrah-bridge-howrah-west-bengal-1-attr-hero?qlt=82&ts=1726642836188",
   },
 
   // Add more destinations to reach 100...
@@ -368,7 +372,7 @@ const ZingDarshan = () => {
       {/* <Text style={styles.header}>BluSmart Darshan</Text> */}
 
       {/* Horizontal Category List */}
-      <View style={{ backgroundColor: "#e5eaff" }}>
+      <View style={{ backgroundColor: "#E0F2FE" }}>
         <FlatList
           data={categories}
           horizontal
@@ -403,12 +407,31 @@ const ZingDarshan = () => {
       <FlatList
         data={filteredEvents}
         keyExtractor={(item) => item.id}
+        windowSize={2}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.card}>
             <Image source={{ uri: item.image }} style={styles.cardImage} />
             <Text style={styles.cardTitle}>{item.title}</Text>
             <Text style={styles.cardLocation}>{item.location}</Text>
-            <View style={{width:'100%'}}><Text style={{textAlign:'center',fontWeight:'bold',color:'#2d78ff'}}>Tap to Explore</Text></View>
+            <View
+              style={{
+                width: "100%",
+                backgroundColor: "#E9F4FF",
+                paddingVertical: 10,
+                borderBottomEndRadius: 10,
+                borderBottomLeftRadius: 10,
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  color: "#007AFF",
+                }}
+              >
+                Tap to Explore
+              </Text>
+            </View>
           </TouchableOpacity>
         )}
       />
@@ -417,7 +440,7 @@ const ZingDarshan = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#F5F5F5", marginBottom: 100, },
+  container: { flex: 1, backgroundColor: "#F5F5F5", marginBottom: 100 },
   header: {
     fontSize: 22,
     fontWeight: "bold",
@@ -445,18 +468,36 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 14,
     fontWeight: "bold",
-    color: "gray",
+    color: "#696E72",
   },
   card: {
-    backgroundColor: "white",
+    backgroundColor: "#FEFFFE",
     borderRadius: 10,
     margin: 10,
-    padding: 10,
+    // borderColor:'grey',
+    // padding: 10,
     elevation: 3,
   },
-  cardImage: { width: "100%", height: 150, borderRadius: 10 },
-  cardTitle: { fontSize: 18, fontWeight: "bold", marginTop: 5 },
-  cardLocation: { fontSize: 14, color: "gray" },
+  cardImage: {
+    width: "100%",
+    height: 150,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginTop: 5,
+    color: "#333333",
+    paddingLeft: 20,
+    paddingTop: 5,
+  },
+  cardLocation: {
+    fontSize: 14,
+    color: "#AAAAAA",
+    paddingLeft: 20,
+    paddingBottom: 10,
+  },
 });
 
 export default ZingDarshan;

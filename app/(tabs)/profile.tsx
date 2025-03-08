@@ -8,8 +8,10 @@ import {
   ScrollView,
 } from "react-native";
 import { MaterialIcons, FontAwesome5, Entypo } from "@expo/vector-icons";
+import { useNavigation } from "expo-router";
 
-const ProfileScreen = ({ navigation }) => {
+const ProfileScreen = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {/* Profile Section */}
@@ -46,7 +48,7 @@ const ProfileScreen = ({ navigation }) => {
           { label: "Help", icon: "help-outline" },
           { label: "Policy", icon: "policy" },
         ].map((item, index) => (
-          <TouchableOpacity key={index} style={styles.menuItem}>
+          <TouchableOpacity key={index} style={styles.menuItem}  onPress={() => navigation.navigate("loginScreen")}>
             <MaterialIcons name={item.icon} size={22} color="#0056D2" />
             <Text style={styles.menuText}>{item.label}</Text>
             {item.badge && <Text style={styles.badge}>{item.badge}</Text>}

@@ -1,109 +1,495 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+// import React, { useState } from "react";
+// import {
+//   StyleSheet,
+//   Image,
+//   View,
+//   Text,
+//   ScrollView,
+//   TextInput,
+//   TouchableOpacity,
+//   Dimensions,
+//   KeyboardAvoidingView,
+//   Platform,
+//   TouchableWithoutFeedback,
+//   Keyboard,
+// } from "react-native";
+// import Carousel from "react-native-reanimated-carousel";
+// import Animated, {
+//   interpolate,
+//   useAnimatedStyle,
+// } from "react-native-reanimated";
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+// const imageUrls = [
+//   "https://media.istockphoto.com/id/1224814265/photo/indian-couple-in-the-car-with-phone.jpg?s=612x612&w=0&k=20&c=SP4c6XC8Toe_Vs3W93EGZufDDr1653aCMethJ6-vFvE=",
+//   "https://media.istockphoto.com/id/1133362236/photo/happy-couple-going-on-a-road-trip-stock-image.jpg?s=612x612&w=0&k=20&c=CtMQbW0_lzEGvAt0paqkGWSp3WKR5w3yYcEivRHT7uM=",
+//   "https://media.istockphoto.com/id/1133366487/photo/enjoying-travel-stock-image.jpg?s=612x612&w=0&k=20&c=4kZDaZ0Gs4rTxHdInJharjn4-KfEbUhbAr06r6nODsQ=",
+//   "https://media.istockphoto.com/id/1279634421/photo/young-couple-spending-time-together-stock-photo.jpg?s=612x612&w=0&k=20&c=vYO6ksvetNIWUsVfvSEGRDwM35tr5-ulR82h2o5ZTco=",
+//   "https://www.shutterstock.com/image-photo/pleasant-taxi-ride-happy-arabic-600nw-2300534995.jpg",
+// ];
+
+// export default function TabTwoScreen() {
+//   const { width } = Dimensions.get("window");
+//   const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+//   return (
+//     <KeyboardAvoidingView
+//       behavior={Platform.OS === "ios" ? "padding" : "height"}
+//       style={styles.container}
+//     >
+//       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+//         <ScrollView contentContainerStyle={styles.scrollContainer}>
+//           {/* Header Badge */}
+//           <View style={styles.badgeContainer}>
+//             <Text style={styles.badgeText}>
+//               Experience the Future of Travel{" "}
+//             </Text>
+//             <Text style={styles.badgeSubText}>Cleaner, Smoother, Smarter!</Text>
+//           </View>
+
+//           {/* Main Banner */}
+//           <Text style={styles.title}>
+//             Join The{"  \n"}
+//             <Text style={styles.highlight}>Elite Rides, Exclusive Comfort!</Text>
+//           </Text>
+
+//           <Text style={styles.subText}>
+//             Zero Cancellation | Reliable Pricing
+//           </Text>
+
+//           {/* Promo Image */}
+//           <View style={styles.carouselContainer}>
+//             <Carousel
+//               loop
+//               autoPlay
+//               autoPlayInterval={3000}
+//               width={width * 0.85}
+//               height={200}
+//               data={imageUrls}
+//               scrollAnimationDuration={1000}
+//               renderItem={({ item, animationValue }) => {
+//                 const animatedStyle = useAnimatedStyle(() => {
+//                   const opacity = interpolate(
+//                     animationValue.value,
+//                     [-1, 0, 1],
+//                     [0.3, 1, 0.3]
+//                   );
+//                   return { opacity };
+//                 });
+//                 return (
+//                   <Animated.View style={[styles.carouselItem, animatedStyle]}>
+//                     <Image
+//                       source={{ uri: item }}
+//                       style={styles.carouselImage}
+//                     />
+//                   </Animated.View>
+//                 );
+//               }}
+//             />
+//           </View>
+
+//           <View style={styles.promoBadge}>
+//             <Text style={styles.promoText}>
+//               Safe, Reliable & Always On Time
+//             </Text>
+//             <Text style={styles.promoDiscount}>
+//               Experience Comfort Like Never Before
+//             </Text>
+//           </View>
+
+//           {/* Phone Input Section */}
+//           <View style={styles.inputContainer}>
+//             <Text style={styles.flag}>🇮🇳</Text>
+//             <Text style={styles.countryCode}>+91</Text>
+//             <TextInput
+//               style={styles.input}
+//               placeholder="9876543210"
+//               keyboardType="phone-pad"
+//               returnKeyType="done"
+//               onFocus={() => setKeyboardVisible(true)}
+//               onBlur={() => setKeyboardVisible(false)}
+//             />
+//           </View>
+
+//           {/* Get OTP Button */}
+//           <TouchableOpacity style={styles.truecallerButton}>
+//             <Text style={styles.truecallerText}>Get OTP</Text>
+//           </TouchableOpacity>
+
+//           {/* Extra padding to avoid being covered by keyboard */}
+//           {keyboardVisible && <View style={{ height: 80 }} />}
+//         </ScrollView>
+//       </TouchableWithoutFeedback>
+//     </KeyboardAvoidingView>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#F8F9FD",
+//   },
+//   scrollContainer: {
+//     padding: 20,
+//   },
+//   badgeContainer: {
+//     backgroundColor: "#F1F8FD",
+//     paddingVertical: 8,
+//     paddingHorizontal: 16,
+//     borderRadius: 20,
+//     alignSelf: "center",
+//     marginBottom: 10,
+//     marginTop: 20,
+//     width: "90%",
+//   },
+//   badgeText: {
+//     color: "#fff",
+//     fontWeight: "bold",
+//     textAlign: "center",
+//     backgroundColor: "#4EBFAC",
+//     width: "100%",
+//     padding: 10,
+//     fontSize: 15,
+//     borderRadius: 50,
+//   },
+//   badgeSubText: {
+//     color: "#505052",
+//     fontSize: 14,
+//     textAlign: "center",
+//     fontWeight: "700",
+//     padding: 10,
+//   },
+//   title: {
+//     fontSize: 22,
+//     fontWeight: "bold",
+//     textAlign: "center",
+//     marginTop: 10,
+//   },
+//   highlight: {
+//     paddingVertical:10,
+//     color: "#007AFF",
+//     fontSize:20
+//   },
+//   subText: {
+//     fontSize: 14,
+//     color: "#666",
+//     textAlign: "center",
+//     marginBottom: 15,
+//    marginTop:5 
+//   },
+//   carouselContainer: {
+//     alignItems: "center",
+//     justifyContent: "center",
+//     marginVertical: 20,
+//   },
+//   carouselItem: {
+//     borderRadius: 10,
+//     overflow: "hidden",
+//   },
+//   carouselImage: {
+//     width: "100%",
+//     height: 200,
+//     borderRadius: 10,
+//   },
+//   promoBadge: {
+//     backgroundColor: "#0057FF",
+//     paddingVertical: 8,
+//     paddingHorizontal: 16,
+//     borderRadius: 10,
+//     top: -10,
+//   },
+//   promoText: {
+//     color: "#fff",
+//     fontSize: 14,
+//     textAlign: "center",
+//   },
+//   promoDiscount: {
+//     color: "#fff",
+//     fontSize: 16,
+//     fontWeight: "bold",
+//     textAlign: "center",
+//   },
+//   inputContainer: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     backgroundColor: "#fff",
+//     padding: 12,
+//     borderRadius: 10,
+//     marginTop: 20,
+//     borderColor: "#ddd",
+//     borderWidth: 1,
+//   },
+//   flag: {
+//     fontSize: 18,
+//     marginRight: 8,
+//   },
+//   countryCode: {
+//     fontSize: 16,
+//     fontWeight: "bold",
+//     marginRight: 8,
+//   },
+//   input: {
+//     flex: 1,
+//     fontSize: 16,
+//   },
+//   truecallerButton: {
+//     backgroundColor: "#E9F4FF",
+//     paddingVertical: 12,
+//     borderRadius: 10,
+//     alignItems: "center",
+//     marginTop: 20,
+//   },
+//   truecallerText: {
+//     color: "#007AFF",
+//     fontSize: 16,
+//     fontWeight: "bold",
+//   },
+// });
+
+
+
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Image,
+  View,
+  Text,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
+import Carousel from "react-native-reanimated-carousel";
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+} from "react-native-reanimated";
+
+const imageUrls = [
+  "https://media.istockphoto.com/id/1224814265/photo/indian-couple-in-the-car-with-phone.jpg?s=612x612&w=0&k=20&c=SP4c6XC8Toe_Vs3W93EGZufDDr1653aCMethJ6-vFvE=",
+  "https://media.istockphoto.com/id/1133362236/photo/happy-couple-going-on-a-road-trip-stock-image.jpg?s=612x612&w=0&k=20&c=CtMQbW0_lzEGvAt0paqkGWSp3WKR5w3yYcEivRHT7uM=",
+  "https://media.istockphoto.com/id/1133366487/photo/enjoying-travel-stock-image.jpg?s=612x612&w=0&k=20&c=4kZDaZ0Gs4rTxHdInJharjn4-KfEbUhbAr06r6nODsQ=",
+  "https://media.istockphoto.com/id/1279634421/photo/young-couple-spending-time-together-stock-photo.jpg?s=612x612&w=0&k=20&c=vYO6ksvetNIWUsVfvSEGRDwM35tr5-ulR82h2o5ZTco=",
+  "https://www.shutterstock.com/image-photo/pleasant-taxi-ride-happy-arabic-600nw-2300534995.jpg",
+];
 
 export default function TabTwoScreen() {
+  const { width } = Dimensions.get("window");
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          {/* Header Badge */}
+          <View style={styles.badgeContainer}>
+            <Text style={styles.badgeText}>
+              Experience the Future of Travel{" "}
+            </Text>
+            <Text style={styles.badgeSubText}>Cleaner, Smoother, Smarter!</Text>
+          </View>
+
+          {/* Main Banner */}
+          <Text style={styles.title}>
+            Join The{"  \n"}
+            <Text style={styles.highlight}>Elite Rides, Exclusive Comfort!</Text>
+          </Text>
+
+          <Text style={styles.subText}>
+            Zero Cancellation | Reliable Pricing
+          </Text>
+
+          {/* Promo Image */}
+          <View style={styles.carouselContainer}>
+            <Carousel
+              loop
+              autoPlay
+              autoPlayInterval={3000}
+              width={width * 0.85}
+              height={200}
+              data={imageUrls}
+              scrollAnimationDuration={1000}
+              renderItem={({ item, animationValue }) => {
+                const animatedStyle = useAnimatedStyle(() => {
+                  const opacity = interpolate(
+                    animationValue.value,
+                    [-1, 0, 1],
+                    [0.3, 1, 0.3]
+                  );
+                  return { opacity };
+                });
+                return (
+                  <Animated.View style={[styles.carouselItem, animatedStyle]}>
+                    <Image
+                      source={{ uri: item }}
+                      style={styles.carouselImage}
+                    />
+                  </Animated.View>
+                );
+              }}
+            />
+          </View>
+
+          <View style={styles.promoBadge}>
+            <Text style={styles.promoText}>
+              Safe, Reliable & Always On Time
+            </Text>
+            <Text style={styles.promoDiscount}>
+              Experience Comfort Like Never Before
+            </Text>
+          </View>
+
+          {/* Phone Input Section */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.flag}>🇮🇳</Text>
+            <Text style={styles.countryCode}>+91</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="9876543210"
+              keyboardType="phone-pad"
+              returnKeyType="done"
+              onFocus={() => setKeyboardVisible(true)}
+              onBlur={() => setKeyboardVisible(false)}
+            />
+          </View>
+
+          {/* Get OTP Button */}
+          <TouchableOpacity style={styles.truecallerButton}>
+            <Text style={styles.truecallerText}>Get OTP</Text>
+          </TouchableOpacity>
+
+          {/* Extra padding to avoid being covered by keyboard */}
+          {keyboardVisible && <View style={{ height: 80 }} />}
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: {
+    flex: 1,
+    backgroundColor: "#F8F9FD",
   },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
+  scrollContainer: {
+    padding: 20,
+  },
+  badgeContainer: {
+    backgroundColor: "#F1F8FD",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+    alignSelf: "center",
+    marginBottom: 10,
+    marginTop: 20,
+    width: "90%",
+  },
+  badgeText: {
+    color: "#fff",
+    fontWeight: "bold",
+    textAlign: "center",
+    backgroundColor: "#4EBFAC",
+    width: "100%",
+    padding: 10,
+    fontSize: 15,
+    borderRadius: 50,
+  },
+  badgeSubText: {
+    color: "#505052",
+    fontSize: 14,
+    textAlign: "center",
+    fontWeight: "700",
+    padding: 10,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 10,
+  },
+  highlight: {
+    paddingVertical:10,
+    color: "#007AFF",
+    fontSize:20
+  },
+  subText: {
+    fontSize: 14,
+    color: "#666",
+    textAlign: "center",
+    marginBottom: 15,
+   marginTop:5 
+  },
+  carouselContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 20,
+  },
+  carouselItem: {
+    borderRadius: 10,
+    overflow: "hidden",
+  },
+  carouselImage: {
+    width: "100%",
+    height: 200,
+    borderRadius: 10,
+  },
+  promoBadge: {
+    backgroundColor: "#0057FF",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 10,
+    top: -10,
+  },
+  promoText: {
+    color: "#fff",
+    fontSize: 14,
+    textAlign: "center",
+  },
+  promoDiscount: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    padding: 12,
+    borderRadius: 10,
+    marginTop: 20,
+    borderColor: "#ddd",
+    borderWidth: 1,
+  },
+  flag: {
+    fontSize: 18,
+    marginRight: 8,
+  },
+  countryCode: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginRight: 8,
+  },
+  input: {
+    flex: 1,
+    fontSize: 16,
+  },
+  truecallerButton: {
+    backgroundColor: "#E9F4FF",
+    paddingVertical: 12,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 20,
+  },
+  truecallerText: {
+    color: "#007AFF",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });

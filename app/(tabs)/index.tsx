@@ -95,18 +95,25 @@ const data = [
 ];
 const listItem = [
   {
-    id: 1,
-    title: "Now in Kolkata",
-    image:
-      "https://blog.uber-cdn.com/cdn-cgi/image/width=2160,quality=80,onerror=redirect,format=auto/wp-content/uploads/2018/08/Screen-Shot-2018-08-27-at-11.42.41-AM-1024x510.png",
-  },
-  {
     id: 3,
     title: "Schedule Intercity",
     image:
       "https://quickride.in/quickRideHomeLandingPage/taxiAssets/rentalImage.png",
     // description:'ONE RENTAL FOR ALL YOUR LOCATION'
   },
+  {
+    id: 1,
+    title: "Now in Kolkata",
+    image:
+      "https://blog.uber-cdn.com/cdn-cgi/image/width=2160,quality=80,onerror=redirect,format=auto/wp-content/uploads/2018/08/Screen-Shot-2018-08-27-at-11.42.41-AM-1024x510.png",
+  },
+  // {
+  //   id: 3,
+  //   title: "Schedule Intercity",
+  //   image:
+  //     "https://quickride.in/quickRideHomeLandingPage/taxiAssets/rentalImage.png",
+  //   // description:'ONE RENTAL FOR ALL YOUR LOCATION'
+  // },
   {
     id: 2,
     title: "Schedule City Rides",
@@ -211,16 +218,16 @@ export default function HomeScreen() {
           onPress={() => navigation.navigate("bookingScreen")}
           style={{
             // flex: 0.5,
-            backgroundColor: "#0045ff",
+            backgroundColor: "#2A5ED0",
             justifyContent: "center",
             alignItems: "center",
-            borderBottomLeftRadius: 10,
-            borderBottomRightRadius: 10,
+            // borderBottomLeftRadius: 10,
+            // borderBottomRightRadius: 10,
             shadowColor: "#000",
             shadowOffset: { width: 0, height: 4 },
             shadowOpacity: 0.2,
             shadowRadius: 5,
-            height: 250,
+            height: 197,
             // Shadow for Android
             elevation: 5,
           }}
@@ -234,7 +241,7 @@ export default function HomeScreen() {
           </View> */}
           <View
             style={{
-              marginTop: 90,
+              marginTop: 60,
               alignItems: "center",
               flexDirection: "row",
             }}
@@ -331,11 +338,11 @@ export default function HomeScreen() {
           >
             {[
               {
-                title: "City Rides",
+                title: "Outstation",
                 rideLottie: require("../../assets/A3.json"),
               },
               {
-                title: "Rentals",
+                title: "Round Trip",
                 rideLottie: require("../../assets/A2.json"),
               },
               {
@@ -417,7 +424,7 @@ export default function HomeScreen() {
                     <Text
                       style={{
                         fontWeight: "bold",
-                        color: "#435b8e",
+                        color: "#435890",
                         flex: 0.3,
                         justifyContent: "center",
                         alignItems: "center",
@@ -450,7 +457,7 @@ export default function HomeScreen() {
               width: "95%",
               justifyContent: "center",
               alignItems: "center",
-              backgroundColor: "#f9faff",
+              backgroundColor: "#F5FEFF",
               margin: 10,
               borderRadius: 10,
               shadowColor: "#505672",
@@ -502,7 +509,7 @@ export default function HomeScreen() {
                   flexDirection: "column",
                 }}
               >
-                <Text style={{ color: "#01001c" }}>
+                <Text style={{ color: "#3366CF", fontWeight: "500" }}>
                   Explore Bengal like never before
                 </Text>
               </View>
@@ -515,12 +522,51 @@ export default function HomeScreen() {
                   width: "100%",
                 }}
               >
-                <AntDesign name="arrowright" size={15} color="#2d78ff" />
+                <AntDesign name="arrowright" size={15} color="#3366CF" />
               </View>
             </View>
           </TouchableOpacity>
 
-          {/* <TouchableOpacity
+          <View style={{ height: 120 }}>
+            <FlatList
+              data={ListData}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item, index }) => {
+                console.log("item", item);
+                return (
+                  <View
+                    style={{
+                      marginHorizontal: 0,
+                      padding: 10,
+                      height: 120,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      backgroundColor: "#E0F2FE",
+                    }}
+                  >
+                    <Image
+                      source={{ uri: item.image }}
+                      style={{
+                        width: 80,
+                        height: 80,
+                        borderRadius: 50,
+                        borderWidth: 5,
+                        borderColor: "#fff",
+                        elevation: 5,
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    />
+                    <Text style={{ paddingTop: 8 }}>{item?.location}</Text>
+                  </View>
+                );
+              }}
+              keyExtractor={(item) => item.id}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("bookingScreen")}
             style={{
               // flex: 0.3,
               // height: "20%",
@@ -538,6 +584,8 @@ export default function HomeScreen() {
               // Shadow for Android
               elevation: 5,
               marginTop: 5,
+              borderColor: "silver",
+              borderWidth: 0.5,
             }}
           >
             <View
@@ -573,10 +621,10 @@ export default function HomeScreen() {
                 />
               </View>
               <View style={{ flex: 4, flexDirection: "column" }}>
-                <Text style={{ color: "#01001c" }}>
-                  Get an Express Ride in few minutes
+                <Text style={{ color: "#343434", fontWeight: "700" }}>
+                  Need a Ride? Just Zing It!
                 </Text>
-                <Text style={{ color: "#959595" }}>
+                <Text style={{ color: "#8292B6" }}>
                   Experience gold standard
                 </Text>
               </View>
@@ -589,7 +637,7 @@ export default function HomeScreen() {
                   width: "100%",
                 }}
               >
-                <AntDesign name="right" size={15} color="#959595" />
+                <AntDesign name="right" size={15} color="#2d78ff" />
               </View>
             </View>
 
@@ -602,6 +650,7 @@ export default function HomeScreen() {
               }}
             ></View>
             <TouchableOpacity
+              onPress={() => navigation.navigate("bookingScreen")}
               style={{
                 flex: 0.3,
                 justifyContent: "center",
@@ -613,29 +662,14 @@ export default function HomeScreen() {
                   justifyContent: "center",
                   alignContent: "center",
                   fontWeight: "bold",
-                  color: "#2d78ff",
+                  color: "#2A5ED0",
                   alignSelf: "center",
                 }}
               >
                 Book Now
               </Text>
             </TouchableOpacity>
-          </TouchableOpacity> */}
-          <View style={{ height: 100 }}>
-            <FlatList
-              data={ListData}
-              horizontal
-              renderItem={({ item, index }) => {
-                console.log("item", item);
-                return (
-                  <View>
-                    <Text>{item?.title}</Text>
-                  </View>
-                );
-              }}
-              keyExtractor={item=>item.id}
-            />
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity
             style={{
               height: 200,
@@ -649,7 +683,7 @@ export default function HomeScreen() {
               // // height: 120,
               // // Shadow for Android
               // elevation: 5,
-              marginTop: 5,
+              marginTop: 3,
 
               justifyContent: "center",
               // alignItems: "center",
@@ -671,6 +705,7 @@ export default function HomeScreen() {
                   fontSize: 18,
                   color: "#2d78ff",
                   fontFamily: "Poppins",
+                  fontWeight: "700",
                 }}
               >
                 Welcome to ZingCab
@@ -683,7 +718,7 @@ export default function HomeScreen() {
                 style={{
                   alignContent: "center",
                   width: "100%",
-                  height: 140,
+                  height: 130,
                   alignSelf: "center",
                 }}
               />

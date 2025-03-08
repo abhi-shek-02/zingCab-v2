@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 
 import { useColorScheme } from "react-native"; // ✅ Using React Native's built-in hook
+import { Ionicons } from "@expo/vector-icons";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -50,32 +51,63 @@ export default function RootLayout() {
             headerShown: true, // Ensure the header is visible
             title: "Zing Darshan", // Custom title
             headerStyle: {
-              backgroundColor: "#0056D2", // Change background color
+              backgroundColor: "#2C66E3", // Change background color
             },
-            headerTintColor: "#fff", // Change text/icon color
+            headerTintColor: "#E6F2FF", // Change text/icon color
             headerTitleStyle: {
               fontWeight: "700", // Customize title font style
               fontSize: 17,
-              
             },
             headerTitleAlign: "center",
           }}
         />
+        {/* import {Ionicons} from "@expo/vector-icons"; */}
         <Stack.Screen
           name="bookingScreen"
           options={{
-            headerShown: false, // Ensure the header is visible
+            headerShown: true, // Ensure the header is visible
             title: "Book your Ride", // Custom title
             headerStyle: {
-              backgroundColor: "#0056D2", // Change background color
+              // backgroundColor: "#0057FF", // Change background color
             },
-            headerTintColor: "#fff", // Change text/icon color
+            headerTintColor: "#0057FF", // Change text/icon color
             headerTitleStyle: {
               fontWeight: "700", // Customize title font style
               fontSize: 17,
-              
             },
             headerTitleAlign: "center",
+            headerRight: () => (
+              <Ionicons
+                name="car-outline" // Change to any relevant icon
+                size={24}
+                color="#fff" // Match the header text color
+                style={{ marginRight: 15 }} // Add spacing if needed
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="loginScreen"
+          options={{
+            headerShown: true, // Ensure the header is visible
+            title: "Login", // Custom title
+            headerStyle: {
+              // backgroundColor: "#0057FF", // Change background color
+            },
+            headerTintColor: "#0057FF", // Change text/icon color
+            headerTitleStyle: {
+              fontWeight: "700", // Customize title font style
+              fontSize: 17,
+            },
+            headerTitleAlign: "center",
+            headerRight: () => (
+              <Ionicons
+                name="car-outline" // Change to any relevant icon
+                size={24}
+                color="#fff" // Match the header text color
+                style={{ marginRight: 15 }} // Add spacing if needed
+              />
+            ),
           }}
         />
         {/* <Stack.Screen

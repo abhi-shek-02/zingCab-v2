@@ -173,7 +173,7 @@ export default function TabLayout() {
           title: "My Rides",
           tabBarIcon: ({ color }) => (
             <View style={{flex:1,alignItems:'center'}}>
-             <FontAwesome6 name="road-circle-check" size={24} color='#0045ff' />
+             <FontAwesome6 name="road-circle-check" size={24} color='#0057FF' />
              <Text style={{ color: "#959595", fontSize: 11, marginTop: 5 , textAlign:'center',width:'100%' }}>
                 Ride
               </Text>
@@ -193,7 +193,8 @@ export default function TabLayout() {
                 style={{
                   width: 70,
                   height: 70,
-                  backgroundColor: "#0045ff",
+                  backgroundColor: "#0057FF",
+
                   borderRadius: 35,
                   justifyContent: "center",
                   alignItems: "center",
@@ -222,7 +223,7 @@ export default function TabLayout() {
           tabBarLabel: "My Account", // Use tabBarLabel instead of title
           tabBarIcon: ({ color }) => (
             <View style={{flex:1,alignItems:'center'}}>
-              <Ionicons name="person" size={24} color='#0045ff' />
+              <Ionicons name="person" size={24} color='#0057FF' />
               <Text style={{ color: "#959595", fontSize: 11, marginTop: 5 , textAlign:'center',width:'100%' }}>
                 Profile
               </Text>
