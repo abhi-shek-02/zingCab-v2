@@ -273,6 +273,23 @@ export default function RootLayout() {
             headerTitleAlign: "center",
           }}
         />
+        <Stack.Screen
+          name="pricingScreen"
+          options={{
+            headerShown: true, // Ensure the header is visible
+            title: "Pricing", // Custom title
+            headerStyle: {
+              backgroundColor: "#2C66E3", // Change background color
+            },
+            headerTintColor: "#fff", // Change text/icon color
+            headerTitleStyle: {
+              fontWeight: "700", // Customize title font style
+              fontSize: 17,
+            },
+            headerTitleAlign: "center",
+          }}
+        />
+        {/* /pricingScreen */}
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

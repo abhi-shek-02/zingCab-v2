@@ -9,8 +9,9 @@ import {
 } from "react-native";
 import { MaterialIcons, FontAwesome5, Entypo } from "@expo/vector-icons";
 import { useNavigation } from "expo-router";
-
+import { useRouter } from "expo-router";
 const ProfileScreen = () => {
+  const router = useRouter();
   const navigation = useNavigation();
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -46,9 +47,9 @@ const ProfileScreen = () => {
 {/* editUserProfile */}
       <View style={styles.menuContainer}>
         {[
-          { label: "My Rides", icon: "directions-car",screenName:'policyScreen' },
+          { label: "My Rides", icon: "directions-car",screenName:'/(tabs)/explore' },
           { label: "Payments", icon: "credit-card" ,screenName:'policyScreen'},
-          { label: "Pricing", icon: "price-change",screenName:'policyScreen' },
+          { label: "Pricing", icon: "price-change",screenName:'pricingScreen' },
           // { label: "Promos", icon: "local-offer",screenName:'policyScreen' },
           { label: "Safety Hub", icon: "shield", badge: "New",screenName:'safetyHubScreen' },
           { label: "Help", icon: "help-outline",screenName:'helpScreen' },
@@ -60,7 +61,8 @@ const ProfileScreen = () => {
             style={styles.menuItem}
             onPress={() => {
               try {
-                navigation.navigate(item?.screenName);
+                // navigation.navigate(item?.screenName);
+                router.push(item?.screenName)
               } catch (e) {
                 console.log("E", e);
               }

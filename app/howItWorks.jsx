@@ -9,6 +9,7 @@ import {
 import Onboarding from "react-native-onboarding-swiper";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 // Custom Close Button (Top Right)
 const CloseButton = ({ onPress }) => (
@@ -26,12 +27,18 @@ const NextButton = ({ ...props }) => (
 
 // Custom Done Button
 const DoneButton = ({ ...props }) => {
-  const navigation = useNavigation();
+  const router = useRouter();
   return (
     <TouchableOpacity
       style={styles.nextButton}
       {...props}
-      onPress={() => navigation.navigate("Home")}
+      onPress={() => {
+        try {
+         router.push('/(tabs)/index')
+        } catch (e) {
+          console.log("E", e);
+        }
+      }}
     >
       <Text style={styles.buttonText}>Get Started</Text>
     </TouchableOpacity>
@@ -53,7 +60,7 @@ const CustomDot = ({ selected }) => (
 
 // Onboarding Component
 const HowItWorks = () => {
-  const navigation = useNavigation();
+  const router = useRouter();
 
   return (
     <Onboarding
