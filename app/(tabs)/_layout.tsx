@@ -144,7 +144,7 @@
 import { Tabs } from "expo-router";
 import { View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // Icons from Ionicons
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 export default function TabLayout() {
   return (
     <Tabs
@@ -161,7 +161,7 @@ export default function TabLayout() {
           shadowOpacity: 0.2,
           shadowRadius: 5,
           elevation: 10,
-          borderColor:'white'
+          borderColor: "white",
         },
         tabBarShowLabel: false, // No labels for side tabs
       }}
@@ -169,13 +169,34 @@ export default function TabLayout() {
       {/* Left Tab - My Rides */}
       <Tabs.Screen
         name="explore"
-        
         options={{
-          title: "My Rides",
+          headerShown: true, // Ensure the header is visible
+          title: "My Rides", // Custom title
+          headerStyle: {
+            backgroundColor: "#2C66E3", // Change background color
+          },
+          headerTintColor: "#fff", // Change text/icon color
+          headerTitleStyle: {
+            fontWeight: "700", // Customize title font style
+            fontSize: 17,
+          },
+          headerTitleAlign: "center",
           tabBarIcon: ({ color }) => (
-            <View style={{flex:1,alignItems:'center'}}>
-             <FontAwesome6 name="road-circle-check" size={24} color='#0057FF' />
-             <Text style={{ color: "#959595", fontSize: 11, marginTop: 5 , textAlign:'center',width:'100%' }}>
+            <View style={{ flex: 1, alignItems: "center" }}>
+              <FontAwesome6
+                name="road-circle-check"
+                size={24}
+                color="#0057FF"
+              />
+              <Text
+                style={{
+                  color: "#959595",
+                  fontSize: 11,
+                  marginTop: 5,
+                  textAlign: "center",
+                  width: "100%",
+                }}
+              >
                 Ride
               </Text>
             </View>
@@ -223,9 +244,17 @@ export default function TabLayout() {
         options={{
           tabBarLabel: "My Account", // Use tabBarLabel instead of title
           tabBarIcon: ({ color }) => (
-            <View style={{flex:1,alignItems:'center'}}>
-              <Ionicons name="person" size={24} color='#0057FF' />
-              <Text style={{ color: "#959595", fontSize: 11, marginTop: 5 , textAlign:'center',width:'100%' }}>
+            <View style={{ flex: 1, alignItems: "center" }}>
+              <Ionicons name="person" size={24} color="#0057FF" />
+              <Text
+                style={{
+                  color: "#959595",
+                  fontSize: 11,
+                  marginTop: 5,
+                  textAlign: "center",
+                  width: "100%",
+                }}
+              >
                 Profile
               </Text>
             </View>
