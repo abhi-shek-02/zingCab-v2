@@ -477,6 +477,7 @@ const styles = StyleSheet.create({
     // borderColor:'grey',
     // padding: 10,
     elevation: 3,
+    shadowColor: "#2C66E3",
   },
   cardImage: {
     width: "100%",

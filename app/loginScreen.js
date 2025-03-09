@@ -115,15 +115,9 @@ const LoginScreen = () => {
           {/* Get OTP Button */}
           <TouchableOpacity
             style={styles.truecallerButton}
-            onPress={() => {
-              try {
-                navigation.navigate("otpScreen");
-              } catch (e) {
-                console.log("E", e);
-              }
-            }}
+            onPress={() => navigation.navigate("otpScreen")}
           >
-            <Text style={styles.truecallerText}>Get OTP</Text>
+            <Text style={styles.truecallerText}>Get OTP's</Text>
           </TouchableOpacity>
 
           {/* Extra padding to avoid being covered by keyboard */}

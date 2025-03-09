@@ -43,10 +43,12 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
-      {/* howItWorks */}
+        {/* howItWorks */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
-        <Stack.Screen name="howItWorks"  options={{
+        <Stack.Screen
+          name="howItWorks"
+          options={{
             headerShown: false, // Ensure the header is visible
             title: "Login", // Custom title
             headerStyle: {
@@ -66,7 +68,8 @@ export default function RootLayout() {
                 style={{ marginRight: 15 }} // Add spacing if needed
               />
             ),
-          }} />
+          }}
+        />
         <Stack.Screen
           name="zingDarshan"
           options={{
@@ -108,7 +111,6 @@ export default function RootLayout() {
             // ),
           }}
         />
-      
 
         <Stack.Screen
           name="loginScreen"
@@ -134,7 +136,9 @@ export default function RootLayout() {
             ),
           }}
         />
-          <Stack.Screen name="otpScreen"  options={{
+        <Stack.Screen
+          name="otpScreen"
+          options={{
             headerShown: false, // Ensure the header is visible
             title: "Login", // Custom title
             headerStyle: {
@@ -154,24 +158,121 @@ export default function RootLayout() {
                 style={{ marginRight: 15 }} // Add spacing if needed
               />
             ),
-          }} />
-        {/* <Stack.Screen
-          name="bookingScreen"
+          }}
+        />
+        <Stack.Screen
+          name="policyScreen"
           options={{
             headerShown: true, // Ensure the header is visible
-            // title: "Zing Darshan", // Custom title
+            title: "Policy", // Custom title
             headerStyle: {
-              backgroundColor: "#0056D2", // Change background color
+              backgroundColor: "#2C66E3", // Change background color
             },
             headerTintColor: "#fff", // Change text/icon color
             headerTitleStyle: {
               fontWeight: "700", // Customize title font style
               fontSize: 17,
-              
             },
             headerTitleAlign: "center",
           }}
-        /> */}
+        />
+        <Stack.Screen
+          name="accountSettingScreen"
+          options={{
+            headerShown: true, // Ensure the header is visible
+            title: "Account Setting", // Custom title
+            headerStyle: {
+              backgroundColor: "#2C66E3", // Change background color
+            },
+            headerTintColor: "#fff", // Change text/icon color
+            headerTitleStyle: {
+              fontWeight: "700", // Customize title font style
+              fontSize: 17,
+            },
+            headerTitleAlign: "center",
+          }}
+        />
+         <Stack.Screen
+          name="helpScreen"
+          options={{
+            headerShown: true, // Ensure the header is visible
+            title: "Help", // Custom title
+            headerStyle: {
+              backgroundColor: "#2C66E3", // Change background color
+            },
+            headerTintColor: "#fff", // Change text/icon color
+            headerTitleStyle: {
+              fontWeight: "700", // Customize title font style
+              fontSize: 17,
+            },
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="safetyHubScreen"
+          options={{
+            headerShown: true, // Ensure the header is visible
+            title: "Safety Hub", // Custom title
+            headerStyle: {
+              backgroundColor: "#2C66E3", // Change background color
+            },
+            headerTintColor: "#fff", // Change text/icon color
+            headerTitleStyle: {
+              fontWeight: "700", // Customize title font style
+              fontSize: 17,
+            },
+            headerTitleAlign: "center",
+          }}
+        />
+        {/* userProfile */}
+        <Stack.Screen
+          name="userProfile"
+          options={{
+            headerShown: true, // Ensure the header is visible
+            title: "Profile", // Custom title
+            headerStyle: {
+              backgroundColor: "#2C66E3", // Change background color
+            },
+            headerTintColor: "#fff", // Change text/icon color
+            headerTitleStyle: {
+              fontWeight: "700", // Customize title font style
+              fontSize: 17,
+            },
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="EditUserProfile"
+          options={{
+            headerShown: true, // Ensure the header is visible
+            title: "Edit Profile", // Custom title
+            headerStyle: {
+              backgroundColor: "#2C66E3", // Change background color
+            },
+            headerTintColor: "#fff", // Change text/icon color
+            headerTitleStyle: {
+              fontWeight: "700", // Customize title font style
+              fontSize: 17,
+            },
+            headerTitleAlign: "center",
+          }}
+        />
+         <Stack.Screen
+          name="safetyDetailScreen"
+          options={{
+            headerShown: true, // Ensure the header is visible
+            title: "Edit Profile", // Custom title
+            headerStyle: {
+              backgroundColor: "#2C66E3", // Change background color
+            },
+            headerTintColor: "#fff", // Change text/icon color
+            headerTitleStyle: {
+              fontWeight: "700", // Customize title font style
+              fontSize: 17,
+            },
+            headerTitleAlign: "center",
+          }}
+        />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

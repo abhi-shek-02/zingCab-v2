@@ -84,7 +84,7 @@ const BookingScreen = () => {
           justifyContent: "center",
           flexDirection: "row",
           width: "100%",
-          shadowColor: "#000",
+          shadowColor: "#2C66E3",
           shadowOffset: { width: 0, height: 4 },
           shadowOpacity: 0.2,
           shadowRadius: 5,

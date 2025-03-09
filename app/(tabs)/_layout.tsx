@@ -156,11 +156,12 @@ export default function TabLayout() {
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           position: "absolute",
-          shadowColor: "#000",
+          shadowColor: "#2C66E3",
           shadowOffset: { width: 0, height: 4 },
           shadowOpacity: 0.2,
           shadowRadius: 5,
           elevation: 10,
+          borderColor:'white'
         },
         tabBarShowLabel: false, // No labels for side tabs
       }}
@@ -198,7 +199,7 @@ export default function TabLayout() {
                   borderRadius: 35,
                   justifyContent: "center",
                   alignItems: "center",
-                  shadowColor: "#000",
+                  shadowColor: "#2C66E3",
                   shadowOffset: { width: 0, height: 4 },
                   shadowOpacity: 0.3,
                   shadowRadius: 6,

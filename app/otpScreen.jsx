@@ -56,7 +56,7 @@ const OTPScreen = () => {
         <Text style={styles.otpTitle}>Enter OTP</Text>
         <View style={styles.phoneNumberRow}>
           <Text style={styles.phoneText}>Sent to +91-7003840501</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("loginScreen")}>
             <Text style={styles.editIcon}>✎</Text>
           </TouchableOpacity>
         </View>
@@ -65,7 +65,7 @@ const OTPScreen = () => {
         <OTPTextInput
           inputCount={6}
           handleTextChange={(text) => setOtp(text)}
-          tintColor="#0057FF"
+          tintColor="#6AAEFD"
           offTintColor="#ddd"
           textInputStyle={styles.otpInput}
         />
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     color: "#555",
   },
   editIcon: {
-    color: "#1E90FF",
+    color: "#6AAEFD",
     marginLeft: 5,
   },
   otpInput: {

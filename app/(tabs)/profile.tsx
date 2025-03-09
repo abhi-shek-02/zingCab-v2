@@ -33,27 +33,34 @@ const ProfileScreen = () => {
           <Entypo name="user" size={60} color="#0056D2" />
         </View>
         <Text style={styles.userName}>Abhishek</Text>
-        <TouchableOpacity>
+        <TouchableOpacity  onPress={() => {
+              try {
+                navigation.navigate('userProfile');
+              } catch (e) {
+                console.log("E", e);
+              }
+            }}>
           <Text style={styles.viewProfile}>View Profile</Text>
         </TouchableOpacity>
       </View>
-
+{/* editUserProfile */}
       <View style={styles.menuContainer}>
         {[
-          { label: "My Rides", icon: "directions-car" },
-          { label: "Payments", icon: "credit-card" },
-          { label: "Pricing", icon: "price-change" },
-          { label: "Promos", icon: "local-offer" },
-          { label: "Safety Hub", icon: "shield", badge: "New" },
-          { label: "Help", icon: "help-outline" },
-          { label: "Policy", icon: "policy" },
+          { label: "My Rides", icon: "directions-car",screenName:'policyScreen' },
+          { label: "Payments", icon: "credit-card" ,screenName:'policyScreen'},
+          { label: "Pricing", icon: "price-change",screenName:'policyScreen' },
+          // { label: "Promos", icon: "local-offer",screenName:'policyScreen' },
+          { label: "Safety Hub", icon: "shield", badge: "New",screenName:'safetyHubScreen' },
+          { label: "Help", icon: "help-outline",screenName:'helpScreen' },
+          { label: "Policy", icon: "policy",screenName:'policyScreen' },
+          { label: "Account Settings", icon: "local-offer",screenName:'accountSettingScreen' },
         ].map((item, index) => (
           <TouchableOpacity
             key={index}
             style={styles.menuItem}
             onPress={() => {
               try {
-                navigation.navigate("loginScreen");
+                navigation.navigate(item?.screenName);
               } catch (e) {
                 console.log("E", e);
               }

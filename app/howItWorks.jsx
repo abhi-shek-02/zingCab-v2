@@ -84,9 +84,7 @@ const HowItWorks = () => {
           backgroundColor: "#000",
           image: (
             <ImageBackground
-              source={{
-                uri: "https://img.utdstc.com/screen/502/4f6/5024f63eb7bb4fba25ad96516e0404e46c02fe4fe42b3dd6fd69a22628839e7f:600",
-              }}
+              source={require("../assets/images/Onboarding3.png")}
               style={styles.imageBackground}
             >
               <View style={styles.overlay} />
@@ -106,9 +104,7 @@ const HowItWorks = () => {
           backgroundColor: "#000",
           image: (
             <ImageBackground
-              source={{
-                uri: "https://media.licdn.com/dms/image/v2/D5622AQGSAWMm3esh0A/feedshare-shrink_800/feedshare-shrink_800/0/1721364314820?e=2147483647&v=beta&t=iGltZSquPUjfzcPbx6NB2m-jTfbARjW4T-h1-Ygueok",
-              }}
+              source={require("../assets/images/Onboarding3.png")}
               style={styles.imageBackground}
             >
               <View style={styles.overlay} />

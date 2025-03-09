@@ -18,7 +18,7 @@ import Animated, {
   interpolate,
   useAnimatedStyle,
 } from "react-native-reanimated";
-
+import { useNavigation } from "@react-navigation/native";
 const imageUrls = [
   "https://media.istockphoto.com/id/1224814265/photo/indian-couple-in-the-car-with-phone.jpg?s=612x612&w=0&k=20&c=SP4c6XC8Toe_Vs3W93EGZufDDr1653aCMethJ6-vFvE=",
   "https://media.istockphoto.com/id/1133362236/photo/happy-couple-going-on-a-road-trip-stock-image.jpg?s=612x612&w=0&k=20&c=CtMQbW0_lzEGvAt0paqkGWSp3WKR5w3yYcEivRHT7uM=",
@@ -30,7 +30,7 @@ const imageUrls = [
 export default function TabTwoScreen() {
   const { width } = Dimensions.get("window");
   const [keyboardVisible, setKeyboardVisible] = useState(false);
-
+  const navigation = useNavigation();
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -111,7 +111,7 @@ export default function TabTwoScreen() {
           </View>
 
           {/* Get OTP Button */}
-          <TouchableOpacity style={styles.truecallerButton}>
+          <TouchableOpacity style={styles.truecallerButton} onPress={() => navigation.navigate("otpScreen")}>
             <Text style={styles.truecallerText}>Get OTP</Text>
           </TouchableOpacity>
 
