@@ -533,7 +533,7 @@ export default function HomeScreen() {
               horizontal
               showsHorizontalScrollIndicator={false}
               renderItem={({ item, index }) => {
-                console.log("item", item);
+              
                 return (
                   <View
                     style={{
@@ -697,6 +697,13 @@ export default function HomeScreen() {
 
               // Shadow for Android
               elevation: 5,
+            }}
+            onPress={() => {
+              try {
+                navigation.navigate("howItWorks");
+              } catch (e) {
+                console.log("E", e);
+              }
             }}
           >
             <View style={{ justifyContent: "center", alignItems: "center" }}>

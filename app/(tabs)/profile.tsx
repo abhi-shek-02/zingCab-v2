@@ -16,22 +16,22 @@ const ProfileScreen = () => {
     <ScrollView contentContainerStyle={styles.container}>
       {/* Profile Section */}
       <View style={styles.profileContainer}>
-      {/* <MaterialIcons name={'shield'} size={100} color="#0056D2"  style={{marginTop:50}}/> */}
-      {/* <Entypo name="user" size={80} color="#0056D2" style={{marginTop:50 ,padding:50,borderRadius:20,border:2}}/> */}
-      <View
-        style={{
-          width: 100,  // Same width & height for a perfect circle
-          height: 100,
-          borderRadius: 50, // Half of width/height for a circle
-          borderWidth: 2, // Thickness of the border
-          borderColor: "#0056D2", // Border color
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop:50
-        }}
-      >
-        <Entypo name="user" size={60} color="#0056D2" />
-      </View>
+        {/* <MaterialIcons name={'shield'} size={100} color="#0056D2"  style={{marginTop:50}}/> */}
+        {/* <Entypo name="user" size={80} color="#0056D2" style={{marginTop:50 ,padding:50,borderRadius:20,border:2}}/> */}
+        <View
+          style={{
+            width: 100, // Same width & height for a perfect circle
+            height: 100,
+            borderRadius: 50, // Half of width/height for a circle
+            borderWidth: 2, // Thickness of the border
+            borderColor: "#0056D2", // Border color
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 50,
+          }}
+        >
+          <Entypo name="user" size={60} color="#0056D2" />
+        </View>
         <Text style={styles.userName}>Abhishek</Text>
         <TouchableOpacity>
           <Text style={styles.viewProfile}>View Profile</Text>
@@ -48,7 +48,17 @@ const ProfileScreen = () => {
           { label: "Help", icon: "help-outline" },
           { label: "Policy", icon: "policy" },
         ].map((item, index) => (
-          <TouchableOpacity key={index} style={styles.menuItem}  onPress={() => navigation.navigate("loginScreen")}>
+          <TouchableOpacity
+            key={index}
+            style={styles.menuItem}
+            onPress={() => {
+              try {
+                navigation.navigate("loginScreen");
+              } catch (e) {
+                console.log("E", e);
+              }
+            }}
+          >
             <MaterialIcons name={item.icon} size={22} color="#0056D2" />
             <Text style={styles.menuText}>{item.label}</Text>
             {item.badge && <Text style={styles.badge}>{item.badge}</Text>}
@@ -69,7 +79,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: 20,
     backgroundColor: "#fff",
-    marginTop:0,
+    marginTop: 0,
   },
   profileContainer: {
     alignItems: "center",

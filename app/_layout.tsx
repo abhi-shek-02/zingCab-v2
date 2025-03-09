@@ -43,8 +43,30 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
+      {/* howItWorks */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
+        <Stack.Screen name="howItWorks"  options={{
+            headerShown: false, // Ensure the header is visible
+            title: "Login", // Custom title
+            headerStyle: {
+              // backgroundColor: "#0057FF", // Change background color
+            },
+            headerTintColor: "#0057FF", // Change text/icon color
+            headerTitleStyle: {
+              fontWeight: "700", // Customize title font style
+              fontSize: 17,
+            },
+            headerTitleAlign: "center",
+            headerRight: () => (
+              <Ionicons
+                name="car-outline" // Change to any relevant icon
+                size={24}
+                color="#fff" // Match the header text color
+                style={{ marginRight: 15 }} // Add spacing if needed
+              />
+            ),
+          }} />
         <Stack.Screen
           name="zingDarshan"
           options={{
@@ -68,28 +90,30 @@ export default function RootLayout() {
             headerShown: true, // Ensure the header is visible
             title: "Book your Ride", // Custom title
             headerStyle: {
-              // backgroundColor: "#0057FF", // Change background color
+              backgroundColor: "#2C66E3", // Change background color
             },
-            headerTintColor: "#0057FF", // Change text/icon color
+            headerTintColor: "#E6F2FF", // Change text/icon color
             headerTitleStyle: {
               fontWeight: "700", // Customize title font style
               fontSize: 17,
             },
             headerTitleAlign: "center",
-            headerRight: () => (
-              <Ionicons
-                name="car-outline" // Change to any relevant icon
-                size={24}
-                color="#fff" // Match the header text color
-                style={{ marginRight: 15 }} // Add spacing if needed
-              />
-            ),
+            // headerRight: () => (
+            //   // <Ionicons
+            //   //   name="car-outline" // Change to any relevant icon
+            //   //   size={24}
+            //   //   color="#fff" // Match the header text color
+            //   //   style={{ marginRight: 15 }} // Add spacing if needed
+            //   // />
+            // ),
           }}
         />
+      
+
         <Stack.Screen
           name="loginScreen"
           options={{
-            headerShown: true, // Ensure the header is visible
+            headerShown: false, // Ensure the header is visible
             title: "Login", // Custom title
             headerStyle: {
               // backgroundColor: "#0057FF", // Change background color
@@ -110,6 +134,27 @@ export default function RootLayout() {
             ),
           }}
         />
+          <Stack.Screen name="otpScreen"  options={{
+            headerShown: false, // Ensure the header is visible
+            title: "Login", // Custom title
+            headerStyle: {
+              // backgroundColor: "#0057FF", // Change background color
+            },
+            headerTintColor: "#0057FF", // Change text/icon color
+            headerTitleStyle: {
+              fontWeight: "700", // Customize title font style
+              fontSize: 17,
+            },
+            headerTitleAlign: "center",
+            headerRight: () => (
+              <Ionicons
+                name="car-outline" // Change to any relevant icon
+                size={24}
+                color="#fff" // Match the header text color
+                style={{ marginRight: 15 }} // Add spacing if needed
+              />
+            ),
+          }} />
         {/* <Stack.Screen
           name="bookingScreen"
           options={{

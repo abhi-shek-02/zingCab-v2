@@ -466,8 +466,8 @@ const styles = StyleSheet.create({
   },
   categoryText: {
     marginTop: 5,
-    fontSize: 14,
-    fontWeight: "bold",
+    fontSize: 12,
+    fontWeight: "500",
     color: "#696E72",
   },
   card: {

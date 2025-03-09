@@ -18,7 +18,7 @@ import Animated, {
   interpolate,
   useAnimatedStyle,
 } from "react-native-reanimated";
-
+import { useNavigation } from "@react-navigation/native";
 const imageUrls = [
   "https://media.istockphoto.com/id/1224814265/photo/indian-couple-in-the-car-with-phone.jpg?s=612x612&w=0&k=20&c=SP4c6XC8Toe_Vs3W93EGZufDDr1653aCMethJ6-vFvE=",
   "https://media.istockphoto.com/id/1133362236/photo/happy-couple-going-on-a-road-trip-stock-image.jpg?s=612x612&w=0&k=20&c=CtMQbW0_lzEGvAt0paqkGWSp3WKR5w3yYcEivRHT7uM=",
@@ -27,10 +27,10 @@ const imageUrls = [
   "https://www.shutterstock.com/image-photo/pleasant-taxi-ride-happy-arabic-600nw-2300534995.jpg",
 ];
 
-export default function TabTwoScreen() {
+const LoginScreen = () => {
   const { width } = Dimensions.get("window");
   const [keyboardVisible, setKeyboardVisible] = useState(false);
-
+  const navigation = useNavigation();
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -49,7 +49,9 @@ export default function TabTwoScreen() {
           {/* Main Banner */}
           <Text style={styles.title}>
             Join The{"  \n"}
-            <Text style={styles.highlight}>Elite Rides, Exclusive Comfort!</Text>
+            <Text style={styles.highlight}>
+              Elite Rides, Exclusive Comfort!
+            </Text>
           </Text>
 
           <Text style={styles.subText}>
@@ -111,7 +113,16 @@ export default function TabTwoScreen() {
           </View>
 
           {/* Get OTP Button */}
-          <TouchableOpacity style={styles.truecallerButton}>
+          <TouchableOpacity
+            style={styles.truecallerButton}
+            onPress={() => {
+              try {
+                navigation.navigate("otpScreen");
+              } catch (e) {
+                console.log("E", e);
+              }
+            }}
+          >
             <Text style={styles.truecallerText}>Get OTP</Text>
           </TouchableOpacity>
 
@@ -121,8 +132,8 @@ export default function TabTwoScreen() {
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
-}
-
+};
+export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -138,7 +149,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignSelf: "center",
     marginBottom: 10,
-    marginTop: 20,
+    marginTop: 30,
     width: "90%",
   },
   badgeText: {
@@ -165,16 +176,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   highlight: {
-    paddingVertical:10,
+    paddingVertical: 10,
     color: "#007AFF",
-    fontSize:20
+    fontSize: 20,
   },
   subText: {
     fontSize: 14,
     color: "#666",
     textAlign: "center",
     marginBottom: 15,
-   marginTop:5
+    marginTop: 5,
   },
   carouselContainer: {
     alignItems: "center",
@@ -244,197 +255,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-// import LottieView from "lottie-react-native";
-// import React, { useState, useEffect } from "react";
-// import {
-//   View,
-//   Text,
-//   TextInput,
-//   TouchableOpacity,
-//   Image,
-//   StyleSheet,
-//   ScrollView,
-// } from "react-native";
-// import OTPTextInput from "react-native-otp-textinput";
-
-// export default function TabTwoScreen() {
-//   const [otp, setOtp] = useState("");
-//   const [timer, setTimer] = useState(30);
-
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       if (timer > 0) {
-//         setTimer(timer - 1);
-//       }
-//     }, 1000);
-//     return () => clearInterval(interval);
-//   }, [timer]);
-
-//   return (
-//     <ScrollView contentContainerStyle={styles.container}>
-//       {/* Back Button */}
-//       {/* <TouchableOpacity style={styles.backButton}>
-//         <Text style={styles.backText}>←</Text>
-//       </TouchableOpacity> */}
-
-//       {/* Banner */}
-//       {/* <View style={styles.banner}> */}
-//         {/* <Text style={styles.greenText}>ECO FRIENDLY</Text>
-//         <Text style={styles.blackText}>RIDES</Text> */}
-       
-//       {/* </View> */}
-//       <LottieView
-//           source={require("../../assets/A3.json")} // Replace with your JSON file path
-//           autoPlay
-//           loop
-//           style={{
-//             width: '100%', // Increase width
-//             height: '50%', // Increase height
-//             // alignSelf: "center", // Center alignment
-//             justifyContent:'center',
-//             alignItems:'center'
-//             ,
-//             // backgroundColor:'red'
-//           }}
-//         />
-
-//       {/* OTP Card */}
-//       <View style={styles.otpCard}>
-//         <Text style={styles.otpTitle}>Enter OTP</Text>
-//         <View style={styles.phoneNumberRow}>
-//           <Text style={styles.phoneText}>Sent to +91-7003840501</Text>
-//           <TouchableOpacity>
-//             <Text style={styles.editIcon}>✎</Text>
-//           </TouchableOpacity>
-//         </View>
-
-//         {/* OTP Input */}
-//         <OTPTextInput
-//           inputCount={6}
-//           handleTextChange={(text) => setOtp(text)}
-//           tintColor="#0057FF"
-//           offTintColor="#ddd"
-//           textInputStyle={styles.otpInput}
-//         />
-
-//         {/* Verify Button */}
-//         <TouchableOpacity
-//           style={styles.verifyButton}
-//           disabled={otp.length !== 6}
-//         >
-//           <Text style={styles.verifyButtonText}>Verify OTP</Text>
-//         </TouchableOpacity>
-
-//         {/* Timer */}
-//         <Text style={styles.timer}>00:{timer < 10 ? `0${timer}` : timer}s</Text>
-//       </View>
-//     </ScrollView>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flexGrow: 1,
-//     backgroundColor: "#fff",
-//     padding: 20,
-//     // justifyContent:'center'
-//     alignItems:'center'
-//   },
-//   backButton: {
-//     position: "absolute",
-//     top: 20,
-//     left: 20,
-//     zIndex: 1,
-//   },
-//   backText: {
-//     fontSize: 24,
-//   },
-//   banner: {
-//     // flexDirection: "colo",
-//     alignItems: "center",
-//     justifyContent: "center",
-//     marginTop: 40,
-//     height: 200,
-//     width: 100,
-//   },
-//   greenText: {
-//     fontSize: 22,
-//     fontWeight: "bold",
-//     color: "#00A86B",
-//   },
-//   blackText: {
-//     fontSize: 22,
-//     fontWeight: "bold",
-//     color: "#333",
-//   },
-//   carImage: {
-//     width: 150,
-//     height: 80,
-//     resizeMode: "contain",
-//   },
-//   otpCard: {
-//     // backgroundColor: "#EAF6FF",
-//     padding: 20,
-//     borderRadius: 20,
-//     marginTop: 20,
-//     shadowColor: "#000",
-//     shadowOpacity: 0.1,
-//     shadowRadius: 10,
-//     // elevation: 5,
-//     height: "100%",
-//   },
-//   otpTitle: {
-//     fontSize: 18,
-//     fontWeight: "bold",
-//     marginBottom: 5,
-//   },
-//   phoneNumberRow: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     marginBottom: 20,
-//   },
-//   phoneText: {
-//     color: "#555",
-//   },
-//   editIcon: {
-//     color: "#1E90FF",
-//     marginLeft: 5,
-//   },
-//   otpInput: {
-//     borderWidth: 0.5,
-//     borderColor: "#ccc",
-//     borderRadius: 5,
-//     fontSize: 18,
-//     textAlign: "center",
-//     height: 50,
-//     width: 40,
-//     marginHorizontal: 5,
-//     // backgroundColor:'red'
-//     // ✅ Remove shadow on iOS
-//   shadowColor: "transparent",
-//   shadowOffset: { width: 0, height: 0 },
-//   shadowOpacity: 0,
-//   shadowRadius: 0,
-
-//   // ✅ Remove elevation on Android
-//   elevation: 0,
-//   },
-//   verifyButton: {
-//     backgroundColor: "#ccc",
-//     paddingVertical: 15,
-//     borderRadius: 15,
-//     alignItems: "center",
-//     marginTop: 20,
-//   },
-//   verifyButtonText: {
-//     color: "#fff",
-//     fontWeight: "bold",
-//     fontSize: 15,
-//   },
-//   timer: {
-//     textAlign: "right",
-//     marginTop: 10,
-//     color: "#555",
-//   },
-// });
