@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   View,
@@ -351,27 +352,20 @@ const events = [
     image:
       "https://s7ap1.scene7.com/is/image/incredibleindia/howrah-bridge-howrah-west-bengal-1-attr-hero?qlt=82&ts=1726642836188",
   },
-
-  // Add more destinations to reach 100...
 ];
 
-// Generate IDs dynamically
 events.forEach((event, index) => (event.id = (index + 1).toString()));
 
 const ZingDarshan = () => {
+  const navigation = useNavigation();
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  // Filter events based on selected category, show all if nothing is selected
   const filteredEvents = selectedCategory
     ? events.filter((event) => event.category === selectedCategory)
     : events;
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      {/* <Text style={styles.header}>BluSmart Darshan</Text> */}
-
-      {/* Horizontal Category List */}
       <View style={{ backgroundColor: "#E0F2FE" }}>
         <FlatList
           data={categories}
@@ -409,7 +403,12 @@ const ZingDarshan = () => {
         keyExtractor={(item) => item.id}
         windowSize={2}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.card}>
+          <TouchableOpacity
+            style={styles.card}
+            onPress={() =>
+              navigation.navigate("bookingScreen", { bookingData: item })
+            }
+          >
             <Image source={{ uri: item.image }} style={styles.cardImage} />
             <Text style={styles.cardTitle}>{item.title}</Text>
             <Text style={styles.cardLocation}>{item.location}</Text>

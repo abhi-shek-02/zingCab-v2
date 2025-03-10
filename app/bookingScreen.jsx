@@ -10,7 +10,10 @@ import {
 } from "react-native";
 import { Ionicons, MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import DatePicker from "react-native-date-picker";
+import { useRoute } from "@react-navigation/native";
 const BookingScreen = () => {
+  const route = useRoute();
+  console.log("Route:", route);
   const [selectedTab, setSelectedTab] = useState("Rides");
   const [selectedSubTab, setSelectedSubTab] = useState(false);
   const [date, setDate] = useState(new Date());
@@ -186,7 +189,12 @@ const BookingScreen = () => {
             name="location"
             size={20}
             color="#14BA77"
-            style={{ width: "8%", alignSelf: "center",justifyContent:'center',alignItems:'center' }}
+            style={{
+              width: "8%",
+              alignSelf: "center",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           />
           <View style={styles.inputWrapper}>
             <TextInput style={styles.input} placeholder="Enter drop location" />

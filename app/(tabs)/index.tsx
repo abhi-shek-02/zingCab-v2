@@ -301,7 +301,13 @@ export default function HomeScreen() {
               // elevation: 5,
             }}
           >
-            <Text style={{ color: "#878ca8", alignContent: "center",fontFamily: "Poppins_Regular", }}>
+            <Text
+              style={{
+                color: "#878ca8",
+                alignContent: "center",
+                fontFamily: "Poppins_Regular",
+              }}
+            >
               Introducing
             </Text>
             <Text
@@ -504,7 +510,6 @@ export default function HomeScreen() {
                     height: 100,
                     alignSelf: "center",
                   }} // Adjust size
-                  
                 />
               </View>
               <View
@@ -555,29 +560,35 @@ export default function HomeScreen() {
                       backgroundColor: "#E0F2FE",
                     }}
                   >
-                    <Image
-                      source={{ uri: item.image }}
-                      style={{
-                        width: 80,
-                        height: 80,
-                        borderRadius: 50,
-                        borderWidth: 5,
-                        borderColor: "#fff",
-                        elevation: 5,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    />
-                    <Text
-                      style={{
-                        paddingTop: 8,
-                        fontFamily: "Poppins_Regular",
-                        fontSize: 11,
-                        fontWeight: "600",
-                      }}
+                    <TouchableOpacity
+                    style={{justifyContent:'center',alignItems:'center'}}
+                    onPress={() => navigation.navigate("bookingScreen", { bookingData: item })}
+
                     >
-                      {item?.location}
-                    </Text>
+                      <Image
+                        source={{ uri: item.image }}
+                        style={{
+                          width: 80,
+                          height: 80,
+                          borderRadius: 50,
+                          borderWidth: 5,
+                          borderColor: "#fff",
+                          elevation: 5,
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      />
+                      <Text
+                        style={{
+                          paddingTop: 8,
+                          fontFamily: "Poppins_Regular",
+                          fontSize: 11,
+                          fontWeight: "600",
+                        }}
+                      >
+                        {item?.location}
+                      </Text>
+                    </TouchableOpacity>
                   </View>
                 );
               }}
@@ -641,7 +652,7 @@ export default function HomeScreen() {
               </View>
               <View style={{ flex: 4, flexDirection: "column" }}>
                 <Text
-                  style={{ color: "#343434", fontFamily: "Poppins_Medium" }}
+                  style={{ color: "#545A75", fontFamily: "Poppins_Medium" }}
                 >
                   Need a Ride? Just Zing It!
                 </Text>
@@ -691,7 +702,7 @@ export default function HomeScreen() {
                   // fontWeight: "bold",
                   color: mainColor,
                   alignSelf: "center",
-                  fontFamily:'Poppins_Medium'
+                  fontFamily: "Poppins_Medium",
                 }}
               >
                 Book Now
@@ -778,7 +789,7 @@ export default function HomeScreen() {
                 textAlign: "left",
                 fontSize: 15,
                 // fontWeight: "600",
-                fontFamily:'Poppins_Bold'
+                fontFamily: "Poppins_Bold",
               }}
             >
               Travel Smart with Zingcab!
@@ -918,7 +929,7 @@ export default function HomeScreen() {
                     // fontWeight: "bold",
                     color: "#435b8e",
                     textAlign: "center",
-                    fontFamily:'Poppins_Medium'
+                    fontFamily: "Poppins_Medium",
                     // marginTop: 2,
                     // marginBottom: 10,
                   }}
@@ -964,7 +975,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     fontWeight: "bold",
     fontSize: 14,
-    fontFamily:'Poppins_Bold'
+    fontFamily: "Poppins_Bold",
   },
 });
 // const styles = StyleSheet.create({

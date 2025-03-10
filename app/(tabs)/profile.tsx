@@ -55,6 +55,7 @@ const ProfileScreen = () => {
           { label: "Help", icon: "help-outline",screenName:'helpScreen' },
           { label: "Policy", icon: "policy",screenName:'policyScreen' },
           { label: "Account Settings", icon: "local-offer",screenName:'accountSettingScreen' },
+          { label: "Feedback", icon: "feedback",screenName:'feedBack' },
         ].map((item, index) => (
           <TouchableOpacity
             key={index}

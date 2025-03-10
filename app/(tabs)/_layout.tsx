@@ -177,6 +177,7 @@ export default function TabLayout() {
           headerStyle: {
             backgroundColor: mainColor, // Change background color
           },
+          headerShadowVisible: false,
           headerTintColor: "#fff", // Change text/icon color
           headerTitleStyle: {
             fontWeight: "700", // Customize title font style

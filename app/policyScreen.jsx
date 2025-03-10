@@ -40,10 +40,11 @@ const PrivacyPolicy = () => (
     <Text
       style={{
         fontSize: 22,
-        fontWeight: "700",
+        // fontWeight: "700",
         color: "#2C66E3",
         textAlign: "center",
         marginBottom: 10,
+        fontFamily: "Poppins_Medium",
       }}
     >
       Privacy Policy
@@ -55,6 +56,7 @@ const PrivacyPolicy = () => (
         color: "#555",
         lineHeight: 20,
         marginBottom: 10,
+        fontFamily: "Poppins_Regular",
       }}
     >
       At ZingCab, we value your privacy and are committed to protecting your
@@ -65,15 +67,23 @@ const PrivacyPolicy = () => (
     <Text
       style={{
         fontSize: 18,
-        fontWeight: "600",
+        // fontWeight: "600",
         color: "#333",
         marginTop: 20,
         marginBottom: 5,
+        fontFamily: "Poppins_Medium",
       }}
     >
       Information We Collect
     </Text>
-    <Text style={{ fontSize: 14, color: "#555", lineHeight: 20 }}>
+    <Text
+      style={{
+        fontSize: 14,
+        color: "#555",
+        lineHeight: 20,
+        fontFamily: "Poppins_Regular",
+      }}
+    >
       We may collect personal details such as your name, contact information,
       location data, and payment details when you use our platform. We also
       gather information related to your ride preferences, trip history, and
@@ -83,10 +93,11 @@ const PrivacyPolicy = () => (
     <Text
       style={{
         fontSize: 18,
-        fontWeight: "600",
+        // fontWeight: "600",
         color: "#333",
         marginTop: 20,
         marginBottom: 5,
+        fontFamily: "Poppins_Medium",
       }}
     >
       How We Use Your Information
@@ -113,15 +124,23 @@ const PrivacyPolicy = () => (
     <Text
       style={{
         fontSize: 18,
-        fontWeight: "600",
+        // fontWeight: "600",
         color: "#333",
         marginTop: 20,
         marginBottom: 5,
+        fontFamily: "Poppins_Medium",
       }}
     >
       Data Security
     </Text>
-    <Text style={{ fontSize: 14, color: "#555", lineHeight: 20 }}>
+    <Text
+      style={{
+        fontSize: 14,
+        color: "#555",
+        lineHeight: 20,
+        fontFamily: "Poppins_Regular",
+      }}
+    >
       We implement stringent security measures to protect your data from
       unauthorized access, alteration, or disclosure. Our database is stored on
       secure servers with encryption and firewall protection. However, no
@@ -132,7 +151,8 @@ const PrivacyPolicy = () => (
     <Text
       style={{
         fontSize: 18,
-        fontWeight: "600",
+        // fontWeight: "600",
+        fontFamily: "Poppins_Medium",
         color: "#333",
         marginTop: 20,
         marginBottom: 5,
@@ -140,7 +160,14 @@ const PrivacyPolicy = () => (
     >
       Grievance Redressal
     </Text>
-    <Text style={{ fontSize: 14, color: "#555", lineHeight: 20 }}>
+    <Text
+      style={{
+        fontSize: 14,
+        color: "#555",
+        lineHeight: 20,
+        fontFamily: "Poppins_Regular",
+      }}
+    >
       If you have any concerns regarding our privacy practices or data security,
       please contact our designated Grievance Officer:
     </Text>
@@ -150,6 +177,7 @@ const PrivacyPolicy = () => (
         color: "#007AFF",
         fontWeight: "600",
         marginTop: 5,
+        fontFamily: "Poppins_Regular",
       }}
     >
       📍 ZingCab OPC Private Limited{"\n"}
@@ -161,7 +189,8 @@ const PrivacyPolicy = () => (
     <Text
       style={{
         fontSize: 18,
-        fontWeight: "600",
+        // fontWeight: "600",
+        fontFamily: "Poppins_Medium",
         color: "#333",
         marginTop: 20,
         marginBottom: 5,
@@ -169,7 +198,14 @@ const PrivacyPolicy = () => (
     >
       Changes to This Privacy Policy
     </Text>
-    <Text style={{ fontSize: 14, color: "#555", lineHeight: 20 }}>
+    <Text
+      style={{
+        fontSize: 14,
+        color: "#555",
+        lineHeight: 20,
+        fontFamily: "Poppins_Regular",
+      }}
+    >
       We may update this Privacy Policy from time to time. Any changes will be
       posted on our app and website, and we encourage you to review the policy
       periodically to stay informed about how we are protecting your data.
@@ -181,6 +217,7 @@ const PrivacyPolicy = () => (
         color: "#888",
         textAlign: "center",
         marginTop: 20,
+        fontFamily: "Poppins_Regular",
       }}
     >
       Last Updated: 19th December 2024
@@ -227,15 +264,21 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#fff",
+    // justifyContent: "center",
+    alignItems: "center",
   },
   heading: {
     fontSize: 18,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Poppins_Medium",
+    color: "#2C66E3",
     marginBottom: 10,
+    color: "#black",
   },
   subheading: {
     fontSize: 14,
-    fontWeight: "600",
+    // fontWeight: "600",
+    fontFamily: "Poppins_Regular",
     color: "gray",
     marginBottom: 8,
   },
@@ -243,5 +286,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     color: "#333",
+    fontFamily: "Poppins_Regular",
   },
 });
