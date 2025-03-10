@@ -25,13 +25,13 @@ const ProfileScreen = () => {
             height: 100,
             borderRadius: 50, // Half of width/height for a circle
             borderWidth: 2, // Thickness of the border
-            borderColor: "#0056D2", // Border color
+            borderColor: "#2d78ff", // Border color
             justifyContent: "center",
             alignItems: "center",
             marginTop: 50,
           }}
         >
-          <Entypo name="user" size={60} color="#0056D2" />
+          <Entypo name="user" size={60} color="#2d78ff" />
         </View>
         <Text style={styles.userName}>Abhishek</Text>
         <TouchableOpacity  onPress={() => {
@@ -68,7 +68,7 @@ const ProfileScreen = () => {
               }
             }}
           >
-            <MaterialIcons name={item.icon} size={22} color="#0056D2" />
+            <MaterialIcons name={item.icon} size={22} color="#2d78ff" />
             <Text style={styles.menuText}>{item.label}</Text>
             {item.badge && <Text style={styles.badge}>{item.badge}</Text>}
           </TouchableOpacity>
@@ -101,13 +101,15 @@ const styles = StyleSheet.create({
   },
   userName: {
     fontSize: 18,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     marginTop: 10,
+    fontFamily:'Poppins_Medium',
   },
   viewProfile: {
-    color: "#0056D2",
+    color: "#2d78ff",
     fontSize: 14,
     marginTop: 5,
+    fontFamily:'Poppins_Regular'
   },
   menuContainer: {
     flex: 1,
@@ -118,18 +120,22 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   menuText: {
-    fontSize: 16,
+    fontSize: 15,
     marginLeft: 15,
     flex: 1,
+    fontFamily:'Poppins_Regular'
   },
   badge: {
-    backgroundColor: "#0056D2",
+    backgroundColor: "#2d78ff",
     color: "#fff",
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 8,
     fontSize: 12,
     marginLeft: 10,
+    fontFamily:'Poppins_Regular',
+    justifyContent:'center',
+    alignItems:'center'
   },
   versionText: {
     textAlign: "center",

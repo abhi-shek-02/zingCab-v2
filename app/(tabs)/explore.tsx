@@ -12,6 +12,7 @@ import { Card, Divider } from "react-native-paper";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
+import { mainColor } from "@/constants/Colors";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -45,7 +46,9 @@ const OngoingScreen = () => (
         marginTop: 10,
         fontSize: 15,
         padding: 15,
-        fontWeight: "600",
+        // fontWeight: "600",
+        fontFamily:'Poppins_Medium',
+        color: "#8292B6",
       }}
     >
       No ongoing rides at the moment
@@ -87,11 +90,13 @@ const ScheduledScreen = () => {
           paddingTop: 15,
           fontWeight: "600",
           paddingBottom: 10,
+          fontFamily:'Poppins_Medium',
+          color: "#8292B6",
         }}
       >
         No Scheduled rides at the moment
       </Text>
-      <Text>Ready to take your next ride?</Text>
+      <Text style={{ fontFamily:'Poppins_Regular',color:'#202329'}}>Ready to take your next ride?</Text>
       <TouchableOpacity
         style={styles.truecallerButton}
         onPress={() => navigation.navigate("bookingScreen")}
@@ -133,9 +138,11 @@ const PastScreen = () => (
         fontSize: 15,
         padding: 15,
         fontWeight: "600",
+        fontFamily:'Poppins_Medium',
+        color: "#8292B6",
       }}
     >
-      You haven't taken a rid with us yet
+      You haven't taken a ride with us yet
     </Text>
   </ScrollView>
 );
@@ -147,12 +154,12 @@ export default function TabTwoScreen() {
         tabBarLabelStyle: { fontSize: 16 },
         tabBarStyle: { backgroundColor: "#fff" },
         tabBarIndicatorStyle: {
-          backgroundColor: "#0057FF",
+          backgroundColor: mainColor,
           height: 3,
           borderTopLeftRadius: 5,
           borderTopRightRadius: 5,
         },
-        tabBarActiveTintColor: "#0057FF",
+        tabBarActiveTintColor: mainColor,
         tabBarInactiveTintColor: "#666",
       }}
     >
@@ -182,6 +189,7 @@ const styles = StyleSheet.create({
   truecallerText: {
     color: "#007AFF",
     fontSize: 16,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily:'Poppins_Medium',
   },
 });

@@ -10,18 +10,36 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import "react-native-reanimated";
 
-import { useColorScheme } from "react-native"; // ✅ Using React Native's built-in hook
+import { ActivityIndicator, View, useColorScheme } from "react-native"; // ✅ Using React Native's built-in hook
 import { Ionicons } from "@expo/vector-icons";
-
+import { Inter_400Regular, Inter_700Bold } from "@expo-google-fonts/inter";
+import {
+  Poppins_400Regular,
+  Poppins_500Medium,
+} from "@expo-google-fonts/poppins";
+import { mainColor } from "@/constants/Colors";
+// import { Poppins_400Regular, Poppins_500Medium } from "@expo-google-fonts/poppins";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    SpaceMono: require("@/assets/fonts/SpaceMono-Regular.ttf"),
+    // SpaceMono: require("@/assets/fonts/SpaceMono-Regular.ttf"),
+    // Inter_Regular: Inter_400Regular,
+    // Inter_Bold: Inter_700Bold,
+    Poppins_Regular: Poppins_400Regular,
+    // Poppins_Bold: Poppins_700Bold,
+    Poppins_Medium: Poppins_500Medium,
   });
-
+  console.log("loaded", loaded);
+  if (!loaded) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
   useEffect(() => {
     async function prepare() {
       try {
@@ -56,8 +74,9 @@ export default function RootLayout() {
             },
             headerTintColor: "#0057FF", // Change text/icon color
             headerTitleStyle: {
-              fontWeight: "700", // Customize title font style
+              // fontWeight: "700", // Customize title font style
               fontSize: 17,
+              fontFamily:'Poppins_Medium'
             },
             headerTitleAlign: "center",
             headerRight: () => (
@@ -80,7 +99,8 @@ export default function RootLayout() {
             },
             headerTintColor: "#E6F2FF", // Change text/icon color
             headerTitleStyle: {
-              fontWeight: "700", // Customize title font style
+              // fontWeight: "700", // Customize title font style
+              fontFamily:'Poppins_Medium',
               fontSize: 17,
             },
             headerTitleAlign: "center",
@@ -97,8 +117,9 @@ export default function RootLayout() {
             },
             headerTintColor: "#E6F2FF", // Change text/icon color
             headerTitleStyle: {
-              fontWeight: "700", // Customize title font style
+              // fontWeight: "700", // Customize title font style
               fontSize: 17,
+              fontFamily:'Poppins_Medium'
             },
             headerTitleAlign: "center",
             // headerRight: () => (
@@ -122,8 +143,9 @@ export default function RootLayout() {
             },
             headerTintColor: "#0057FF", // Change text/icon color
             headerTitleStyle: {
-              fontWeight: "700", // Customize title font style
+              // fontWeight: "700", // Customize title font style
               fontSize: 17,
+              fontFamily:'Poppins_Medium'
             },
             headerTitleAlign: "center",
             headerRight: () => (
@@ -146,8 +168,9 @@ export default function RootLayout() {
             },
             headerTintColor: "#0057FF", // Change text/icon color
             headerTitleStyle: {
-              fontWeight: "700", // Customize title font style
+              // fontWeight: "700", // Customize title font style
               fontSize: 17,
+              fontFamily:'Poppins_Medium'
             },
             headerTitleAlign: "center",
             headerRight: () => (
@@ -166,12 +189,13 @@ export default function RootLayout() {
             headerShown: true, // Ensure the header is visible
             title: "Policy", // Custom title
             headerStyle: {
-              backgroundColor: "#2C66E3", // Change background color
+              backgroundColor: mainColor, // Change background color
             },
             headerTintColor: "#fff", // Change text/icon color
             headerTitleStyle: {
-              fontWeight: "700", // Customize title font style
+              // fontWeight: "700", // Customize title font style
               fontSize: 17,
+              fontFamily:'Poppins_Medium'
             },
             headerTitleAlign: "center",
           }}
@@ -186,13 +210,14 @@ export default function RootLayout() {
             },
             headerTintColor: "#fff", // Change text/icon color
             headerTitleStyle: {
-              fontWeight: "700", // Customize title font style
+              // fontWeight: "700", // Customize title font style
+              fontFamily:'Poppins_Medium',
               fontSize: 17,
             },
             headerTitleAlign: "center",
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="helpScreen"
           options={{
             headerShown: true, // Ensure the header is visible
@@ -202,8 +227,9 @@ export default function RootLayout() {
             },
             headerTintColor: "#fff", // Change text/icon color
             headerTitleStyle: {
-              fontWeight: "700", // Customize title font style
+              // fontWeight: "700", // Customize title font style
               fontSize: 17,
+              fontFamily:'Poppins_Medium'
             },
             headerTitleAlign: "center",
           }}
@@ -218,7 +244,8 @@ export default function RootLayout() {
             },
             headerTintColor: "#fff", // Change text/icon color
             headerTitleStyle: {
-              fontWeight: "700", // Customize title font style
+              // fontWeight: "700", // Customize title font style
+              fontFamily:'Poppins_Medium',
               fontSize: 17,
             },
             headerTitleAlign: "center",
@@ -235,8 +262,9 @@ export default function RootLayout() {
             },
             headerTintColor: "#fff", // Change text/icon color
             headerTitleStyle: {
-              fontWeight: "700", // Customize title font style
+              // fontWeight: "700", // Customize title font style
               fontSize: 17,
+              fontFamily:'Poppins_Medium'
             },
             headerTitleAlign: "center",
           }}
@@ -251,13 +279,14 @@ export default function RootLayout() {
             },
             headerTintColor: "#fff", // Change text/icon color
             headerTitleStyle: {
-              fontWeight: "700", // Customize title font style
+              // fontWeight: "700", // Customize title font style
               fontSize: 17,
+              fontFamily:'Poppins_Medium'
             },
             headerTitleAlign: "center",
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="safetyDetailScreen"
           options={{
             headerShown: true, // Ensure the header is visible
@@ -267,8 +296,9 @@ export default function RootLayout() {
             },
             headerTintColor: "#fff", // Change text/icon color
             headerTitleStyle: {
-              fontWeight: "700", // Customize title font style
+              // fontWeight: "700", // Customize title font style
               fontSize: 17,
+              fontFamily:'Poppins_Medium'
             },
             headerTitleAlign: "center",
           }}
@@ -283,7 +313,8 @@ export default function RootLayout() {
             },
             headerTintColor: "#fff", // Change text/icon color
             headerTitleStyle: {
-              fontWeight: "700", // Customize title font style
+              // fontWeight: "700", // Customize title font style
+              fontFamily:'Poppins_Medium',
               fontSize: 17,
             },
             headerTitleAlign: "center",

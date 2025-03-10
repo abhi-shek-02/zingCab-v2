@@ -425,8 +425,9 @@ const ZingDarshan = () => {
               <Text
                 style={{
                   textAlign: "center",
-                  fontWeight: "bold",
+                  // fontWeight: "bold",
                   color: "#007AFF",
+                  fontFamily: "Poppins_Medium",
                 }}
               >
                 Tap to Explore
@@ -467,8 +468,9 @@ const styles = StyleSheet.create({
   categoryText: {
     marginTop: 5,
     fontSize: 12,
-    fontWeight: "500",
+    // fontWeight: "500",
     color: "#696E72",
+    fontFamily: "Poppins_Medium",
   },
   card: {
     backgroundColor: "#FEFFFE",
@@ -486,18 +488,20 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
   },
   cardTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 16,
+    // fontWeight: "bold",
     marginTop: 5,
     color: "#333333",
     paddingLeft: 20,
     paddingTop: 5,
+    fontFamily: "Poppins_Medium",
   },
   cardLocation: {
     fontSize: 14,
     color: "#AAAAAA",
     paddingLeft: 20,
     paddingBottom: 10,
+    fontFamily: "Poppins_Regular",
   },
 });
 

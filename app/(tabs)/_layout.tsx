@@ -145,6 +145,7 @@ import { Tabs } from "expo-router";
 import { View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // Icons from Ionicons
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { mainColor } from "@/constants/Colors";
 export default function TabLayout() {
   return (
     <Tabs
@@ -162,6 +163,7 @@ export default function TabLayout() {
           shadowRadius: 5,
           elevation: 10,
           borderColor: "white",
+         
         },
         tabBarShowLabel: false, // No labels for side tabs
       }}
@@ -173,7 +175,7 @@ export default function TabLayout() {
           headerShown: true, // Ensure the header is visible
           title: "My Rides", // Custom title
           headerStyle: {
-            backgroundColor: "#2C66E3", // Change background color
+            backgroundColor: mainColor, // Change background color
           },
           headerTintColor: "#fff", // Change text/icon color
           headerTitleStyle: {
@@ -195,6 +197,7 @@ export default function TabLayout() {
                   marginTop: 5,
                   textAlign: "center",
                   width: "100%",
+                  fontFamily:'Poppins_Medium',
                 }}
               >
                 Ride
@@ -230,7 +233,7 @@ export default function TabLayout() {
                 <Ionicons name="home" size={40} color="white" />
               </View>
               {/* Home Label in Yellow */}
-              <Text style={{ color: "#959595", fontSize: 11, marginTop: 5 }}>
+              <Text style={{ color: "#959595", fontSize: 10, marginTop: 5,fontFamily:'Poppins_Medium', }}>
                 Home
               </Text>
             </View>
@@ -253,6 +256,7 @@ export default function TabLayout() {
                   marginTop: 5,
                   textAlign: "center",
                   width: "100%",
+                  fontFamily:'Poppins_Medium',
                 }}
               >
                 Profile

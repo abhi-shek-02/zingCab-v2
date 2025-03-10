@@ -21,6 +21,7 @@ import Carousel from "react-native-reanimated-carousel";
 import { useEffect, useRef, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useRouter } from "expo-router";
+import { mainColor } from "@/constants/Colors";
 
 const ListData = [
   {
@@ -249,7 +250,7 @@ export default function HomeScreen() {
             <Animated.Text
               style={{
                 color: "#fff",
-                fontFamily: "Poppins",
+                fontFamily: "Poppins_Regular",
                 fontSize: 12.5,
                 opacity: fadeAnim1,
                 transform: [{ translateY: translateY1 }],
@@ -261,7 +262,7 @@ export default function HomeScreen() {
             <Animated.Text
               style={{
                 color: "#fff",
-                fontFamily: "Poppins",
+                fontFamily: "Poppins_Regular",
                 fontSize: 12.5,
                 opacity: fadeAnim2,
                 transform: [{ translateY: translateY2 }],
@@ -273,7 +274,7 @@ export default function HomeScreen() {
             <Animated.Text
               style={{
                 color: "#fff",
-                fontFamily: "Poppins",
+                fontFamily: "Poppins_Regular",
                 fontSize: 12.5,
                 opacity: fadeAnim3,
                 transform: [{ translateY: translateY3 }],
@@ -300,15 +301,16 @@ export default function HomeScreen() {
               // elevation: 5,
             }}
           >
-            <Text style={{ color: "#878ca8", alignContent: "center" }}>
+            <Text style={{ color: "#878ca8", alignContent: "center",fontFamily: "Poppins_Regular", }}>
               Introducing
             </Text>
             <Text
               style={{
                 marginLeft: 5,
                 alignContent: "center",
-                fontWeight: "bold",
+                // fontWeight: "bold",
                 color: "#435b8e",
+                fontFamily: "Poppins_Medium",
               }}
             >
               Seamless Rides
@@ -317,7 +319,7 @@ export default function HomeScreen() {
           <Text
             style={{
               color: "#fff",
-              fontFamily: "Poppins",
+              fontFamily: "Poppins_Regular",
               marginLeft: 120,
               marginTop: 3,
               fontSize: 10,
@@ -423,12 +425,13 @@ export default function HomeScreen() {
                     </View>
                     <Text
                       style={{
-                        fontWeight: "bold",
+                        // fontWeight: "bold",
                         color: "#435890",
                         flex: 0.3,
                         justifyContent: "center",
                         alignItems: "center",
                         fontSize: 11,
+                        fontFamily: "Poppins_Medium",
                       }}
                     >
                       {item?.title}
@@ -501,6 +504,7 @@ export default function HomeScreen() {
                     height: 100,
                     alignSelf: "center",
                   }} // Adjust size
+                  
                 />
               </View>
               <View
@@ -509,7 +513,14 @@ export default function HomeScreen() {
                   flexDirection: "column",
                 }}
               >
-                <Text style={{ color: "#3366CF", fontWeight: "500" }}>
+                <Text
+                  style={{
+                    color: "#3366CF",
+                    // fontWeight: "600",
+                    fontFamily: "Poppins_Medium",
+                    fontSize: 13,
+                  }}
+                >
                   Explore Bengal like never before
                 </Text>
               </View>
@@ -533,7 +544,6 @@ export default function HomeScreen() {
               horizontal
               showsHorizontalScrollIndicator={false}
               renderItem={({ item, index }) => {
-              
                 return (
                   <View
                     style={{
@@ -558,7 +568,16 @@ export default function HomeScreen() {
                         alignItems: "center",
                       }}
                     />
-                    <Text style={{ paddingTop: 8 }}>{item?.location}</Text>
+                    <Text
+                      style={{
+                        paddingTop: 8,
+                        fontFamily: "Poppins_Regular",
+                        fontSize: 11,
+                        fontWeight: "600",
+                      }}
+                    >
+                      {item?.location}
+                    </Text>
                   </View>
                 );
               }}
@@ -621,10 +640,18 @@ export default function HomeScreen() {
                 />
               </View>
               <View style={{ flex: 4, flexDirection: "column" }}>
-                <Text style={{ color: "#343434", fontWeight: "700" }}>
+                <Text
+                  style={{ color: "#343434", fontFamily: "Poppins_Medium" }}
+                >
                   Need a Ride? Just Zing It!
                 </Text>
-                <Text style={{ color: "#8292B6" }}>
+                <Text
+                  style={{
+                    color: "#8292B6",
+                    fontFamily: "Poppins_Regular",
+                    fontSize: 11,
+                  }}
+                >
                   Experience gold standard
                 </Text>
               </View>
@@ -661,9 +688,10 @@ export default function HomeScreen() {
                 style={{
                   justifyContent: "center",
                   alignContent: "center",
-                  fontWeight: "bold",
-                  color: "#2A5ED0",
+                  // fontWeight: "bold",
+                  color: mainColor,
                   alignSelf: "center",
+                  fontFamily:'Poppins_Medium'
                 }}
               >
                 Book Now
@@ -711,13 +739,15 @@ export default function HomeScreen() {
                 style={{
                   fontSize: 18,
                   color: "#2d78ff",
-                  fontFamily: "Poppins",
-                  fontWeight: "700",
+                  fontFamily: "Poppins_Medium",
+                  // fontWeight: "700",
                 }}
               >
                 Welcome to ZingCab
               </Text>
-              <Text style={{ fontSize: 10 }}>Tap to see how ZingCab works</Text>
+              <Text style={{ fontSize: 10, fontFamily: "Poppins_Regular" }}>
+                Tap to see how ZingCab works
+              </Text>
               <LottieView
                 source={require("../../assets/SUV.json")}
                 autoPlay
@@ -746,8 +776,9 @@ export default function HomeScreen() {
               style={{
                 justifyContent: "flex-start",
                 textAlign: "left",
-                fontSize: 17,
-                fontWeight: "600",
+                fontSize: 15,
+                // fontWeight: "600",
+                fontFamily:'Poppins_Bold'
               }}
             >
               Travel Smart with Zingcab!
@@ -884,9 +915,10 @@ export default function HomeScreen() {
                 <Text
                   style={{
                     fontSize: 15,
-                    fontWeight: "bold",
+                    // fontWeight: "bold",
                     color: "#435b8e",
                     textAlign: "center",
+                    fontFamily:'Poppins_Medium'
                     // marginTop: 2,
                     // marginBottom: 10,
                   }}
@@ -932,6 +964,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     fontWeight: "bold",
     fontSize: 14,
+    fontFamily:'Poppins_Bold'
   },
 });
 // const styles = StyleSheet.create({

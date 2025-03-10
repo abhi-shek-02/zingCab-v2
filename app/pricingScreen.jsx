@@ -24,7 +24,7 @@ const pricingData = [
   { id: 13, distance: "36-39 km", relaxed: "₹739-₹839", rush: "₹929-₹1029" },
 ];
 const tolls = [
-  { name: "Faridabad Toll Plaza Badarpur", price: "₹30 per crossing" },
+  { name: "Faridabad Toll Plaza", price: "₹30 per crossing" },
   { name: "Delhi MCD Tax", price: "₹105 per entry" },
   { name: "Kherki Daula Toll Plaza", price: "₹85 per crossing" },
   { name: "Nizamuddin Toll", price: "₹30 per crossing" },
@@ -150,7 +150,8 @@ const OutstationScreen = () => (
         <Text
           style={{
             flex: 0.5,
-            fontWeight: "bold",
+            // fontWeight: "bold",
+            fontFamily: "Poppins_Medium",
             textAlign: "center",
             color: "#4372CF",
           }}
@@ -160,7 +161,8 @@ const OutstationScreen = () => (
         <Text
           style={{
             flex: 1,
-            fontWeight: "bold",
+            // fontWeight: "bold",
+            fontFamily: "Poppins_Medium",
             textAlign: "center",
             alignSelf: "center",
             color: "#4372CF",
@@ -172,7 +174,8 @@ const OutstationScreen = () => (
         <Text
           style={{
             flex: 1,
-            fontWeight: "bold",
+            // fontWeight: "bold",
+            fontFamily: "Poppins_Medium",
             textAlign: "center",
             color: "#4372CF",
           }}
@@ -182,7 +185,8 @@ const OutstationScreen = () => (
         <Text
           style={{
             flex: 1,
-            fontWeight: "bold",
+            // fontWeight: "bold",
+            fontFamily: "Poppins_Medium",
             textAlign: "center",
             color: "#4372CF",
           }}
@@ -214,21 +218,49 @@ const OutstationScreen = () => (
               marginRight: 10,
             }}
           >
-            <Text style={{ color: "#fff", fontWeight: "bold" }}>{item.id}</Text>
+            <Text style={{ color: "#fff", fontFamily: "Poppins_Medium" }}>
+              {item.id}
+            </Text>
           </View>
 
-          <Text style={{ flex: 1, textAlign: "center" }}>{item.distance}</Text>
-          <Text style={{ flex: 1, textAlign: "center" }}>{item.relaxed}</Text>
-          <Text style={{ flex: 1, textAlign: "center" }}>{item.rush}</Text>
+          <Text
+            style={{
+              flex: 1,
+              textAlign: "center",
+              fontFamily: "Poppins_Regular",
+            }}
+          >
+            {item.distance}
+          </Text>
+          <Text
+            style={{
+              flex: 1,
+              textAlign: "center",
+              fontFamily: "Poppins_Regular",
+            }}
+          >
+            {item.relaxed}
+          </Text>
+          <Text
+            style={{
+              flex: 1,
+              textAlign: "center",
+              fontFamily: "Poppins_Regular",
+            }}
+          >
+            {item.rush}
+          </Text>
         </View>
       ))}
       <ScrollView style={{ padding: 16, backgroundColor: "#f8f9fa" }}>
-        <Text style={{ padding: 5, fontSize: 13, fontWeight: "500" }}>
+        <Text
+          style={{ padding: 5, fontSize: 13, fontFamily: "Poppins_Regular" }}
+        >
           Additional charges of ₹100/3 km after this.
         </Text>
         <Card style={{ marginBottom: 16, backgroundColor: "#fff" }}>
           <Card.Content>
-            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+            <Text style={{ fontSize: 18, fontFamily: "Poppins_Medium" }}>
               Fees, Tolls & Taxes
             </Text>
             <FlatList
@@ -242,8 +274,12 @@ const OutstationScreen = () => (
                     paddingVertical: 8,
                   }}
                 >
-                  <Text>{item.name}</Text>
-                  <Text style={{ fontWeight: "bold" }}>{item.price}</Text>
+                  <Text style={{ fontFamily: "Poppins_Regular" }}>
+                    {item.name}
+                  </Text>
+                  <Text style={{ fontFamily: "Poppins_Medium" }}>
+                    {item.price}
+                  </Text>
                 </View>
               )}
             />
@@ -252,15 +288,25 @@ const OutstationScreen = () => (
 
         <Card>
           <Card.Content style={{ marginBottom: 16, backgroundColor: "#fff" }}>
-            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+            <Text style={{ fontSize: 18, fontFamily: "Poppins_Medium" }}>
               Other Terms & Details
             </Text>
             <Divider style={{ marginVertical: 8 }} />
-            <Text>• Waiting beyond 2 mins at stops: ₹4/min</Text>
-            <Text>• Parking charges should be paid to the driver</Text>
-            <Text>• Discounts apply on base fares only</Text>
-            <Text>• Pickups available in Gurgaon, IGI Airport, and Delhi</Text>
-            <Text>• Drops available within Gurgaon and Delhi</Text>
+            <Text style={{ fontFamily: "Poppins_Regular" }}>
+              • Waiting beyond 2 mins at stops: ₹4/min
+            </Text>
+            <Text style={{ fontFamily: "Poppins_Regular", fontSize: 10 }}>
+              • Parking charges should be paid to the driver
+            </Text>
+            <Text style={{ fontFamily: "Poppins_Regular" }}>
+              • Discounts apply on base fares only
+            </Text>
+            <Text style={{ fontFamily: "Poppins_Regular" }}>
+              • Pickups available in Gurgaon, IGI Airport, and Delhi
+            </Text>
+            <Text style={{ fontFamily: "Poppins_Regular" }}>
+              • Drops available within Gurgaon and Delhi
+            </Text>
           </Card.Content>
         </Card>
       </ScrollView>
