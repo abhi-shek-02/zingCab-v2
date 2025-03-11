@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4, // Keep radius similar to Android
 
     // Android Shadow
-    elevation: 2, // Increase for a stronger effect
+    // elevation: 2, // Increase for a stronger effect
 
     width: "100%",
   },
@@ -128,7 +128,8 @@ const styles = StyleSheet.create({
     color: "#F05E55",
     fontSize: 16,
     flex: 1,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Poppins_Medium",
   },
   accordionHeader: {
     flexDirection: "row",
@@ -140,8 +141,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 15,
+    // fontWeight: "bold",
+    fontFamily: "Poppins_Medium",
     color: "#414141",
   },
   content: {
@@ -150,9 +152,10 @@ const styles = StyleSheet.create({
   },
   greeting: {
     fontSize: 16,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     color: "#2C66E3",
     marginBottom: 10,
+    fontFamily: "Poppins_Medium",
   },
   username: {
     color: "#2C66E3",
@@ -161,14 +164,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#444",
     marginBottom: 10,
+    fontFamily: "Poppins_Regular",
   },
   link: {
     color: "#2C66E3",
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Poppins_Regular",
   },
   highlight: {
     color: "#1E88E5",
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Poppins_Regular",
   },
   continueButton: {
     backgroundColor: "#2C66E3",
@@ -180,6 +186,7 @@ const styles = StyleSheet.create({
   continueText: {
     color: "#fff",
     fontSize: 16,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Poppins_Medium",
   },
 });

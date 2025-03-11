@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { WebView } from "react-native-webview";
+import CustomLoader from "../components/ui/CustomLoader";
 
 const FeedBack = () => {
   const [loading, setLoading] = useState(true);
@@ -21,7 +22,7 @@ const FeedBack = () => {
 
       {loading && (
         <View style={styles.loader}>
-          <ActivityIndicator size="large" color="#0057FF" />
+          <CustomLoader size="large" color="#0057FF" />
         </View>
       )}
     </View>

@@ -201,12 +201,17 @@ const SafetyHubScreen = () => {
 export default SafetyHubScreen;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#F8F9FA", marginBottom: 95 },
+  container: {
+    flex: 1,
+    backgroundColor: "#F8F9FA",
+    marginBottom: 0,
+    paddingBottom: 100,
+  },
   bannerImage: {
     width: "100%",
     height: 250,
     resizeMode: "cover",
-    marginBottom: 15,
+    marginBottom: 1,
   },
   card: {
     flexDirection: "row",

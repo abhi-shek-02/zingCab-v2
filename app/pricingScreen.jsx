@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+
 import { Card, Divider } from "react-native-paper";
 const pricingData = [
   { id: 1, distance: "0-3 km", relaxed: "₹199-₹229", rush: "₹249-₹279" },
@@ -122,197 +124,269 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 
 const Tab = createMaterialTopTabNavigator();
 
-const OutstationScreen = () => (
-  <ScrollView
-    style={{ flex: 1, backgroundColor: "#fff", padding: 16, marginBottom: 40 }}
-  >
+const OutstationScreen = () => {
+  const sections = [
+    {
+      title: "Fees, Tolls & Taxes",
+      content:
+        "Toll charges, state entry fees, and parking fees are extra and need to be paid by the rider. The final fare does not include these charges.",
+    },
+    {
+      title: "Other Terms & Details",
+      content:
+        "Waiting charges may apply if the trip is delayed beyond a certain limit. Cancellations after driver allocation may incur charges.",
+    },
+  ];
+  const TermsDetails = () => {
+    const [expandedIndex, setExpandedIndex] = useState(null);
+
+    return (
+      <View style={{ marginBottom: 0 }}>
+        {sections.map((section, index) => (
+          <View key={index}>
+            <TouchableOpacity
+              style={{
+                paddingVertical: 12,
+                borderBottomWidth: 1,
+                borderBottomColor: "#ddd",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+              onPress={() =>
+                setExpandedIndex(expandedIndex === index ? null : index)
+              }
+            >
+              <Text style={{ fontSize: 16, fontFamily: "Poppins_Medium" }}>
+                {section.title}
+              </Text>
+              <Text style={{ fontSize: 20 }}>
+                <MaterialIcons
+                  name={
+                    expandedIndex === index
+                      ? "keyboard-arrow-up"
+                      : "keyboard-arrow-down"
+                  }
+                  size={20}
+                  color="black"
+                />
+              </Text>
+            </TouchableOpacity>
+            {expandedIndex === index && (
+              <Text
+                style={{
+                  paddingVertical: 10,
+                  fontSize: 14,
+                  color: "#555",
+                  fontFamily: "Poppins_Regular",
+                }}
+              >
+                {section.content}
+              </Text>
+            )}
+          </View>
+        ))}
+      </View>
+    );
+  };
+  return (
     <ScrollView
       style={{
-        marginBottom: 100,
-        borderWidth: 1,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        borderColor: "#EBECED",
+        flex: 1,
+        backgroundColor: "#fff",
+        padding: 16,
+        marginBottom: 40,
       }}
-      showsVerticalScrollIndicator={false}
     >
-      <View
+      <ScrollView
         style={{
-          flexDirection: "row",
-          backgroundColor: "#F0F9FF",
-          padding: 10,
-          justifyContent: "center",
-          alignContent: "center",
+          marginBottom: 100,
+          borderWidth: 1,
           borderTopLeftRadius: 10,
           borderTopRightRadius: 10,
+          borderColor: "#EBECED",
         }}
+        showsVerticalScrollIndicator={false}
       >
-        <Text
-          style={{
-            flex: 0.5,
-            // fontWeight: "bold",
-            fontFamily: "Poppins_Medium",
-            textAlign: "center",
-            color: "#4372CF",
-          }}
-        >
-          Sr. No.
-        </Text>
-        <Text
-          style={{
-            flex: 1,
-            // fontWeight: "bold",
-            fontFamily: "Poppins_Medium",
-            textAlign: "center",
-            alignSelf: "center",
-            color: "#4372CF",
-          }}
-        >
-          Distance {"\n"}
-          <Text style={{ fontSize: 10, color: "#4372CF" }}>in kms</Text>
-        </Text>
-        <Text
-          style={{
-            flex: 1,
-            // fontWeight: "bold",
-            fontFamily: "Poppins_Medium",
-            textAlign: "center",
-            color: "#4372CF",
-          }}
-        >
-          Relaxed Hrs.
-        </Text>
-        <Text
-          style={{
-            flex: 1,
-            // fontWeight: "bold",
-            fontFamily: "Poppins_Medium",
-            textAlign: "center",
-            color: "#4372CF",
-          }}
-        >
-          Rush Hrs.
-        </Text>
-      </View>
-
-      {pricingData?.map((item) => (
         <View
-          key={item.id}
           style={{
             flexDirection: "row",
+            backgroundColor: "#F0F9FF",
             padding: 10,
-            borderBottomWidth: 1,
-            borderBottomColor: "#ddd",
-            alignItems: "center",
+            justifyContent: "center",
+            alignContent: "center",
+            borderTopLeftRadius: 10,
+            borderTopRightRadius: 10,
           }}
         >
-          {/* Index Circle */}
-          <View
-            style={{
-              width: 30,
-              height: 30,
-              backgroundColor: "#0057FF",
-              borderRadius: 15,
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: 10,
-            }}
-          >
-            <Text style={{ color: "#fff", fontFamily: "Poppins_Medium" }}>
-              {item.id}
-            </Text>
-          </View>
-
           <Text
             style={{
-              flex: 1,
+              flex: 0.5,
+              // fontWeight: "bold",
+              fontFamily: "Poppins_Medium",
               textAlign: "center",
-              fontFamily: "Poppins_Regular",
+              color: "#4372CF",
             }}
           >
-            {item.distance}
+            Sr. No.
           </Text>
           <Text
             style={{
               flex: 1,
+              // fontWeight: "bold",
+              fontFamily: "Poppins_Medium",
               textAlign: "center",
-              fontFamily: "Poppins_Regular",
+              alignSelf: "center",
+              color: "#4372CF",
             }}
           >
-            {item.relaxed}
+            Distance {"\n"}
+            <Text style={{ fontSize: 10, color: "#4372CF" }}>in kms</Text>
           </Text>
           <Text
             style={{
               flex: 1,
+              // fontWeight: "bold",
+              fontFamily: "Poppins_Medium",
               textAlign: "center",
-              fontFamily: "Poppins_Regular",
+              color: "#4372CF",
             }}
           >
-            {item.rush}
+            Relaxed Hrs.
+          </Text>
+          <Text
+            style={{
+              flex: 1,
+              // fontWeight: "bold",
+              fontFamily: "Poppins_Medium",
+              textAlign: "center",
+              color: "#4372CF",
+            }}
+          >
+            Rush Hrs.
           </Text>
         </View>
-      ))}
-      <ScrollView style={{ padding: 16, backgroundColor: "#f8f9fa" }}>
-        <Text
-          style={{ padding: 5, fontSize: 13, fontFamily: "Poppins_Regular" }}
-        >
-          Additional charges of ₹100/3 km after this.
-        </Text>
-        <Card style={{ marginBottom: 16, backgroundColor: "#fff" }}>
-          <Card.Content>
-            <Text style={{ fontSize: 18, fontFamily: "Poppins_Medium" }}>
-              Fees, Tolls & Taxes
-            </Text>
-            <FlatList
-              data={tolls}
-              keyExtractor={(item) => item.name}
-              renderItem={({ item }) => (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingVertical: 8,
-                  }}
-                >
-                  <Text style={{ fontFamily: "Poppins_Regular" }}>
-                    {item.name}
-                  </Text>
-                  <Text style={{ fontFamily: "Poppins_Medium" }}>
-                    {item.price}
-                  </Text>
-                </View>
-              )}
-            />
-          </Card.Content>
-        </Card>
 
-        <Card>
-          <Card.Content style={{ marginBottom: 16, backgroundColor: "#fff" }}>
-            <Text style={{ fontSize: 18, fontFamily: "Poppins_Medium" }}>
-              Other Terms & Details
+        {pricingData?.map((item) => (
+          <View
+            key={item.id}
+            style={{
+              flexDirection: "row",
+              padding: 10,
+              borderBottomWidth: 1,
+              borderBottomColor: "#ddd",
+              alignItems: "center",
+            }}
+          >
+            {/* Index Circle */}
+            <View
+              style={{
+                width: 30,
+                height: 30,
+                backgroundColor: "#0057FF",
+                borderRadius: 15,
+                alignItems: "center",
+                justifyContent: "center",
+                marginRight: 10,
+              }}
+            >
+              <Text style={{ color: "#fff", fontFamily: "Poppins_Medium" }}>
+                {item.id}
+              </Text>
+            </View>
+
+            <Text
+              style={{
+                flex: 1,
+                textAlign: "center",
+                fontFamily: "Poppins_Regular",
+              }}
+            >
+              {item.distance}
             </Text>
-            <Divider style={{ marginVertical: 8 }} />
-            <Text style={{ fontFamily: "Poppins_Regular" }}>
-              • Waiting beyond 2 mins at stops: ₹4/min
+            <Text
+              style={{
+                flex: 1,
+                textAlign: "center",
+                fontFamily: "Poppins_Regular",
+              }}
+            >
+              {item.relaxed}
             </Text>
-            <Text style={{ fontFamily: "Poppins_Regular", fontSize: 10 }}>
-              • Parking charges should be paid to the driver
+            <Text
+              style={{
+                flex: 1,
+                textAlign: "center",
+                fontFamily: "Poppins_Regular",
+              }}
+            >
+              {item.rush}
             </Text>
-            <Text style={{ fontFamily: "Poppins_Regular" }}>
-              • Discounts apply on base fares only
-            </Text>
-            <Text style={{ fontFamily: "Poppins_Regular" }}>
-              • Pickups available in Gurgaon, IGI Airport, and Delhi
-            </Text>
-            <Text style={{ fontFamily: "Poppins_Regular" }}>
-              • Drops available within Gurgaon and Delhi
-            </Text>
-          </Card.Content>
-        </Card>
+          </View>
+        ))}
+        <ScrollView style={{ padding: 16, backgroundColor: "#f8f9fa" }}>
+          <Text
+            style={{ padding: 5, fontSize: 13, fontFamily: "Poppins_Regular" }}
+          >
+            Additional charges of ₹100/3 km after this.
+          </Text>
+          {TermsDetails()}
+          {/* <Card style={{ marginBottom: 16, backgroundColor: "#fff" }}>
+            <Card.Content>
+              <Text style={{ fontSize: 18, fontFamily: "Poppins_Medium" }}>
+                Fees, Tolls & Taxes
+              </Text>
+              <FlatList
+                data={tolls}
+                keyExtractor={(item) => item.name}
+                renderItem={({ item }) => (
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      paddingVertical: 8,
+                    }}
+                  >
+                    <Text style={{ fontFamily: "Poppins_Regular" }}>
+                      {item.name}
+                    </Text>
+                    <Text style={{ fontFamily: "Poppins_Medium" }}>
+                      {item.price}
+                    </Text>
+                  </View>
+                )}
+              />
+            </Card.Content>
+          </Card>
+
+          <Card>
+            <Card.Content style={{ marginBottom: 16, backgroundColor: "#fff" }}>
+              <Text style={{ fontSize: 18, fontFamily: "Poppins_Medium" }}>
+                Other Terms & Details
+              </Text>
+              <Divider style={{ marginVertical: 8 }} />
+              <Text style={{ fontFamily: "Poppins_Regular" }}>
+                • Waiting beyond 2 mins at stops: ₹4/min
+              </Text>
+              <Text style={{ fontFamily: "Poppins_Regular", fontSize: 10 }}>
+                • Parking charges should be paid to the driver
+              </Text>
+              <Text style={{ fontFamily: "Poppins_Regular" }}>
+                • Discounts apply on base fares only
+              </Text>
+              <Text style={{ fontFamily: "Poppins_Regular" }}>
+                • Pickups available in Gurgaon, IGI Airport, and Delhi
+              </Text>
+              <Text style={{ fontFamily: "Poppins_Regular" }}>
+                • Drops available within Gurgaon and Delhi
+              </Text>
+            </Card.Content>
+          </Card> */}
+        </ScrollView>
       </ScrollView>
     </ScrollView>
-  </ScrollView>
-);
+  );
+};
 
 const RentalsScreen = () => {
   const pricingData = [
@@ -359,16 +433,29 @@ const RentalsScreen = () => {
                 setExpandedIndex(expandedIndex === index ? null : index)
               }
             >
-              <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+              <Text style={{ fontSize: 16, fontFamily: "Poppins_Medium" }}>
                 {section.title}
               </Text>
               <Text style={{ fontSize: 20 }}>
-                {expandedIndex === index ? "⌃" : "⌄"}
+                <MaterialIcons
+                  name={
+                    expandedIndex === index
+                      ? "keyboard-arrow-up"
+                      : "keyboard-arrow-down"
+                  }
+                  size={20}
+                  color="black"
+                />
               </Text>
             </TouchableOpacity>
             {expandedIndex === index && (
               <Text
-                style={{ paddingVertical: 10, fontSize: 14, color: "#555" }}
+                style={{
+                  paddingVertical: 10,
+                  fontSize: 14,
+                  color: "#555",
+                  fontFamily: "Poppins_Regular",
+                }}
               >
                 {section.content}
               </Text>
@@ -416,7 +503,9 @@ const RentalsScreen = () => {
 
           {/* Duration & Price */}
           <Text style={{ flex: 1, fontSize: 16 }}>{item.duration}</Text>
-          <Text style={{ fontSize: 16, fontWeight: "bold" }}>{item.price}</Text>
+          <Text style={{ fontSize: 16, fontFamily: "Poppins_Medium" }}>
+            {item.price}
+          </Text>
         </View>
       ))}
       {TermsDetails()}
@@ -424,111 +513,186 @@ const RentalsScreen = () => {
   );
 };
 
-const AirportScreen = () => (
-  <ScrollView
-    style={{ flex: 1, backgroundColor: "#fff", padding: 16, marginBottom: 40 }}
-  >
+const AirportScreen = () => {
+  const sections = [
+    {
+      title: "Fees, Tolls & Taxes",
+      content:
+        "Toll charges, state entry fees, and parking fees are extra and need to be paid by the rider. The final fare does not include these charges.",
+    },
+    {
+      title: "Other Terms & Details",
+      content:
+        "Waiting charges may apply if the trip is delayed beyond a certain limit. Cancellations after driver allocation may incur charges.",
+    },
+  ];
+  const TermsDetails = () => {
+    const [expandedIndex, setExpandedIndex] = useState(null);
+
+    return (
+      <View style={{ marginBottom: 0 }}>
+        {sections.map((section, index) => (
+          <View key={index}>
+            <TouchableOpacity
+              style={{
+                paddingVertical: 12,
+                borderBottomWidth: 1,
+                borderBottomColor: "#ddd",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+              onPress={() =>
+                setExpandedIndex(expandedIndex === index ? null : index)
+              }
+            >
+              <Text style={{ fontSize: 16, fontFamily: "Poppins_Medium" }}>
+                {section.title}
+              </Text>
+              <Text style={{ fontSize: 20 }}>
+                <MaterialIcons
+                  name={
+                    expandedIndex === index
+                      ? "keyboard-arrow-up"
+                      : "keyboard-arrow-down"
+                  }
+                  size={20}
+                  color="black"
+                />
+              </Text>
+            </TouchableOpacity>
+            {expandedIndex === index && (
+              <Text
+                style={{
+                  paddingVertical: 10,
+                  fontSize: 14,
+                  color: "#555",
+                  fontFamily: "Poppins_Regular",
+                }}
+              >
+                {section.content}
+              </Text>
+            )}
+          </View>
+        ))}
+      </View>
+    );
+  };
+
+  return (
     <ScrollView
       style={{
-        marginBottom: 100,
-        borderWidth: 1,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        borderColor: "#EBECED",
+        flex: 1,
+        backgroundColor: "#fff",
+        padding: 16,
+        marginBottom: 40,
       }}
-      showsVerticalScrollIndicator={false}
     >
-      <View
+      <ScrollView
         style={{
-          flexDirection: "row",
-          backgroundColor: "#F0F9FF",
-          padding: 10,
-          justifyContent: "center",
-          alignContent: "center",
+          marginBottom: 100,
+          borderWidth: 1,
           borderTopLeftRadius: 10,
           borderTopRightRadius: 10,
+          borderColor: "#EBECED",
         }}
+        showsVerticalScrollIndicator={false}
       >
-        <Text
-          style={{
-            flex: 0.5,
-            fontWeight: "bold",
-            textAlign: "center",
-            color: "#4372CF",
-          }}
-        >
-          Sr. No.
-        </Text>
-        <Text
-          style={{
-            flex: 1,
-            fontWeight: "bold",
-            textAlign: "center",
-            alignSelf: "center",
-            color: "#4372CF",
-          }}
-        >
-          Distance {"\n"}
-          <Text style={{ fontSize: 10, color: "#4372CF" }}>in kms</Text>
-        </Text>
-        <Text
-          style={{
-            flex: 1,
-            fontWeight: "bold",
-            textAlign: "center",
-            color: "#4372CF",
-          }}
-        >
-          Relaxed Hrs.
-        </Text>
-        <Text
-          style={{
-            flex: 1,
-            fontWeight: "bold",
-            textAlign: "center",
-            color: "#4372CF",
-          }}
-        >
-          Rush Hrs.
-        </Text>
-      </View>
-
-      {pricingData?.map((item) => (
         <View
-          key={item.id}
           style={{
             flexDirection: "row",
+            backgroundColor: "#F0F9FF",
             padding: 10,
-            borderBottomWidth: 1,
-            borderBottomColor: "#ddd",
-            alignItems: "center",
+            justifyContent: "center",
+            alignContent: "center",
+            borderTopLeftRadius: 10,
+            borderTopRightRadius: 10,
           }}
         >
-          {/* Index Circle */}
-          <View
+          <Text
             style={{
-              width: 30,
-              height: 30,
-              backgroundColor: "#0057FF",
-              borderRadius: 15,
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: 10,
+              flex: 0.5,
+              fontWeight: "bold",
+              textAlign: "center",
+              color: "#4372CF",
             }}
           >
-            <Text style={{ color: "#fff", fontWeight: "bold" }}>{item.id}</Text>
-          </View>
-
-          <Text style={{ flex: 1, textAlign: "center" }}>{item.distance}</Text>
-          <Text style={{ flex: 1, textAlign: "center" }}>{item.relaxed}</Text>
-          <Text style={{ flex: 1, textAlign: "center" }}>{item.rush}</Text>
+            Sr. No.
+          </Text>
+          <Text
+            style={{
+              flex: 1,
+              fontWeight: "bold",
+              textAlign: "center",
+              alignSelf: "center",
+              color: "#4372CF",
+            }}
+          >
+            Distance {"\n"}
+            <Text style={{ fontSize: 10, color: "#4372CF" }}>in kms</Text>
+          </Text>
+          <Text
+            style={{
+              flex: 1,
+              fontWeight: "bold",
+              textAlign: "center",
+              color: "#4372CF",
+            }}
+          >
+            Relaxed Hrs.
+          </Text>
+          <Text
+            style={{
+              flex: 1,
+              fontWeight: "bold",
+              textAlign: "center",
+              color: "#4372CF",
+            }}
+          >
+            Rush Hrs.
+          </Text>
         </View>
-      ))}
-      <ScrollView style={{ padding: 16, backgroundColor: "#f8f9fa" }}>
-        <Text style={{ padding: 5, fontSize: 13, fontWeight: "500" }}>
-          Additional charges of ₹100/3 km after this.
-        </Text>
-        <Card style={{ marginBottom: 16, backgroundColor: "#fff" }}>
+
+        {pricingData?.map((item) => (
+          <View
+            key={item.id}
+            style={{
+              flexDirection: "row",
+              padding: 10,
+              borderBottomWidth: 1,
+              borderBottomColor: "#ddd",
+              alignItems: "center",
+            }}
+          >
+            {/* Index Circle */}
+            <View
+              style={{
+                width: 30,
+                height: 30,
+                backgroundColor: "#0057FF",
+                borderRadius: 15,
+                alignItems: "center",
+                justifyContent: "center",
+                marginRight: 10,
+              }}
+            >
+              <Text style={{ color: "#fff", fontWeight: "bold" }}>
+                {item.id}
+              </Text>
+            </View>
+
+            <Text style={{ flex: 1, textAlign: "center" }}>
+              {item.distance}
+            </Text>
+            <Text style={{ flex: 1, textAlign: "center" }}>{item.relaxed}</Text>
+            <Text style={{ flex: 1, textAlign: "center" }}>{item.rush}</Text>
+          </View>
+        ))}
+        <ScrollView style={{ padding: 16, backgroundColor: "#f8f9fa" }}>
+          <Text style={{ padding: 5, fontSize: 13, fontWeight: "500" }}>
+            Additional charges of ₹100/3 km after this.
+          </Text>
+          {/* <Card style={{ marginBottom: 16, backgroundColor: "#fff" }}>
           <Card.Content>
             <Text style={{ fontSize: 18, fontWeight: "bold" }}>
               Fees, Tolls & Taxes
@@ -564,11 +728,13 @@ const AirportScreen = () => (
             <Text>• Pickups available in Gurgaon, IGI Airport, and Delhi</Text>
             <Text>• Drops available within Gurgaon and Delhi</Text>
           </Card.Content>
-        </Card>
+        </Card> */}
+          {TermsDetails()}
+        </ScrollView>
       </ScrollView>
     </ScrollView>
-  </ScrollView>
-);
+  );
+};
 
 const PricingScreen = () => {
   return (

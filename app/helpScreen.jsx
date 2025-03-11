@@ -158,7 +158,8 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 18,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Poppins_Medium",
     marginBottom: 10,
     textAlign: "center",
     color: "#333",
@@ -172,6 +173,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 16,
     color: "#555",
+    fontFamily: "Poppins_Regular",
   },
   formContainer: {
     backgroundColor: "#FFFFFF",
@@ -189,7 +191,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 16,
     backgroundColor: "#F8F9FA",
+    fontFamily: "Poppins_Regular",
   },
+
   textArea: {
     height: 80,
     textAlignVertical: "top",
@@ -203,6 +207,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#FFF",
     fontSize: 16,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Poppins_Medium",
   },
 });

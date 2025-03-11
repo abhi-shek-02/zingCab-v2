@@ -74,6 +74,56 @@ const ListData = [
   },
 ];
 
+const ListDatas = [
+  {
+    id: "28",
+    category: "Beaches",
+    title: "Durgapur",
+    location: "Durgapur",
+    image:
+      "https://s7ap1.scene7.com/is/image/incredibleindia/2-durgapur-steel-plant-durgapur-west-bengal-city-hero?qlt=82&ts=1726643819222",
+  },
+  {
+    id: "29",
+    category: "Beaches",
+    title: "kharagpur",
+    location: "kharagpur",
+    image:
+      "https://www.sikareducationhub.in/wp-content/uploads/2025/01/kgp_bg-1030x687.jpg",
+  },
+  {
+    id: "10",
+    category: "Wildlife",
+    title: "Sundarbans Tiger Safari",
+    location: "Asansol",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/2/24/IMG_asnrlyjn.jpg",
+  },
+  {
+    id: "1",
+    category: "Hill Stations",
+    title: "Haldia",
+    location: "Haldia",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/3/32/Jamnagar_Refinery.jpg",
+  },
+  {
+    id: "11",
+    category: "Wildlife",
+    title: "Gorumara National Park",
+    location: "Bolpur",
+    image:
+      "https://i0.wp.com/traveldreams.live/wp-content/uploads/2023/02/4.jpg?resize=840%2C560&ssl=1",
+  },
+  {
+    id: "12",
+    category: "Wildlife",
+    title: "Jaldapara Wildlife Sanctuary",
+    location: "Berhampore",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/0/04/Maa_Dayamoyee_Kalibari_at_Berhampore_in_Murshidabad_district_04.jpg",
+  },
+];
 const data = [
   {
     id: 1,
@@ -219,7 +269,7 @@ export default function HomeScreen() {
           onPress={() => navigation.navigate("bookingScreen")}
           style={{
             // flex: 0.5,
-            backgroundColor: "#2A5ED0",
+            backgroundColor: "#0045FF",
             justifyContent: "center",
             alignItems: "center",
             // borderBottomLeftRadius: 10,
@@ -228,7 +278,7 @@ export default function HomeScreen() {
             shadowOffset: { width: 0, height: 4 },
             shadowOpacity: 0.2,
             shadowRadius: 5,
-            height: 197,
+            height: 240,
             // Shadow for Android
             elevation: 5,
           }}
@@ -338,7 +388,7 @@ export default function HomeScreen() {
               // backgroundColor: "grey",
               width: "90%",
               // height: 80,
-              top: 10,
+              top: 15,
               flexDirection: "row",
               justifyContent: "center",
               alignItems: "center",
@@ -561,9 +611,12 @@ export default function HomeScreen() {
                     }}
                   >
                     <TouchableOpacity
-                    style={{justifyContent:'center',alignItems:'center'}}
-                    onPress={() => navigation.navigate("bookingScreen", { bookingData: item })}
-
+                      style={{ justifyContent: "center", alignItems: "center" }}
+                      onPress={() =>
+                        navigation.navigate("bookingScreen", {
+                          bookingData: item,
+                        })
+                      }
                     >
                       <Image
                         source={{ uri: item.image }}
@@ -584,6 +637,73 @@ export default function HomeScreen() {
                           fontFamily: "Poppins_Regular",
                           fontSize: 11,
                           fontWeight: "600",
+                        }}
+                      >
+                        {item?.location}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                );
+              }}
+              keyExtractor={(item) => item.id}
+            />
+          </View>
+          <View
+            style={{ borderRadius: 0.5, width: "100%", height: 1, padding: 1 }}
+          ></View>
+          <View style={{ height: 90 }}>
+            <FlatList
+              data={ListDatas}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item, index }) => {
+                return (
+                  <View
+                    style={{
+                      marginHorizontal: 0,
+                      padding: 10,
+                      height: 90,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      // backgroundColor: "#E0F2FE",
+                      // elevation:1
+                    }}
+                  >
+                    <TouchableOpacity
+                      style={{
+                        justifyContent: "center",
+                        alignItems: "center",
+                        shadowColor: "#2C66E3",
+                        shadowOffset: { width: 0, height: 4 },
+                        shadowOpacity: 0.2,
+                        shadowRadius: 5,
+                        elevation: 5,
+                      }}
+                      onPress={() =>
+                        navigation.navigate("bookingScreen", {
+                          bookingData: item,
+                        })
+                      }
+                    >
+                      <Image
+                        source={{ uri: item.image }}
+                        style={{
+                          width: 40,
+                          height: 40,
+                          borderRadius: 50,
+                          borderWidth: 1,
+                          borderColor: "#fff",
+                          elevation: 5,
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      />
+                      <Text
+                        style={{
+                          paddingTop: 8,
+                          fontFamily: "Poppins_Regular",
+                          fontSize: 12.5,
+                          // fontWeight: "600",
                         }}
                       >
                         {item?.location}
@@ -709,6 +829,7 @@ export default function HomeScreen() {
               </Text>
             </TouchableOpacity>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={{
               height: 200,

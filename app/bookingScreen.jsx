@@ -2,84 +2,178 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
   ScrollView,
-  Button,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+  TextInput,
+  Modal,
+  Dimensions,
 } from "react-native";
-import { Ionicons, MaterialIcons, FontAwesome } from "@expo/vector-icons";
-import DatePicker from "react-native-date-picker";
-import { useRoute } from "@react-navigation/native";
-const BookingScreen = () => {
-  const route = useRoute();
-  console.log("Route:", route);
-  const [selectedTab, setSelectedTab] = useState("Rides");
-  const [selectedSubTab, setSelectedSubTab] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
-  return (
-    <View style={styles.container}>
-      {/* Header */}
-      {/* <View style={styles.header}>
-        <View style={styles.profile}>
-          <FontAwesome name="user-circle" size={20} color="##00AFF0" />
-          <Text style={styles.profileText}>Myself</Text>
-          <MaterialIcons name="keyboard-arrow-down" size={20} color="#0045ff" />
-        </View>
-      </View> */}
+import { Card, Divider } from "react-native-paper";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+// import DatePicker from "react-native-date-picker";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import LottieView from "lottie-react-native";
+import { useNavigation } from "@react-navigation/native";
+import { mainColor } from "@/constants/Colors";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Button } from "react-native";
 
-      {/* Tabs */}
-      <View style={styles.tabContainer}>
-        <TouchableOpacity
-          onPress={() => setSelectedTab("Rides")}
-          style={styles.tab}
-        >
-          <Text
-            style={[
-              styles.tabText,
-              selectedTab === "Rides" && styles.activeTabText,
-            ]}
+const Tab = createMaterialTopTabNavigator();
+
+const OutstationScreen = () => {
+  // const route = useRoute();
+  // console.log("Route:", route);
+  const [selectedTab, setSelectedTab] = useState("Rides");
+  const [selectedSubTab, setSelectedSubTab] = useState(true);
+  const [pickup, setPickup] = useState("");
+  const [drop, setDrop] = useState("");
+
+  const TripForm = () => {
+    const [pickup, setPickup] = useState("");
+    const [dropLocations, setDropLocations] = useState([""]); // Stores multiple drop locations
+
+    const addDropLocation = () => {
+      if (dropLocations.length < 4) {
+        setDropLocations([...dropLocations, ""]);
+      } else {
+        Alert.alert(
+          "Limit Reached",
+          "You can add up to 4 drop locations only."
+        );
+      }
+    };
+
+    // Remove a drop location field (Ensures at least one remains)
+    const removeDropLocation = (index) => {
+      if (dropLocations.length > 1) {
+        let updatedDrops = [...dropLocations];
+        updatedDrops.splice(index, 1);
+        setDropLocations(updatedDrops);
+      }
+    };
+
+    // Update text of a drop location
+    const updateDropLocation = (text, index) => {
+      let updatedDrops = [...dropLocations];
+      updatedDrops[index] = text;
+      setDropLocations(updatedDrops);
+    };
+
+    return (
+      <View style={{ marginTop: 10, width: "100%", alignItems: "center" }}>
+        {/* Pickup Location */}
+        <TextInput
+          style={{
+            width: "90%",
+            padding: 15,
+            borderRadius: 10,
+            borderWidth: 1,
+            borderColor: "#e0e0e0",
+            backgroundColor: "#FFF",
+            fontSize: 12,
+            marginBottom: 10,
+            shadowColor: "#000",
+            shadowOpacity: 0.1,
+            shadowOffset: { width: 0, height: 2 },
+            shadowRadius: 5,
+            elevation: 3,
+            fontFamily: "Poppins_Regular",
+          }}
+          placeholder="Enter Pickup Location"
+          placeholderTextColor="#9FA9BC"
+          value={pickup}
+          onChangeText={setPickup}
+        />
+
+        {/* Drop Locations */}
+        {dropLocations.map((drop, index) => (
+          <View
+            key={index}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              width: "90%",
+              marginBottom: 10,
+            }}
           >
-            Rentals
-          </Text>
-          {selectedTab === "Rides" && (
-            <View style={styles.activeTabUnderline} />
-          )}
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => setSelectedTab("Rentals")}
-          style={styles.tab}
-        >
-          <Text
-            style={[
-              styles.tabText,
-              selectedTab === "Rentals" && styles.activeTabText,
-            ]}
+            <TextInput
+              style={{
+                flex: 1,
+                padding: 15,
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: "#e0e0e0",
+                backgroundColor: "#FFF",
+                fontSize: 12,
+                shadowColor: "#000",
+                shadowOpacity: 0.1,
+                shadowOffset: { width: 0, height: 2 },
+                shadowRadius: 5,
+                elevation: 3,
+                fontFamily: "Poppins_Regular",
+              }}
+              placeholder={`Enter Drop Location ${index + 1}`}
+              placeholderTextColor="#9FA9BC"
+              value={drop}
+              onChangeText={(text) => updateDropLocation(text, index)}
+            />
+
+            {/* Remove Button (only if more than one drop location) */}
+            {dropLocations.length > 1 && (
+              <TouchableOpacity
+                onPress={() => removeDropLocation(index)}
+                style={{
+                  marginLeft: 10,
+                  backgroundColor: "#FF5A5F",
+                  padding: 8,
+                  borderRadius: 5,
+                }}
+              >
+                <MaterialIcons name="close" size={18} color="#FFF" />
+              </TouchableOpacity>
+            )}
+          </View>
+        ))}
+
+        {/* (+) Add Drop Location Button (Disabled when 4 locations exist) */}
+        {dropLocations.length < 4 && (
+          <TouchableOpacity
+            onPress={addDropLocation}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "90%",
+              padding: 12,
+              borderRadius: 10,
+              backgroundColor: "#2d78ff",
+              marginBottom: 10,
+            }}
           >
-            Outstation
-          </Text>
-          {selectedTab === "Rentals" && (
-            <View style={styles.activeTabUnderline} />
-          )}
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => setSelectedTab("Airport  Rides")}
-          style={styles.tab}
-        >
-          <Text
-            style={[
-              styles.tabText,
-              selectedTab === "Airport  Rides" && styles.activeTabText,
-            ]}
-          >
-            Airport
-          </Text>
-          {selectedTab === "Airport  Rides" && (
-            <View style={styles.activeTabUnderline} />
-          )}
-        </TouchableOpacity>
+            <MaterialIcons name="add" size={18} color="#FFF" />
+            <Text style={{ color: "#FFF", fontSize: 14, marginLeft: 5 }}>
+              Add Drop Location
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
+    );
+  };
+  return (
+    <ScrollView
+      style={{
+        flex: 1,
+        backgroundColor: "#fff",
+        padding: 10,
+      }}
+      contentContainerStyle={{
+        flex: 1, // Ensures the container takes full height
+        // justifyContent: "center",
+        // alignItems: "center",
+      }}
+    >
       <View
         style={{
           display: "flex",
@@ -87,7 +181,7 @@ const BookingScreen = () => {
           justifyContent: "center",
           flexDirection: "row",
           width: "100%",
-          shadowColor: "#2C66E3",
+          shadowColor: "#2d78ff",
           shadowOffset: { width: 0, height: 4 },
           shadowOpacity: 0.2,
           shadowRadius: 5,
@@ -97,34 +191,36 @@ const BookingScreen = () => {
       >
         <View
           style={{
-            width: "54%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
             flexDirection: "row",
-            borderRadius: 30,
+            borderRadius: 12,
             borderWidth: 1,
             borderColor: "#e7ecf1",
+            width: "60%",
+            alignSelf: "center",
+            overflow: "hidden",
+            backgroundColor: "#F5F7FA",
           }}
         >
           {/* One Way Tab */}
           <TouchableOpacity
             onPress={() => setSelectedSubTab(true)}
             style={{
-              backgroundColor: selectedSubTab ? "#2C66E3" : "#FFF",
-              borderRadius: 30,
-              paddingHorizontal: 10,
+              flex: 1,
+              paddingVertical: 5,
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: selectedSubTab ? "#2d78ff" : "transparent",
             }}
           >
             <Text
               style={{
+                fontSize: 13,
+                // fontWeight: "600",
                 color: selectedSubTab ? "#FFF" : "#9FA9BC",
-                fontSize: 15,
-                fontWeight: "600",
-                padding: 10,
+                fontFamily: "Poppins_Regular",
               }}
             >
-              One way
+              One Way
             </Text>
           </TouchableOpacity>
 
@@ -132,218 +228,736 @@ const BookingScreen = () => {
           <TouchableOpacity
             onPress={() => setSelectedSubTab(false)}
             style={{
-              backgroundColor: !selectedSubTab ? "#2C66E3" : "#FFF",
-              borderRadius: 30,
-              paddingHorizontal: 10,
+              flex: 1,
+              paddingVertical: 5,
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: !selectedSubTab ? "#2d78ff" : "transparent",
             }}
           >
             <Text
               style={{
+                fontSize: 13,
+                // fontWeight: "600",
+                fontFamily: "Poppins_Regular",
                 color: !selectedSubTab ? "#FFF" : "#9FA9BC",
-                fontSize: 15,
-                fontWeight: "600",
-                padding: 10,
               }}
             >
-              Round trip
+              Round Trip
             </Text>
           </TouchableOpacity>
         </View>
       </View>
+      <View
+        style={{
+          paddingTop: 10,
+          alignItems: "center",
+          width: "100%",
+          // backgroundColor: "red",
+        }}
+      >
+        {/* One Way / Round Trip Toggle */}
 
-      {/* Location Inputs */}
-      <View style={styles.inputContainer}>
-        <View
+        {/* Booking Input Fields */}
+
+        {TripForm()}
+      </View>
+      <LottieView
+        source={require("../assets/A2.json")}
+        autoPlay
+        loop
+        style={{
+          width: "100%",
+          height: 150,
+          alignSelf: "center",
+        }}
+      />
+
+      <TouchableOpacity
+        style={{
+          backgroundColor: "#2d78ff",
+          paddingVertical: 12,
+          borderRadius: 10,
+          alignItems: "center",
+          marginTop: 20,
+          width: "100%",
+          marginBottom: 100,
+        }}
+        // onPress={() => navigation.navigate("otpScreen")}
+      >
+        <Text
           style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
+            color: "#fff",
+            fontSize: 16,
+            // fontWeight: "bold",
+            fontFamily: "Poppins_Medium",
           }}
         >
-          <Ionicons
-            name="location"
-            size={20}
-            color="#2C66E3"
-            style={{ width: "8%", alignSelf: "center" }}
-          />
-          <View style={styles.inputWrapper}>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter pickup location"
-            />
-            {/* <Ionicons
-              name="information-circle-outline"
-              size={20}
-              color="gray"
-            /> */}
-          </View>
-        </View>
-        <View
+          Continue
+        </Text>
+      </TouchableOpacity>
+
+      {/* <Text
+        style={{
+          textAlign: "center",
+          marginTop: 10,
+          fontSize: 15,
+          padding: 15,
+          // fontWeight: "600",
+          fontFamily: "Poppins_Medium",
+          color: "#8292B6",
+        }}
+      >
+        No ongoing rides at the momentx
+      </Text> */}
+    </ScrollView>
+  );
+};
+const RentalScreen = () => {
+  // const route = useRoute();
+  // console.log("Route:", route);
+  const [selectedTab, setSelectedTab] = useState("Rides");
+  const [selectedSubTab, setSelectedSubTab] = useState(true);
+  const [pickup, setPickup] = useState("");
+  const [drop, setDrop] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
+  const TripForm = () => {
+    const [pickup, setPickup] = useState("");
+    const [dropLocations, setDropLocations] = useState([""]); // Stores multiple drop locations
+
+    return (
+      <View
+        style={{
+          marginTop: 10,
+          width: "100%",
+          alignItems: "center",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        {/* Pickup Location ttt */}
+        <MaterialCommunityIcons
+          name="map-marker-radius-outline"
+          size={30}
+          color="#505672"
           style={{
-            flexDirection: "row",
+            alignItems: "center",
+            height: "90%",
+            padding: 5,
+            width: "10%",
+          }}
+        />
+
+        <TextInput
+          style={{
+            width: "85%",
+            padding: 15,
+            borderRadius: 10,
+            borderWidth: 1,
+            borderColor: "#e0e0e0",
+            backgroundColor: "#FFF",
+            fontSize: 12,
+            marginBottom: 10,
+            shadowColor: "#000",
+            shadowOpacity: 0.1,
+            shadowOffset: { width: 0, height: 2 },
+            shadowRadius: 5,
+            elevation: 3,
+            fontFamily: "Poppins_Regular",
+          }}
+          placeholder="Enter Pickup Location"
+          placeholderTextColor="#9FA9BC"
+          value={pickup}
+          onChangeText={setPickup}
+        />
+        <MaterialIcons
+          name="info-outline"
+          size={18}
+          color="#2C66E3"
+          style={{
             justifyContent: "center",
             alignItems: "center",
+            alignSelf: "center",
+            height: "65%",
+            width: "8%",
+            padding: 5,
           }}
-        >
-          <Ionicons
-            name="location"
-            size={20}
-            color="#14BA77"
+        />
+        {/* Drop Locations */}
+        {/* {dropLocations.map((drop, index) => (
+          <View
+            key={index}
             style={{
-              width: "8%",
-              alignSelf: "center",
-              justifyContent: "center",
+              flexDirection: "row",
               alignItems: "center",
+              width: "90%",
+              marginBottom: 10,
+            }}
+          >
+            <TextInput
+              style={{
+                flex: 1,
+                padding: 15,
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: "#e0e0e0",
+                backgroundColor: "#FFF",
+                fontSize: 12,
+                shadowColor: "#000",
+                shadowOpacity: 0.1,
+                shadowOffset: { width: 0, height: 2 },
+                shadowRadius: 5,
+                elevation: 3,
+                fontFamily: "Poppins_Regular",
+              }}
+              placeholder={`Enter Drop Location ${index + 1}`}
+              placeholderTextColor="#9FA9BC"
+              value={drop}
+              onChangeText={(text) => updateDropLocation(text, index)}
+            />
+
+    
+            {dropLocations.length > 1 && (
+              <TouchableOpacity
+                onPress={() => removeDropLocation(index)}
+                style={{
+                  marginLeft: 10,
+                  backgroundColor: "#FF5A5F",
+                  padding: 8,
+                  borderRadius: 5,
+                }}
+              >
+                <MaterialIcons name="close" size={18} color="#FFF" />
+              </TouchableOpacity>
+            )}
+          </View>
+        ))} */}
+
+        {/* (+) Add Drop Location Button (Disabled when 4 locations exist) */}
+        {/* {dropLocations.length < 4 && (
+          <TouchableOpacity
+            onPress={addDropLocation}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "90%",
+              padding: 12,
+              borderRadius: 10,
+              backgroundColor: "#2d78ff",
+              marginBottom: 10,
+            }}
+          >
+            <MaterialIcons name="add" size={18} color="#FFF" />
+            <Text style={{ color: "#FFF", fontSize: 14, marginLeft: 5 }}>
+              Add Drop Location
+            </Text>
+          </TouchableOpacity>
+        )} */}
+      </View>
+    );
+  };
+  const splitIntoRows = (data) => {
+    let row1 = [];
+    let row2 = [];
+    data.forEach((item, index) => {
+      if (index % 2 === 0) {
+        row1.push(item);
+      } else {
+        row2.push(item);
+      }
+    });
+    return [row1, row2];
+  };
+  const [selectedId, setSelectedId] = useState("3");
+  const [selectedVehicle, setSelectedVehicle] = useState("Sedan");
+
+  const pricingData = [
+    { id: "1", hours: "1 hr", distance: "10 km", price: "₹389" },
+    { id: "2", hours: "2 hrs", distance: "20 km", price: "₹599" },
+    { id: "3", hours: "3 hrs", distance: "30 km", price: "₹799" },
+    { id: "4", hours: "4 hrs", distance: "40 km", price: "₹999" },
+    { id: "5", hours: "5 hrs", distance: "50 km", price: "₹1249" },
+    { id: "6", hours: "6 hrs", distance: "60 km", price: "₹1499" },
+    { id: "7", hours: "7 hrs", distance: "70 km", price: "₹1699" },
+    { id: "8", hours: "8 hrs", distance: "80 km", price: "₹1999" },
+    { id: "9", hours: "10 hrs", distance: "100 km", price: "₹2499" },
+    { id: "10", hours: "12 hrs", distance: "120 km", price: "₹2999" },
+  ];
+  const pricingDatas = [
+    { id: "6", hours: "6 hrs", distance: "60 km", price: "₹1499" },
+    { id: "7", hours: "7 hrs", distance: "70 km", price: "₹1699" },
+    { id: "8", hours: "8 hrs", distance: "80 km", price: "₹1999" },
+    { id: "9", hours: "10 hrs", distance: "100 km", price: "₹2499" },
+    { id: "10", hours: "12 hrs", distance: "120 km", price: "₹2999" },
+  ];
+
+  const [row1, row2] = splitIntoRows(pricingData);
+  const itemWidth = Dimensions.get("window").width * 0.2; // Adjust width
+
+  const renderItem = ({ item }) => {
+    const isSelected = selectedId === item.id;
+    return (
+      <TouchableOpacity
+        style={{
+          // width: itemWidth,
+          backgroundColor: isSelected ? "#2d78ff" : "white",
+
+          borderRadius: 8,
+          padding: 18,
+          margin: 5,
+          // elevation: 2,
+          borderWidth: 1,
+          borderColor: isSelected ? "#2d78ff" : "#ddd",
+          alignItems: "center",
+          height: 60,
+          justifyContent: "center",
+          paddingHorizontal: 25,
+        }}
+        onPress={() => setSelectedId(item.id)}
+      >
+        {/* <View
+          style={{
+            width: 30,
+            height: 30,
+            borderRadius: 15,
+            backgroundColor: "#2d78ff",
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: 5,
+          }}
+        >
+          <Text style={{ color: "#fff", fontWeight: "bold" }}>{item.id}</Text>
+        </View> */}
+        <Text
+          style={{
+            fontSize: 14,
+            fontWeight: "500",
+            fontFamily: "Poppins_Regular",
+            color: isSelected ? "#fff" : "#333",
+          }}
+        >
+          {item.hours}
+        </Text>
+        <Text
+          style={{
+            fontSize: 14,
+            // fontWeight: "bold",
+
+            fontFamily: "Poppins_Regular",
+            color: isSelected ? "#fff" : "#333",
+          }}
+        >
+          {item.distance}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+  return (
+    <ScrollView
+      style={{
+        // flex: 1,
+        backgroundColor: "#fff",
+      }}
+      contentContainerStyle={
+        {
+          // flex: 1, // Ensures the container takes full height
+          // justifyContent: "center",
+          // alignItems: "center",
+        }
+      }
+    >
+      <View
+        style={{
+          padding: 10,
+          alignItems: "center",
+          width: "100%",
+          // backgroundColor: "red",
+        }}
+      >
+        {/* One Way / Round Trip Toggle */}
+
+        {/* Booking Input Fields */}
+
+        {TripForm()}
+      </View>
+      <LottieView
+        source={require("../assets/A2.json")}
+        autoPlay
+        loop
+        style={{
+          width: "100%",
+          height: 160,
+          alignSelf: "center",
+        }}
+      />
+      <View
+        style={{
+          marginTop: 40,
+          // backgroundColor: "#F9FAFF",
+          width: "100%",
+          padding: 10,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+          borderColor: "#DADEF2",
+          borderWidth: 1,
+          // height: "100%",
+          // flex: 1,
+          marginBottom: 150,
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            padding: 10,
+            // justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <MaterialIcons
+            name="assistant-navigation"
+            size={16}
+            color="#2d78ff"
+            style={{
+              borderWidth: 1,
+              borderRadius: 50,
+              padding: 5,
+              borderColor: "silver",
+              backgroundColor: "#fff",
+              shadowColor: "#2d78ff",
+              shadowOffset: { width: 2, height: 2 },
+              shadowOpacity: 0.1, // Reduced opacity for a lighter shadow
+              shadowRadius: 6, // Increased radius for a softer effect
+              elevation: 2, // Lowered for a subtle shadow on Android
             }}
           />
-          <View style={styles.inputWrapper}>
-            <TextInput style={styles.input} placeholder="Enter drop location" />
-            {/* <Ionicons
-              name="information-circle-outline"
-              size={20}
-              color="gray"
-            /> */}
-          </View>
+          <Text
+            style={{
+              // textAlign: "center",
+              // marginTop: 10,
+              fontSize: 15,
+              paddingHorizontal: 10,
+              // padding: 10,
+
+              fontFamily: "Poppins_Medium",
+              color: "#505672",
+            }}
+          >
+            Select a package
+          </Text>
         </View>
-        {/* <Ionicons name="location" size={20} color="red" />
-        <View style={styles.inputWrapper}>
-          <TextInput style={styles.input} placeholder="Enter drop location" />
-          <Ionicons name="information-circle-outline" size={20} color="gray" />
-        </View> */}
-      </View>
+        <FlatList
+          data={pricingData}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          // contentContainerStyle={{ paddingVertical: 10 }}
+        />
+        {/* <DateTimePickerExample /> */}
+        {/* <FlatList
+          data={pricingDatas}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          // contentContainerStyle={{ paddingHorizontal: 10, paddingVertical: 10 }}
+        /> */}
+        {/* <Button title="Open" onPress={() => setOpen(true)} />
+        <DatePicker
+          modal
+          open={open}
+          date={date}
+          onConfirm={(date) => {
+            setOpen(false);
+            setDate(date);
+          }}
+          onCancel={() => {
+            setOpen(false);
+          }}
+        /> */}
+        <View
+          style={{
+            flexDirection: "row",
+            padding: 10,
+            // justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <MaterialIcons
+            name="directions-car"
+            size={16}
+            color="#2d78ff"
+            style={{
+              borderWidth: 1,
+              borderRadius: 50,
+              padding: 5,
+              borderColor: "silver",
+              backgroundColor: "#fff",
+              shadowColor: "#2d78ff",
+              shadowOffset: { width: 2, height: 2 },
+              shadowOpacity: 0.1, // Reduced opacity for a lighter shadow
+              shadowRadius: 6, // Increased radius for a softer effect
+              elevation: 2, // Lowered for a subtle shadow on Android
+            }}
+          />
+          <Text
+            style={{
+              // textAlign: "center",
+              // marginTop: 10,
+              fontSize: 15,
+              paddingHorizontal: 10,
+              // padding: 10,
 
-      {/* Add Stops */}
-      <Text style={styles.addStops}>Add all stops now</Text>
+              fontFamily: "Poppins_Medium",
+              color: "#505672",
+            }}
+          >
+            Select Category
+          </Text>
+        </View>
 
-      {/* Quick Access Buttons */}
-      {/* <View style={styles.quickActions}>
-        <TouchableOpacity style={styles.quickButton}>
-          <Ionicons name="home" size={20} color="blue" />
-          <Text style={styles.quickText}>Add Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.quickButton}>
-          <Ionicons name="briefcase" size={20} color="blue" />
-          <Text style={styles.quickText}>Add Work</Text>
-        </TouchableOpacity>
-      </View> */}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            // padding: 5,
+            backgroundColor: "#fff", // Light background for better contrast
+            borderRadius: 10,
+          }}
+        >
+          {/* Sedan Option */}
+          <TouchableOpacity
+            style={{
+              width: "48%",
+              // padding: 15,
+              borderRadius: 10,
+              borderWidth: 1,
+              borderColor: selectedVehicle === "Sedan" ? "#2d78ff" : "silver",
+              backgroundColor: selectedVehicle === "Sedan" ? "#eaf3ff" : "#fff",
+              alignItems: "center",
+              justifyContent: "center",
+              // elevation: 3, // Soft shadow
+            }}
+            onPress={() => setSelectedVehicle("Sedan")}
+          >
+            <View style={{ flexDirection: "row" }}>
+              {/* <MaterialIcons
+                name="directions-car"
+                size={24}
+                color="#2d78ff"
+                style={{ paddingHorizontal: 10 }}
+              /> */}
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontFamily: "Poppins_Medium",
+                  // marginTop: 5,
+                  // backgroundColor: "#eaf3ff",
+                  width: "100%",
+                  textAlign: "center",
+                  borderTopRightRadius: 10,
+                  borderTopLeftRadius: 10,
+                }}
+              >
+                Sedan
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginTop: 5,
+              }}
+            >
+              <MaterialIcons name="person" size={16} color="#555" />
+              <Text style={{ marginLeft: 5, fontFamily: "Poppins_Regular" }}>
+                4 People
+              </Text>
+            </View>
+            <Text
+              style={{
+                fontSize: 16,
+                // fontWeight: "bold",
+                color: "#28a745",
+                marginTop: 5,
+                fontFamily: "Poppins_Medium",
+              }}
+            >
+              ₹999
+            </Text>
+          </TouchableOpacity>
 
-      {/* Saved Locations */}
-      {/* <ScrollView>
-        <TouchableOpacity style={styles.savedItem}>
-          <Ionicons name="heart-outline" size={20} color="gray" />
-          <Text style={styles.savedText}>Favourite Places</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.savedItem}>
-          <Ionicons name="airplane-outline" size={20} color="gray" />
-          <Text style={styles.savedText}>
-            Indira Gandhi International Airport
+          {/* SUV Option */}
+          <TouchableOpacity
+            style={{
+              width: "48%",
+              // padding: 15,
+              borderRadius: 10,
+              borderWidth: 1,
+              borderColor: selectedVehicle === "SUV" ? "#2d78ff" : "silver",
+              backgroundColor: selectedVehicle === "SUV" ? "#eaf3ff" : "#fff",
+              alignItems: "center",
+              justifyContent: "center",
+              // elevation: 3, // Soft shadow
+            }}
+            onPress={() => setSelectedVehicle("SUV")}
+          >
+            {/* <MaterialIcons name="airport-shuttle" size={24} color="#2d78ff" /> */}
+            <Text
+              style={{
+                fontSize: 16,
+                fontFamily: "Poppins_Medium",
+                // marginTop: 5,
+                // backgroundColor: "#eaf3ff",
+                width: "100%",
+                textAlign: "center",
+                borderTopRightRadius: 10,
+                borderTopLeftRadius: 10,
+              }}
+            >
+              SUV
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginTop: 5,
+              }}
+            >
+              <MaterialIcons name="person" size={16} color="#555" />
+              <Text style={{ marginLeft: 5, fontFamily: "Poppins_Regular" }}>
+                6 People
+              </Text>
+            </View>
+            <Text
+              style={{
+                fontSize: 16,
+                // fontWeight: "bold",
+                fontFamily: "Poppins_Medium",
+                color: "#28a745",
+                marginTop: 5,
+              }}
+            >
+              ₹1299
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity
+          style={{
+            backgroundColor: "#2d78ff",
+            paddingVertical: 12,
+            borderRadius: 10,
+            alignItems: "center",
+            marginTop: 20,
+            width: "100%",
+          }}
+          // onPress={() => navigation.navigate("otpScreen")}
+        >
+          <Text
+            style={{
+              color: "#fff",
+              fontSize: 16,
+              // fontWeight: "bold",
+              fontFamily: "Poppins_Medium",
+            }}
+          >
+            Continue
           </Text>
         </TouchableOpacity>
-      </ScrollView> */}
+      </View>
+    </ScrollView>
+  );
+};
 
-      {/* Footer Button */}
-      {/* <TouchableOpacity style={styles.footerButton}>
-        <Ionicons name="information-circle" size={20} color="white" />
-        <Text style={styles.footerText}>Set Location on Map</Text>
-      </TouchableOpacity> */}
-    </View>
+const AirportRideScreen = () => (
+  <ScrollView
+    style={{
+      flex: 1,
+      backgroundColor: "#fff",
+      padding: 10,
+    }}
+    contentContainerStyle={{
+      flex: 1, // Ensures the container takes full height
+      justifyContent: "center",
+      alignItems: "center",
+    }}
+  >
+    <LottieView
+      source={require("../assets/Location.json")}
+      autoPlay
+      loop
+      style={{
+        width: "100%",
+        height: 200,
+        alignSelf: "center",
+      }}
+    />
+
+    <Text
+      style={{
+        textAlign: "center",
+        marginTop: 10,
+        fontSize: 15,
+        padding: 15,
+        fontWeight: "600",
+        fontFamily: "Poppins_Medium",
+        color: "#8292B6",
+      }}
+    >
+      You haven't taken a ride with us yet
+    </Text>
+  </ScrollView>
+);
+const BookingScreen = () => {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarLabelStyle: { fontSize: 14, fontFamily: "Poppins_Medium" },
+        tabBarStyle: { backgroundColor: "#fff" },
+        tabBarIndicatorStyle: {
+          backgroundColor: mainColor,
+          height: 3,
+          borderTopLeftRadius: 5,
+          borderTopRightRadius: 5,
+        },
+        tabBarActiveTintColor: mainColor,
+        tabBarInactiveTintColor: "#666",
+      }}
+    >
+      <Tab.Screen name="Rental" component={RentalScreen} />
+      <Tab.Screen name="Outstation" component={OutstationScreen} />
+
+      <Tab.Screen name="Airport Rides" component={AirportRideScreen} />
+    </Tab.Navigator>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "white" },
-  header: {
-    // backgroundColor: "#0057FF",
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 15,
+  screen: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    borderBottomLeftRadius: 40,
-    borderBottomRightRadius: 40,
+    backgroundColor: "#fff",
   },
-  profile: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginLeft: 15,
-    borderRadius: 50,
-    borderWidth: 1,
-    padding: 10,
-    borderColor: "#DADEF2",
-    paddingHorizontal: 20,
-  },
-  profileText: {
-    color: "#505672",
-    marginLeft: 5,
-    fontWeight: "700",
-    marginHorizontal: 5,
-  },
-
-  tabContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginVertical: 10,
-    alignContent: "center",
-    // flex:1
-  },
-  tab: { alignItems: "center", alignSelf: "center", justifyContent: "center" },
-  tabText: { fontSize: 16, color: "gray" },
-  activeTabText: { color: "#2C66E3", fontWeight: "bold" },
-  activeTabUnderline: {
-    width: "100%",
-    height: 3,
-    backgroundColor: "#2C66E3",
-    marginTop: 10,
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
-  },
-
-  inputContainer: {
-    paddingHorizontal: 15,
-    marginTop: 15,
-    borderWidth: 2,
-    marginHorizontal: 12,
-    borderRadius: 20,
-    borderColor: "#e7ecf1",
-  },
-  inputWrapper: {
-    borderColor: "#e7ecf1",
-    flexDirection: "row",
-    alignItems: "center",
-    // backgroundColor: "#F0F0F0",
-    borderWidth: 2,
-    // padding: 5,
-    borderRadius: 8,
-    marginVertical: 5,
-    width: "95%",
+  text: { fontSize: 20, fontWeight: "bold" },
+  truecallerButton: {
+    backgroundColor: "#E9F4FF",
+    paddingVertical: 12,
     borderRadius: 10,
-  },
-  input: { flex: 1, marginLeft: 10 },
-
-  addStops: { textAlign: "center", marginVertical: 10, color: "gray" },
-
-  quickActions: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingVertical: 10,
-  },
-  quickButton: { alignItems: "center" },
-  quickText: { color: "blue", marginTop: 5 },
-
-  savedItem: { flexDirection: "row", alignItems: "center", padding: 15 },
-  savedText: { marginLeft: 10, fontSize: 16 },
-
-  footerButton: {
-    flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#0057FF",
-    padding: 15,
-    justifyContent: "center",
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
+    marginTop: 20,
+    width: "80%",
   },
-  footerText: { color: "white", marginLeft: 5, fontSize: 16 },
+  truecallerText: {
+    color: "#2d78ff",
+    fontSize: 16,
+    // fontWeight: "bold",
+    fontFamily: "Poppins_Medium",
+  },
 });
 
 export default BookingScreen;
