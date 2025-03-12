@@ -9,7 +9,9 @@ import {
   TextInput,
   Modal,
   Dimensions,
+  Platform,
 } from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { Card, Divider } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 // import DatePicker from "react-native-date-picker";
@@ -644,6 +646,7 @@ const RentalScreen = () => {
           height: 60,
           justifyContent: "center",
           paddingHorizontal: 25,
+          marginTop: 20,
         }}
         onPress={() => setSelectedId(item.id)}
       >
@@ -684,6 +687,40 @@ const RentalScreen = () => {
       </TouchableOpacity>
     );
   };
+
+  // const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState("date"); // Mode: "date" or "time"
+  const [show, setShow] = useState(false);
+  const [tempDate, setTempDate] = useState(null); // Store date before switching mode
+
+  const onChange = (event, selectedDate) => {
+    if (selectedDate) {
+      if (mode === "date") {
+        // Store date but keep time unchanged
+        setDate(
+          (prev) =>
+            new Date(selectedDate.setHours(prev.getHours(), prev.getMinutes()))
+        );
+        setMode("time");
+        setShow(true);
+      } else {
+        // Update only time while keeping the date unchanged
+        setDate(
+          (prev) =>
+            new Date(
+              prev.setHours(selectedDate.getHours(), selectedDate.getMinutes())
+            )
+        );
+        setShow(false);
+      }
+    } else {
+      setShow(false); // Close picker if user cancels
+    }
+  };
+
+  
+
+  console.log("Date-----", date);
   return (
     <ScrollView
       style={{
@@ -718,7 +755,7 @@ const RentalScreen = () => {
         loop
         style={{
           width: "100%",
-          height: 160,
+          height: 100,
           alignSelf: "center",
         }}
       />
@@ -777,14 +814,47 @@ const RentalScreen = () => {
             Select a package
           </Text>
         </View>
-        <FlatList
-          data={pricingData}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={(item) => item.id}
-          renderItem={renderItem}
-          // contentContainerStyle={{ paddingVertical: 10 }}
-        />
+        <View
+          style={{
+            // backgroundColor: "red",
+            height: 100,
+            justifyContent: "center",
+            alignItems: "center",
+            borderTopWidth: 0.8, // Only top border
+            borderBottomWidth: 0.8, // Only bottom border
+            width: "100%",
+            borderColor: "#DADEF2",
+          }}
+        >
+          <FlatList
+            data={pricingData}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item) => item.id}
+            renderItem={renderItem}
+            // contentContainerStyle={{ paddingVertical: 10 }}
+          />
+        </View>
+        <View style={{ padding: 20 }}>
+          <Button
+            title="Pick Date & Time"
+            onPress={() => {
+              setMode("date");
+              setShow(true);
+            }}
+          />
+          {show && (
+            <DateTimePicker
+              value={date}
+              mode={mode}
+              display={Platform.OS === "ios" ? "spinner" : "default"}
+              onChange={onChange}
+            />
+          )}
+          <Text style={{ marginTop: 20, fontSize: 16 }}>
+            Selected: {date.toLocaleString()}
+          </Text>
+        </View>
         {/* <DateTimePickerExample /> */}
         {/* <FlatList
           data={pricingDatas}

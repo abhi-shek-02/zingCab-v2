@@ -440,7 +440,7 @@ const ZingDarshan = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#F5F5F5", marginBottom: 100 },
+  container: { flex: 1, backgroundColor: "#F5F5F5" },
   header: {
     fontSize: 22,
     fontWeight: "bold",

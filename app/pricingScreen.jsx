@@ -202,8 +202,8 @@ const OutstationScreen = () => {
         style={{
           marginBottom: 100,
           borderWidth: 1,
-          borderTopLeftRadius: 10,
-          borderTopRightRadius: 10,
+          borderRadius: 10,
+          // borderTopRightRadius: 10,
           borderColor: "#EBECED",
         }}
         showsVerticalScrollIndicator={false}
@@ -215,8 +215,8 @@ const OutstationScreen = () => {
             padding: 10,
             justifyContent: "center",
             alignContent: "center",
-            borderTopLeftRadius: 10,
-            borderTopRightRadius: 10,
+            borderRadius: 10,
+            // borderTopRightRadius: 10,
           }}
         >
           <Text
@@ -324,7 +324,7 @@ const OutstationScreen = () => {
             </Text>
           </View>
         ))}
-        <ScrollView style={{ padding: 16, backgroundColor: "#f8f9fa" }}>
+        <ScrollView style={{ padding: 16, backgroundColor: "#fff" }}>
           <Text
             style={{ padding: 5, fontSize: 13, fontFamily: "Poppins_Regular" }}
           >
@@ -592,8 +592,7 @@ const AirportScreen = () => {
         style={{
           marginBottom: 100,
           borderWidth: 1,
-          borderTopLeftRadius: 10,
-          borderTopRightRadius: 10,
+          borderRadius: 10,
           borderColor: "#EBECED",
         }}
         showsVerticalScrollIndicator={false}
@@ -605,8 +604,9 @@ const AirportScreen = () => {
             padding: 10,
             justifyContent: "center",
             alignContent: "center",
-            borderTopLeftRadius: 10,
-            borderTopRightRadius: 10,
+            // borderTopLeftRadius: 10,
+            // borderTopRightRadius: 10,
+            borderRadius: 10,
           }}
         >
           <Text
@@ -688,7 +688,7 @@ const AirportScreen = () => {
             <Text style={{ flex: 1, textAlign: "center" }}>{item.rush}</Text>
           </View>
         ))}
-        <ScrollView style={{ padding: 16, backgroundColor: "#f8f9fa" }}>
+        <ScrollView style={{ padding: 16, backgroundColor: "#fff" }}>
           <Text style={{ padding: 5, fontSize: 13, fontWeight: "500" }}>
             Additional charges of ₹100/3 km after this.
           </Text>
