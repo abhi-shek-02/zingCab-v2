@@ -64,7 +64,7 @@ const OutstationScreen = () => {
     return (
       <View style={{ marginTop: 10, width: "100%", alignItems: "center" }}>
         {/* Pickup Location */}
-        <TextInput
+        {/* <TextInput
           style={{
             width: "90%",
             padding: 15,
@@ -85,7 +85,137 @@ const OutstationScreen = () => {
           placeholderTextColor="#9FA9BC"
           value={pickup}
           onChangeText={setPickup}
-        />
+        /> */}
+
+        <View
+          style={{
+            marginTop: 10,
+            width: "100%",
+            alignItems: "center",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+          {/* Pickup Location ttt */}
+          <MaterialCommunityIcons
+            name="map-marker-radius-outline"
+            size={30}
+            color="#505672"
+            style={{
+              alignItems: "center",
+              height: "90%",
+              padding: 5,
+              width: "10%",
+            }}
+          />
+
+          <TextInput
+            style={{
+              width: "85%",
+              padding: 15,
+              borderRadius: 10,
+              borderWidth: 1,
+              borderColor: "#e0e0e0",
+              backgroundColor: "#FFF",
+              fontSize: 12,
+              marginBottom: 10,
+              shadowColor: "#000",
+              shadowOpacity: 0.1,
+              shadowOffset: { width: 0, height: 2 },
+              shadowRadius: 5,
+              elevation: 3,
+              fontFamily: "Poppins_Regular",
+            }}
+            placeholder="Enter Pickup Location"
+            placeholderTextColor="#9FA9BC"
+            value={pickup}
+            onChangeText={setPickup}
+          />
+          <MaterialIcons
+            name="info-outline"
+            size={18}
+            color="#2C66E3"
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              alignSelf: "center",
+              height: "65%",
+              width: "8%",
+              padding: 5,
+            }}
+          />
+          {/* Drop Locations */}
+          {/* {dropLocations.map((drop, index) => (
+          <View
+            key={index}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              width: "90%",
+              marginBottom: 10,
+            }}
+          >
+            <TextInput
+              style={{
+                flex: 1,
+                padding: 15,
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: "#e0e0e0",
+                backgroundColor: "#FFF",
+                fontSize: 12,
+                shadowColor: "#000",
+                shadowOpacity: 0.1,
+                shadowOffset: { width: 0, height: 2 },
+                shadowRadius: 5,
+                elevation: 3,
+                fontFamily: "Poppins_Regular",
+              }}
+              placeholder={`Enter Drop Location ${index + 1}`}
+              placeholderTextColor="#9FA9BC"
+              value={drop}
+              onChangeText={(text) => updateDropLocation(text, index)}
+            />
+
+    
+            {dropLocations.length > 1 && (
+              <TouchableOpacity
+                onPress={() => removeDropLocation(index)}
+                style={{
+                  marginLeft: 10,
+                  backgroundColor: "#FF5A5F",
+                  padding: 8,
+                  borderRadius: 5,
+                }}
+              >
+                <MaterialIcons name="close" size={18} color="#FFF" />
+              </TouchableOpacity>
+            )}
+          </View>
+        ))} */}
+
+          {/* (+) Add Drop Location Button (Disabled when 4 locations exist) */}
+          {/* {dropLocations.length < 4 && (
+          <TouchableOpacity
+            onPress={addDropLocation}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "90%",
+              padding: 12,
+              borderRadius: 10,
+              backgroundColor: "#2d78ff",
+              marginBottom: 10,
+            }}
+          >
+            <MaterialIcons name="add" size={18} color="#FFF" />
+            <Text style={{ color: "#FFF", fontSize: 14, marginLeft: 5 }}>
+              Add Drop Location
+            </Text>
+          </TouchableOpacity>
+        )} */}
+        </View>
 
         {/* Drop Locations */}
         {dropLocations.map((drop, index) => (
@@ -94,7 +224,7 @@ const OutstationScreen = () => {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              width: "90%",
+              width: "86%",
               marginBottom: 10,
             }}
           >
@@ -873,45 +1003,353 @@ const RentalScreen = () => {
   );
 };
 
-const AirportRideScreen = () => (
-  <ScrollView
-    style={{
-      flex: 1,
-      backgroundColor: "#fff",
-      padding: 10,
-    }}
-    contentContainerStyle={{
-      flex: 1, // Ensures the container takes full height
-      justifyContent: "center",
-      alignItems: "center",
-    }}
-  >
-    <LottieView
-      source={require("../assets/Location.json")}
-      autoPlay
-      loop
-      style={{
-        width: "100%",
-        height: 200,
-        alignSelf: "center",
-      }}
-    />
+const AirportRideScreen = () => {
+  // const route = useRoute();
+  // console.log("Route:", route);
+  const [selectedTab, setSelectedTab] = useState("Rides");
+  const [selectedSubTab, setSelectedSubTab] = useState(true);
+  const [pickup, setPickup] = useState("");
+  const [drop, setDrop] = useState("");
 
-    <Text
+  const TripForm = () => {
+    const [pickup, setPickup] = useState("");
+    const [dropLocations, setDropLocations] = useState([""]); // Stores multiple drop locations
+
+    const addDropLocation = () => {
+      if (dropLocations.length < 4) {
+        setDropLocations([...dropLocations, ""]);
+      } else {
+        Alert.alert(
+          "Limit Reached",
+          "You can add up to 4 drop locations only."
+        );
+      }
+    };
+
+    // Remove a drop location field (Ensures at least one remains)
+    const removeDropLocation = (index) => {
+      if (dropLocations.length > 1) {
+        let updatedDrops = [...dropLocations];
+        updatedDrops.splice(index, 1);
+        setDropLocations(updatedDrops);
+      }
+    };
+
+    // Update text of a drop location
+    const updateDropLocation = (text, index) => {
+      let updatedDrops = [...dropLocations];
+      updatedDrops[index] = text;
+      setDropLocations(updatedDrops);
+    };
+
+    return (
+      <View style={{ marginTop: 10, width: "100%", alignItems: "center" }}>
+        {/* Pickup Location */}
+        {/* <TextInput
+          style={{
+            width: "90%",
+            padding: 15,
+            borderRadius: 10,
+            borderWidth: 1,
+            borderColor: "#e0e0e0",
+            backgroundColor: "#FFF",
+            fontSize: 12,
+            marginBottom: 10,
+            shadowColor: "#000",
+            shadowOpacity: 0.1,
+            shadowOffset: { width: 0, height: 2 },
+            shadowRadius: 5,
+            elevation: 3,
+            fontFamily: "Poppins_Regular",
+          }}
+          placeholder="Enter Pickup Location"
+          placeholderTextColor="#9FA9BC"
+          value={pickup}
+          onChangeText={setPickup}
+        /> */}
+
+        <View
+          style={{
+            marginTop: 10,
+            width: "100%",
+            alignItems: "center",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+          {/* Pickup Location ttt */}
+          <MaterialCommunityIcons
+            name="map-marker-radius-outline"
+            size={30}
+            color="#505672"
+            style={{
+              alignItems: "center",
+              height: "90%",
+              padding: 5,
+              width: "10%",
+            }}
+          />
+
+          <TextInput
+            style={{
+              width: "85%",
+              padding: 15,
+              borderRadius: 10,
+              borderWidth: 1,
+              borderColor: "#e0e0e0",
+              backgroundColor: "#FFF",
+              fontSize: 12,
+              marginBottom: 10,
+              shadowColor: "#000",
+              shadowOpacity: 0.1,
+              shadowOffset: { width: 0, height: 2 },
+              shadowRadius: 5,
+              elevation: 3,
+              fontFamily: "Poppins_Regular",
+            }}
+            placeholder="Enter Pickup Location"
+            placeholderTextColor="#9FA9BC"
+            value={pickup}
+            onChangeText={setPickup}
+          />
+          <MaterialIcons
+            name="info-outline"
+            size={18}
+            color="#2C66E3"
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              alignSelf: "center",
+              height: "65%",
+              width: "8%",
+              padding: 5,
+            }}
+          />
+          {/* Drop Locations */}
+          {/* {dropLocations.map((drop, index) => (
+          <View
+            key={index}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              width: "90%",
+              marginBottom: 10,
+            }}
+          >
+            <TextInput
+              style={{
+                flex: 1,
+                padding: 15,
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: "#e0e0e0",
+                backgroundColor: "#FFF",
+                fontSize: 12,
+                shadowColor: "#000",
+                shadowOpacity: 0.1,
+                shadowOffset: { width: 0, height: 2 },
+                shadowRadius: 5,
+                elevation: 3,
+                fontFamily: "Poppins_Regular",
+              }}
+              placeholder={`Enter Drop Location ${index + 1}`}
+              placeholderTextColor="#9FA9BC"
+              value={drop}
+              onChangeText={(text) => updateDropLocation(text, index)}
+            />
+
+    
+            {dropLocations.length > 1 && (
+              <TouchableOpacity
+                onPress={() => removeDropLocation(index)}
+                style={{
+                  marginLeft: 10,
+                  backgroundColor: "#FF5A5F",
+                  padding: 8,
+                  borderRadius: 5,
+                }}
+              >
+                <MaterialIcons name="close" size={18} color="#FFF" />
+              </TouchableOpacity>
+            )}
+          </View>
+        ))} */}
+
+          {/* (+) Add Drop Location Button (Disabled when 4 locations exist) */}
+          {/* {dropLocations.length < 4 && (
+          <TouchableOpacity
+            onPress={addDropLocation}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "90%",
+              padding: 12,
+              borderRadius: 10,
+              backgroundColor: "#2d78ff",
+              marginBottom: 10,
+            }}
+          >
+            <MaterialIcons name="add" size={18} color="#FFF" />
+            <Text style={{ color: "#FFF", fontSize: 14, marginLeft: 5 }}>
+              Add Drop Location
+            </Text>
+          </TouchableOpacity>
+        )} */}
+        </View>
+
+        {/* Drop Locations */}
+        {dropLocations.map((drop, index) => (
+          <View
+            key={index}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              width: "86%",
+              marginBottom: 10,
+            }}
+          >
+            <TextInput
+              style={{
+                flex: 1,
+                padding: 15,
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: "#e0e0e0",
+                backgroundColor: "#FFF",
+                fontSize: 12,
+                shadowColor: "#000",
+                shadowOpacity: 0.1,
+                shadowOffset: { width: 0, height: 2 },
+                shadowRadius: 5,
+                elevation: 3,
+                fontFamily: "Poppins_Regular",
+              }}
+              placeholder={`Enter Drop Location ${index + 1}`}
+              placeholderTextColor="#9FA9BC"
+              value={drop}
+              onChangeText={(text) => updateDropLocation(text, index)}
+            />
+
+            {/* Remove Button (only if more than one drop location) */}
+            {dropLocations.length > 1 && (
+              <TouchableOpacity
+                onPress={() => removeDropLocation(index)}
+                style={{
+                  marginLeft: 10,
+                  backgroundColor: "#FF5A5F",
+                  padding: 8,
+                  borderRadius: 5,
+                }}
+              >
+                <MaterialIcons name="close" size={18} color="#FFF" />
+              </TouchableOpacity>
+            )}
+          </View>
+        ))}
+
+        {/* (+) Add Drop Location Button (Disabled when 4 locations exist) */}
+        {dropLocations.length < 4 && (
+          <TouchableOpacity
+            onPress={addDropLocation}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "90%",
+              padding: 12,
+              borderRadius: 10,
+              backgroundColor: "#2d78ff",
+              marginBottom: 10,
+            }}
+          >
+            <MaterialIcons name="add" size={18} color="#FFF" />
+            <Text style={{ color: "#FFF", fontSize: 14, marginLeft: 5 }}>
+              Add Drop Location
+            </Text>
+          </TouchableOpacity>
+        )}
+      </View>
+    );
+  };
+  return (
+    <ScrollView
       style={{
-        textAlign: "center",
-        marginTop: 10,
-        fontSize: 15,
-        padding: 15,
-        fontWeight: "600",
-        fontFamily: "Poppins_Medium",
-        color: "#8292B6",
+        flex: 1,
+        backgroundColor: "#fff",
+        padding: 10,
+      }}
+      contentContainerStyle={{
+        flex: 1, // Ensures the container takes full height
+        // justifyContent: "center",
+        // alignItems: "center",
       }}
     >
-      You haven't taken a ride with us yet
-    </Text>
-  </ScrollView>
-);
+      <View
+        style={{
+          paddingTop: 10,
+          alignItems: "center",
+          width: "100%",
+          // backgroundColor: "red",
+        }}
+      >
+        {/* One Way / Round Trip Toggle */}
+
+        {/* Booking Input Fields */}
+
+        {TripForm()}
+      </View>
+      <LottieView
+        source={require("../assets/A2.json")}
+        autoPlay
+        loop
+        style={{
+          width: "100%",
+          height: 150,
+          alignSelf: "center",
+        }}
+      />
+
+      <TouchableOpacity
+        style={{
+          backgroundColor: "#2d78ff",
+          paddingVertical: 12,
+          borderRadius: 10,
+          alignItems: "center",
+          marginTop: 20,
+          width: "100%",
+          marginBottom: 100,
+        }}
+        // onPress={() => navigation.navigate("otpScreen")}
+      >
+        <Text
+          style={{
+            color: "#fff",
+            fontSize: 16,
+            // fontWeight: "bold",
+            fontFamily: "Poppins_Medium",
+          }}
+        >
+          Continue
+        </Text>
+      </TouchableOpacity>
+
+      {/* <Text
+        style={{
+          textAlign: "center",
+          marginTop: 10,
+          fontSize: 15,
+          padding: 15,
+          // fontWeight: "600",
+          fontFamily: "Poppins_Medium",
+          color: "#8292B6",
+        }}
+      >
+        No ongoing rides at the momentx
+      </Text> */}
+    </ScrollView>
+  );
+};
 const BookingScreen = () => {
   return (
     <Tab.Navigator
