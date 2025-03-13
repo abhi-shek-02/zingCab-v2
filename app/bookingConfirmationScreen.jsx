@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,9 @@ import {
   ScrollView,
   Dimensions,
   Linking,
+  Modal,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
@@ -18,7 +21,7 @@ const BookingConfirmationScreen = () => {
   const router = useRouter();
   const route = useRoute();
   const { width, height } = Dimensions.get("window"); // or "screen"
-
+  const [modalVisible, setModalVisible] = useState(false);
   // Get data from navigation route
   const { date, time, pickup, drop, fare } = route.params;
 
@@ -291,7 +294,16 @@ const BookingConfirmationScreen = () => {
       </View>
 
       {/* Cancellation Policy */}
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          try {
+            // navigation.navigate("policyScreen");
+            navigation.navigate("policyScreen", { type: "cancellation" });
+          } catch (e) {
+            console.log("E", e);
+          }
+        }}
+      >
         <Text
           style={{
             fontSize: 14,
@@ -331,6 +343,7 @@ const BookingConfirmationScreen = () => {
           // paddingHorizontal: 20,
           marginHorizontal: 10,
         }}
+        onPress={() => setModalVisible(true)}
       >
         {/* <Ionicons name="location" size={20} color="#666" /> */}
         <Text
@@ -443,6 +456,115 @@ const BookingConfirmationScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "rgba(0,0,0,0.5)",
+              justifyContent: "flex-end",
+              alignItems: "center",
+              width: width,
+            }}
+          >
+            <View
+              style={{
+                width: "100%",
+                backgroundColor: "white",
+                padding: 20,
+                borderRadius: 10,
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontFamily: "Poppins_Medium",
+                  marginBottom: 20,
+                  textAlign: "center",
+                  color: "#677483",
+                }}
+              >
+                Cancel Booking?
+              </Text>
+
+              <Text
+                style={{
+                  fontSize: 13,
+                  fontFamily: "Poppins_Regular",
+                  marginBottom: 20,
+                  textAlign: "center",
+                }}
+              >
+                Hold on! Cancel your ride now?
+                {"\n"} It’s secure, convenient, and just a step away!
+              </Text>
+
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() => setModalVisible(false)}
+                  style={{
+                    backgroundColor: "#2d78ff",
+                    padding: 10,
+                    borderRadius: 8,
+                    flex: 1,
+                    marginRight: 10,
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: "#fff",
+                      fontSize: 16,
+                      fontFamily: "Poppins_Medium",
+                    }}
+                  >
+                    Keep My Ride
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => {
+                    /* Add cancel logic here */
+                  }}
+                  style={{
+                    backgroundColor: "white",
+                    padding: 10,
+                    borderRadius: 8,
+                    flex: 1,
+                    alignItems: "center",
+                    borderWidth: 1,
+                    borderColor: "#2d78ff",
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: "#2d78ff",
+                      fontSize: 16,
+                      fontFamily: "Poppins_Medium",
+                    }}
+                  >
+                    Yes, Cancel Ride
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
+      {/* </View> */}
     </View>
   );
 };

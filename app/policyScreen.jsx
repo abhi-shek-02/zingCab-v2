@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-
+import { useRoute } from "@react-navigation/native";
 const Tab = createMaterialTopTabNavigator();
 
 // Terms & Conditions Component
@@ -238,6 +238,9 @@ const CancellationPolicy = () => (
 
 // Main Policy Screen with Tabs
 function PolicyScreen() {
+  const route = useRoute();
+  const { type } = route.params || {}; // Extracting 'type' from params
+
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
       <Tab.Navigator
@@ -247,6 +250,7 @@ function PolicyScreen() {
           tabBarLabelStyle: { fontSize: 14, fontWeight: "600" },
           tabBarStyle: { backgroundColor: "#fff" },
         }}
+        initialRouteName={type === "cancellation" ? "Cancellation" : "Privacy"} // Set default tab
       >
         <Tab.Screen name="Privacy" component={PrivacyPolicy} />
         <Tab.Screen name="Terms" component={TermsAndConditions} />
