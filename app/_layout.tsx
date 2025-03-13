@@ -81,7 +81,7 @@ export default function RootLayout() {
             headerShown: true, // Ensure the header is visible
             title: "Zing Darshan", // Custom title
             headerStyle: {
-              backgroundColor: "#2C66E3", // Change background color
+              backgroundColor: "#2d78ff", // Change background color
             },
             headerTintColor: "#E6F2FF", // Change text/icon color
             headerTitleStyle: {
@@ -99,7 +99,7 @@ export default function RootLayout() {
             headerShown: true, // Ensure the header is visible
             title: "Book your Ride", // Custom title
             headerStyle: {
-              backgroundColor: "#2C66E3", // Change background color
+              backgroundColor: "#2d78ff", // Change background color
             },
             headerTintColor: "#E6F2FF", // Change text/icon color
             headerTitleStyle: {
@@ -192,7 +192,7 @@ export default function RootLayout() {
             headerShown: true, // Ensure the header is visible
             title: "Account Setting", // Custom title
             headerStyle: {
-              backgroundColor: "#2C66E3", // Change background color
+              backgroundColor: "#2d78ff", // Change background color
             },
             headerTintColor: "#fff", // Change text/icon color
             headerTitleStyle: {
@@ -209,7 +209,7 @@ export default function RootLayout() {
             headerShown: true, // Ensure the header is visible
             title: "Help", // Custom title
             headerStyle: {
-              backgroundColor: "#2C66E3", // Change background color
+              backgroundColor: "#2d78ff", // Change background color
             },
             headerTintColor: "#fff", // Change text/icon color
             headerTitleStyle: {
@@ -226,7 +226,7 @@ export default function RootLayout() {
             headerShown: true, // Ensure the header is visible
             title: "Safety Hub", // Custom title
             headerStyle: {
-              backgroundColor: "#2C66E3", // Change background color
+              backgroundColor: "#2d78ff", // Change background color
             },
             headerTintColor: "#fff", // Change text/icon color
             headerTitleStyle: {
@@ -282,7 +282,7 @@ export default function RootLayout() {
             headerShown: true, // Ensure the header is visible
             title: "Edit Profile", // Custom title
             headerStyle: {
-              backgroundColor: "#2C66E3", // Change background color
+              backgroundColor: "#2d78ff", // Change background color
             },
             headerTintColor: "#fff", // Change text/icon color
             headerTitleStyle: {
@@ -299,7 +299,7 @@ export default function RootLayout() {
             headerShown: true, // Ensure the header is visible
             title: "Pricing", // Custom title
             headerStyle: {
-              backgroundColor: "#2C66E3", // Change background color
+              backgroundColor: "#2d78ff", // Change background color
             },
             headerTintColor: "#fff", // Change text/icon color
             headerTitleStyle: {
@@ -316,7 +316,7 @@ export default function RootLayout() {
             headerShown: true, // Ensure the header is visible
             title: "Feedback", // Custom title
             headerStyle: {
-              backgroundColor: "#2C66E3", // Change background color
+              backgroundColor: "#2d78ff", // Change background color
             },
             
             headerTintColor: "#fff", // Change text/icon color
@@ -334,10 +334,10 @@ export default function RootLayout() {
             headerShown: false, // Ensure the header is visible
             title: "", // Custom title
             headerStyle: {
-              // backgroundColor: "#2C66E3", // Change background color
+              // backgroundColor: "#2d78ff", // Change background color
             },
             headerShadowVisible: false,
-            headerTintColor: "#2C66E3", // Change text/icon color
+            headerTintColor: "#2d78ff", // Change text/icon color
             headerTitleStyle: {
               // fontWeight: "700", // Customize title font style
               fontFamily: "Poppins_Medium",

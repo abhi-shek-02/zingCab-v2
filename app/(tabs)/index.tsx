@@ -418,13 +418,15 @@ export default function HomeScreen() {
                     backgroundColor: "white",
                     margin: 10,
                     borderRadius: 10,
-                    shadowColor: "#2C66E3",
-                    shadowOffset: { width: 0, height: 4 },
-                    shadowOpacity: 0.2,
-                    shadowRadius: 5,
+                    // shadowColor: "#2C66E3",
+                    // shadowOffset: { width: 0, height: 4 },
+                    // shadowOpacity: 0.2,
+                    // shadowRadius: 5,
 
-                    // Shadow for Android
-                    elevation: 5,
+                    // // Shadow for Android
+                    // elevation: 5,
+                    borderColor: "#dbdbdb75",
+                    borderWidth: 1.5,
                   }}
                 >
                   <View
@@ -618,19 +620,32 @@ export default function HomeScreen() {
                         })
                       }
                     >
-                      <Image
-                        source={{ uri: item.image }}
+                      <View
                         style={{
-                          width: 80,
-                          height: 80,
-                          borderRadius: 50,
-                          borderWidth: 5,
-                          borderColor: "#fff",
-                          elevation: 5,
+                          // width: 90, // Slightly larger than the image
+                          // height: 90, // Slightly larger than the image
+                          borderRadius: 50, // Same as the image to create a perfect circle
+                          borderWidth: 2,
+                          borderColor: "#dbdbdb75", // Semi-transparent border
                           justifyContent: "center",
                           alignItems: "center",
                         }}
-                      />
+                      >
+                        <Image
+                          source={{ uri: item.image }}
+                          style={{
+                            width: 80,
+                            height: 80,
+                            borderRadius: 50,
+                            borderWidth: 5,
+                            borderColor: "#fff",
+                            // elevation: 5,
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        />
+                      </View>
+
                       <Text
                         style={{
                           paddingTop: 8,
@@ -685,19 +700,31 @@ export default function HomeScreen() {
                         })
                       }
                     >
-                      <Image
-                        source={{ uri: item.image }}
+                      <View
                         style={{
-                          width: 40,
-                          height: 40,
-                          borderRadius: 50,
-                          borderWidth: 1,
-                          borderColor: "#fff",
-                          elevation: 5,
+                          // width: 90, // Slightly larger than the image
+                          // height: 90, // Slightly larger than the image
+                          borderRadius: 50, // Same as the image to create a perfect circle
+                          borderWidth: 2,
+                          borderColor: "#dbdbdb75", // Semi-transparent border
                           justifyContent: "center",
                           alignItems: "center",
                         }}
-                      />
+                      >
+                        <Image
+                          source={{ uri: item.image }}
+                          style={{
+                            width: 40,
+                            height: 40,
+                            borderRadius: 50,
+                            borderWidth: 1,
+                            borderColor: "#fff",
+                            // elevation: 5,
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        />
+                      </View>
                       <Text
                         style={{
                           paddingTop: 8,
