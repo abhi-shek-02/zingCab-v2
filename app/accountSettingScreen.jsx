@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   greeting: {
     fontSize: 16,
     // fontWeight: "bold",
-    color: "#2C66E3",
+    color: "#2d78ff",
     marginBottom: 10,
     fontFamily: "Poppins_Medium",
   },
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_Regular",
   },
   continueButton: {
-    backgroundColor: "#2C66E3",
+    backgroundColor: "#2d78ff",
     paddingVertical: 12,
     borderRadius: 5,
     alignItems: "center",

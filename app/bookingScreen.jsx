@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -21,7 +21,8 @@ import { useNavigation } from "@react-navigation/native";
 import { mainColor } from "@/constants/Colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Button } from "react-native";
-
+import { Picker } from "@react-native-picker/picker";
+import { Animated } from "react-native";
 const Tab = createMaterialTopTabNavigator();
 
 const OutstationScreen = () => {
@@ -448,6 +449,7 @@ const OutstationScreen = () => {
 const RentalScreen = () => {
   // const route = useRoute();
   // console.log("Route:", route);
+  const navigation = useNavigation();
   const [selectedTab, setSelectedTab] = useState("Rides");
   const [selectedSubTab, setSelectedSubTab] = useState(true);
   const [pickup, setPickup] = useState("");
@@ -472,7 +474,7 @@ const RentalScreen = () => {
         <MaterialCommunityIcons
           name="map-marker-radius-outline"
           size={30}
-          color="#505672"
+          color="#009D91"
           style={{
             alignItems: "center",
             height: "90%",
@@ -689,38 +691,97 @@ const RentalScreen = () => {
   };
 
   // const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState("date"); // Mode: "date" or "time"
-  const [show, setShow] = useState(false);
-  const [tempDate, setTempDate] = useState(null); // Store date before switching mode
+  // const [showDatePicker, setShowDatePicker] = useState(false);
+  const [selectedHour, setSelectedHour] = useState(date.getHours());
+  // const [selectedMinute, setSelectedMinute] = useState(date.getMinutes());
 
   const onChange = (event, selectedDate) => {
     if (selectedDate) {
-      if (mode === "date") {
-        // Store date but keep time unchanged
-        setDate(
-          (prev) =>
-            new Date(selectedDate.setHours(prev.getHours(), prev.getMinutes()))
-        );
-        setMode("time");
-        setShow(true);
-      } else {
-        // Update only time while keeping the date unchanged
-        setDate(
-          (prev) =>
-            new Date(
-              prev.setHours(selectedDate.getHours(), selectedDate.getMinutes())
-            )
-        );
-        setShow(false);
-      }
+      setDate(selectedDate);
+      setShowDatePicker(false);
     } else {
-      setShow(false); // Close picker if user cancels
+      setShowDatePicker(false);
     }
   };
 
-  
+  // console.log("Date-----", date);
+  // const generateTimeSlots = () => {
+  //   const timeSlots = [];
+  //   for (let hour = 0; hour < 24; hour++) {
+  //     for (let minute = 0; minute < 60; minute += 15) {
+  //       const amPm = hour < 12 ? "AM" : "PM";
+  //       const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
+  //       const formattedMinute = minute.toString().padStart(2, "0");
+  //       const timeLabel = `${formattedHour}:${formattedMinute} ${amPm}`;
+  //       timeSlots.push({
+  //         label: timeLabel,
+  //         value: `${formattedHour}:${formattedMinute} ${amPm}`,
+  //       });
+  //     }
+  //   }
+  //   return timeSlots;
+  // };
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [selectedTime, setSelectedTime] = useState("12:00 AM");
 
-  console.log("Date-----", date);
+  // Generate time options (12:00 AM - 11:45 PM)
+  const timeOptions = Array.from({ length: 24 * 4 }, (_, i) => {
+    const hours = Math.floor(i / 4);
+    const minutes = (i % 4) * 15;
+    const period = hours >= 12 ? "PM" : "AM";
+    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+    const formattedMinutes = minutes === 0 ? "00" : minutes;
+    return {
+      label: `${formattedHours}:${formattedMinutes} ${period}`,
+      value: `${formattedHours}:${formattedMinutes} ${period}`,
+    };
+  });
+  const messages = [
+    "The driver opens the door for you.",
+    "Please wear your seatbelt.",
+    "Adhering to the speed limit for your safety.",
+  ];
+
+  const onDateChange = (event, selectedDate) => {
+    if (selectedDate) {
+      setDate(selectedDate);
+      setShowDatePicker(false);
+    }
+  };
+  // const timeOptions = generateTimeSlots();
+  const [index, setIndex] = useState(0);
+  const translateY = useRef(new Animated.Value(-20)).current; // Initial position (above)
+  const opacity = useRef(new Animated.Value(0)).current; // Initial opacity (hidden)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Reset animation values before starting
+      translateY.setValue(-20);
+      opacity.setValue(0);
+
+      // Start animation: drop + fade-in
+      Animated.parallel([
+        Animated.timing(translateY, {
+          toValue: 0, // Move to normal position
+          duration: 1000, // Drop animation duration
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacity, {
+          toValue: 1, // Fade in
+          duration: 1000, // Same duration as drop animation
+          useNativeDriver: true,
+        }),
+      ]).start(() => {
+        setTimeout(() => {
+          setIndex((prevIndex) => (prevIndex + 1) % messages.length);
+        }, 2000); // Wait before changing text
+      });
+    }, 3000); // Change text every 3 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <ScrollView
       style={{
@@ -749,19 +810,39 @@ const RentalScreen = () => {
 
         {TripForm()}
       </View>
-      <LottieView
+      {/* <LottieView
         source={require("../assets/A2.json")}
         autoPlay
         loop
         style={{
           width: "100%",
-          height: 100,
+          height: 150,
           alignSelf: "center",
         }}
-      />
+      /> */}
       <View
         style={{
-          marginTop: 40,
+          alignItems: "center",
+          justifyContent: "center",
+          height: 30,
+          // backgroundColor: "#2d78ff",
+        }}
+      >
+        {/* <Animated.Text
+          style={{
+            fontSize: 16,
+            color: "#2d78ff",
+            opacity,
+            transform: [{ translateY }],
+            fontFamily: "Poppins_Medium",
+          }}
+        >
+          {messages[index]}
+        </Animated.Text> */}
+      </View>
+      <View
+        style={{
+          marginTop: 30,
           // backgroundColor: "#F9FAFF",
           width: "100%",
           padding: 10,
@@ -835,25 +916,148 @@ const RentalScreen = () => {
             // contentContainerStyle={{ paddingVertical: 10 }}
           />
         </View>
-        <View style={{ padding: 20 }}>
-          <Button
-            title="Pick Date & Time"
-            onPress={() => {
-              setMode("date");
-              setShow(true);
+        {/* <View
+          style={{
+            padding: 20,
+            alignItems: "center",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+      
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#2d78ff",
+              paddingVertical: 12,
+              paddingHorizontal: 20,
+              borderRadius: 10,
             }}
-          />
-          {show && (
+            onPress={() => setShowDatePicker(true)}
+          >
+            <Text style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}>
+              Pick Date
+            </Text>
+          </TouchableOpacity>
+
+          {showDatePicker && (
             <DateTimePicker
               value={date}
-              mode={mode}
+              mode="date"
               display={Platform.OS === "ios" ? "spinner" : "default"}
               onChange={onChange}
             />
           )}
-          <Text style={{ marginTop: 20, fontSize: 16 }}>
-            Selected: {date.toLocaleString()}
-          </Text>
+
+        
+          <View style={{ flexDirection: "row", marginTop: 20 }}>
+            <Picker
+              selectedValue={selectedHour}
+              style={{ height: 50, width: 200 }}
+              onValueChange={(itemValue) => setSelectedHour(itemValue)}
+            >
+              {timeOptions.map((time, index) => (
+                <Picker.Item
+                  key={index}
+                  label={time.label}
+                  value={time.value}
+                />
+              ))}
+            </Picker>
+           
+          </View>
+
+         
+        </View> */}
+        <View
+          style={{
+            // padding: 20,
+            alignItems: "center",
+            width: "100%",
+            flexDirection: "row",
+            justifyContent: "center",
+            // marginHorizontal: 10,
+            // backgroundColor: "red",
+            marginVertical: 10,
+          }}
+        >
+          {/* Date Picker Input */}
+          <TouchableOpacity
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              backgroundColor: "#fff",
+              borderWidth: 1,
+              borderColor: "#ccc",
+              paddingVertical: 12,
+              paddingHorizontal: 15,
+              borderRadius: 10,
+              width: "53%",
+              marginRight: 10,
+              height: "100%",
+            }}
+            onPress={() => setShowDatePicker(true)}
+          >
+            <Text style={{ fontSize: 15, color: "#333" }}>
+              {date.toDateString()}
+            </Text>
+            <Text style={{ fontSize: 15, color: "#2d78ff" }}>📅</Text>
+          </TouchableOpacity>
+
+          {showDatePicker && (
+            <DateTimePicker
+              value={date}
+              mode="date"
+              display={Platform.OS === "ios" ? "spinner" : "default"}
+              onChange={onDateChange}
+            />
+          )}
+
+          {/* Time Picker */}
+          <View
+            style={{
+              backgroundColor: "#fff",
+              borderWidth: 1,
+              borderColor: "#ccc",
+              // marginTop: 15,
+              // paddingVertical: 10,
+              // paddingHorizontal: 15,
+              borderRadius: 10,
+              width: "42%",
+              // backgroundColor: "red",
+            }}
+          >
+            <Picker
+              selectedValue={selectedTime}
+              onValueChange={(itemValue) => setSelectedTime(itemValue)}
+              style={{}}
+            >
+              {timeOptions.map((time, index) => (
+                <Picker.Item
+                  key={index}
+                  label={time.label}
+                  value={time.value}
+                />
+              ))}
+            </Picker>
+          </View>
+
+          {/* Reschedule Button */}
+          {/* <TouchableOpacity
+            style={{
+              backgroundColor: "#2d78ff",
+              paddingVertical: 12,
+              paddingHorizontal: 20,
+              borderRadius: 10,
+              marginTop: 20,
+              width: "80%",
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}>
+              Reschedule
+            </Text>
+          </TouchableOpacity> */}
         </View>
         {/* <DateTimePickerExample /> */}
         {/* <FlatList
@@ -920,7 +1124,7 @@ const RentalScreen = () => {
 
         <View
           style={{
-            flexDirection: "row",
+            flexDirection: "column",
             justifyContent: "space-between",
             alignItems: "center",
             // padding: 5,
@@ -931,7 +1135,7 @@ const RentalScreen = () => {
           {/* Sedan Option */}
           <TouchableOpacity
             style={{
-              width: "48%",
+              width: "100%",
               // padding: 15,
               borderRadius: 10,
               borderWidth: 1,
@@ -943,57 +1147,104 @@ const RentalScreen = () => {
             }}
             onPress={() => setSelectedVehicle("Sedan")}
           >
-            <View style={{ flexDirection: "row" }}>
-              {/* <MaterialIcons
-                name="directions-car"
-                size={24}
-                color="#2d78ff"
-                style={{ paddingHorizontal: 10 }}
-              /> */}
-              <Text
+            <View style={{ width: "100%", height: 60, flexDirection: "row" }}>
+              <View
                 style={{
-                  fontSize: 16,
-                  fontFamily: "Poppins_Medium",
-                  // marginTop: 5,
-                  // backgroundColor: "#eaf3ff",
-                  width: "100%",
-                  textAlign: "center",
-                  borderTopRightRadius: 10,
-                  borderTopLeftRadius: 10,
+                  width: "30%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  // backgroundColor: "red",
                 }}
               >
-                Sedan
-              </Text>
+                {" "}
+                <LottieView
+                  source={require("../assets/V3.json")}
+                  autoPlay
+                  loop
+                  style={{
+                    // alignContent: "center",
+                    width: "100%",
+                    height: 50,
+                    // alignSelf: "center",
+                    paddingLeft: 10,
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  width: "50%",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  // alignItems: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    paddingHorizontal: 10,
+                    fontFamily: "Poppins_Medium",
+                    color: "#2C66E3",
+                  }}
+                >
+                  Zing Classic
+                </Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    // justifyContent: "center",
+                  }}
+                >
+                  <Text
+                    style={{
+                      paddingHorizontal: 10,
+                      fontFamily: "Poppins_Regular",
+                    }}
+                  >
+                    Sedan
+                  </Text>{" "}
+                  <MaterialIcons
+                    name="person"
+                    size={16}
+                    color="#555"
+                    style={{ fontFamily: "Poppins_Regular", marginBottom: 4 }}
+                  />
+                  <Text style={{ fontFamily: "Poppins_Regular" }}> 4</Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  width: "30%",
+                  // alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    color: "green",
+                    fontSize: 16,
+                    fontFamily: "Poppins_Medium",
+                  }}
+                >
+                  ₹800
+                </Text>
+                <Text
+                  style={{
+                    textDecorationLine: "line-through",
+                    color: "gray",
+                    fontSize: 13,
+                    fontFamily: "Poppins_Regular",
+                  }}
+                >
+                  ₹1000
+                </Text>
+              </View>
             </View>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                marginTop: 5,
-              }}
-            >
-              <MaterialIcons name="person" size={16} color="#555" />
-              <Text style={{ marginLeft: 5, fontFamily: "Poppins_Regular" }}>
-                4 People
-              </Text>
-            </View>
-            <Text
-              style={{
-                fontSize: 16,
-                // fontWeight: "bold",
-                color: "#28a745",
-                marginTop: 5,
-                fontFamily: "Poppins_Medium",
-              }}
-            >
-              ₹999
-            </Text>
           </TouchableOpacity>
 
-          {/* SUV Option */}
           <TouchableOpacity
             style={{
-              width: "48%",
+              width: "100%",
               // padding: 15,
               borderRadius: 10,
               borderWidth: 1,
@@ -1001,73 +1252,323 @@ const RentalScreen = () => {
               backgroundColor: selectedVehicle === "SUV" ? "#eaf3ff" : "#fff",
               alignItems: "center",
               justifyContent: "center",
+              marginTop: 10,
               // elevation: 3, // Soft shadow
             }}
             onPress={() => setSelectedVehicle("SUV")}
           >
-            {/* <MaterialIcons name="airport-shuttle" size={24} color="#2d78ff" /> */}
-            <Text
-              style={{
-                fontSize: 16,
-                fontFamily: "Poppins_Medium",
-                // marginTop: 5,
-                // backgroundColor: "#eaf3ff",
-                width: "100%",
-                textAlign: "center",
-                borderTopRightRadius: 10,
-                borderTopLeftRadius: 10,
-              }}
-            >
-              SUV
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                marginTop: 5,
-              }}
-            >
-              <MaterialIcons name="person" size={16} color="#555" />
-              <Text style={{ marginLeft: 5, fontFamily: "Poppins_Regular" }}>
-                6 People
-              </Text>
+            <View style={{ width: "100%", height: 60, flexDirection: "row" }}>
+              <View
+                style={{
+                  width: "30%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  // backgroundColor: "red",
+                }}
+              >
+                {" "}
+                <LottieView
+                  source={require("../assets/SUV.json")}
+                  autoPlay
+                  loop
+                  style={{
+                    // alignContent: "center",
+                    width: "100%",
+                    height: 70,
+                    // alignSelf: "center",
+                    paddingLeft: 10,
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  width: "50%",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  // alignItems: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    paddingHorizontal: 10,
+                    fontFamily: "Poppins_Medium",
+                    color: "#2C66E3",
+                  }}
+                >
+                  Zing premium
+                </Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    // justifyContent: "center",
+                  }}
+                >
+                  <Text
+                    style={{
+                      paddingHorizontal: 10,
+                      fontFamily: "Poppins_Regular",
+                    }}
+                  >
+                    SUV
+                  </Text>{" "}
+                  <MaterialIcons
+                    name="person"
+                    size={16}
+                    color="#555"
+                    style={{ fontFamily: "Poppins_Regular", marginBottom: 4 }}
+                  />
+                  <Text style={{ fontFamily: "Poppins_Regular" }}> 6</Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  width: "30%",
+                  // alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    color: "green",
+                    fontSize: 16,
+                    fontFamily: "Poppins_Medium",
+                  }}
+                >
+                  ₹800
+                </Text>
+                <Text
+                  style={{
+                    textDecorationLine: "line-through",
+                    color: "gray",
+                    fontSize: 13,
+                    fontFamily: "Poppins_Regular",
+                  }}
+                >
+                  ₹1000
+                </Text>
+              </View>
             </View>
-            <Text
-              style={{
-                fontSize: 16,
-                // fontWeight: "bold",
-                fontFamily: "Poppins_Medium",
-                color: "#28a745",
-                marginTop: 5,
-              }}
-            >
-              ₹1299
-            </Text>
           </TouchableOpacity>
+
+          {/* SUV Option */}
         </View>
 
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#2d78ff",
-            paddingVertical: 12,
-            borderRadius: 10,
-            alignItems: "center",
-            marginTop: 20,
-            width: "100%",
-          }}
-          // onPress={() => navigation.navigate("otpScreen")}
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-          <Text
+          {/* Button to Open Modal */}
+          <TouchableOpacity
             style={{
-              color: "#fff",
-              fontSize: 16,
-              // fontWeight: "bold",
-              fontFamily: "Poppins_Medium",
+              backgroundColor: "#2d78ff",
+              paddingVertical: 12,
+              borderRadius: 10,
+              alignItems: "center",
+              marginTop: 20,
+              width: "100%",
             }}
+            onPress={() => setModalVisible(true)}
           >
-            Continue
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={{
+                color: "#fff",
+                fontSize: 16,
+                fontFamily: "Poppins_Medium",
+              }}
+            >
+              Continue
+            </Text>
+          </TouchableOpacity>
+
+          {/* Modal */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "flex-end",
+                alignItems: "center",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                // height: 800,
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: "white",
+                  padding: 20,
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                  alignItems: "center",
+                  width: "100%",
+                  // height: 500,
+                }}
+              >
+                {/* Booking Summary */}
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontFamily: "Poppins_Medium",
+                    marginBottom: 15,
+                    color: "#007AFF",
+                  }}
+                >
+                  Booking Details
+                </Text>
+
+                <View style={{ width: "100%", marginBottom: 15 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      color: "#666",
+                      fontFamily: "Poppins_Regular",
+                    }}
+                  >
+                    Selected Package
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontFamily: "Poppins_Medium",
+                      color: "#2d78ff",
+                    }}
+                  >
+                    3 hrs / 30 km
+                  </Text>
+                </View>
+
+                <View style={{ width: "100%", marginBottom: 15 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      color: "#666",
+                      fontFamily: "Poppins_Regular",
+                    }}
+                  >
+                    Date & Time:
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      // fontWeight: "600",
+                      fontFamily: "Poppins_Medium",
+                    }}
+                  >
+                    March 12, 2025 - 12:00 AM
+                  </Text>
+                </View>
+
+                <View style={{ width: "100%", marginBottom: 15 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      color: "#666",
+                      fontFamily: "Poppins_Regular",
+                    }}
+                  >
+                    Vehicle Category:
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      // fontWeight: "600",
+                      fontFamily: "Poppins_Medium",
+                    }}
+                  >
+                    Zing Classic (Sedan, 4 Seater)
+                  </Text>
+                </View>
+
+                <View style={{ width: "100%", marginBottom: 20 }}>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      color: "#666",
+                      fontFamily: "Poppins_Regular",
+                    }}
+                  >
+                    Total Fare:
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 22,
+                      // fontWeight: "bold",
+                      color: "#2d78ff",
+                      fontFamily: "Poppins_Medium",
+                    }}
+                  >
+                    ₹800
+                  </Text>
+                </View>
+
+                {/* Button Row */}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
+                >
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: "#E9F4FF",
+                      paddingVertical: 12,
+                      borderRadius: 10,
+                      alignItems: "center",
+                      flex: 1,
+                      marginRight: 10,
+                    }}
+                    onPress={() => setModalVisible(false)}
+                  >
+                    <Text
+                      style={{
+                        color: "#007AFF",
+                        fontSize: 16,
+                        fontFamily: "Poppins_Medium",
+                      }}
+                    >
+                      Edit Details
+                    </Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: "#2d78ff",
+                      paddingVertical: 12,
+                      borderRadius: 10,
+                      alignItems: "center",
+                      flex: 1,
+                    }}
+                    onPress={() => {
+                      setModalVisible(false);
+                      navigation.navigate("bookingConfirmationScreen", {
+                        date: "13 July",
+                        time: "8:30 AM",
+                        pickup: "Ambience Mall",
+                        drop: "Gate 1 Huda City",
+                        fare: 149,
+                      });
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: "#fff",
+                        fontSize: 16,
+                        fontFamily: "Poppins_Medium",
+                      }}
+                    >
+                      Confirm Booking
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </Modal>
+        </View>
       </View>
     </ScrollView>
   );

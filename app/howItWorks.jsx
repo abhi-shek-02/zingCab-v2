@@ -34,7 +34,7 @@ const DoneButton = ({ ...props }) => {
       {...props}
       onPress={() => {
         try {
-         router.push('/(tabs)/index')
+          router.push("/(tabs)");
         } catch (e) {
           console.log("E", e);
         }

@@ -69,7 +69,7 @@ const HelpScreen = () => {
           style={styles.contactRow}
           onPress={() => handlePress("phone", "+917003371343")}
         >
-          <MaterialIcons name="phone" size={20} color="#007BFF" />
+          <MaterialIcons name="phone" size={20} color="#2d78ff" />
           <Text style={styles.contactText}>+91 7003371343</Text>
         </TouchableOpacity>
 
@@ -78,7 +78,7 @@ const HelpScreen = () => {
           style={styles.contactRow}
           onPress={() => handlePress("email", "support@zingcab.in")}
         >
-          <MaterialIcons name="email" size={20} color="#007BFF" />
+          <MaterialIcons name="email" size={20} color="#2d78ff" />
           <Text style={styles.contactText}>support@zingcab.in</Text>
         </TouchableOpacity>
 
@@ -89,7 +89,7 @@ const HelpScreen = () => {
             handlePress("location", "Bagmari Road, Kolkata - 700054")
           }
         >
-          <MaterialIcons name="location-on" size={20} color="#007BFF" />
+          <MaterialIcons name="location-on" size={20} color="#2d78ff" />
           <Text style={styles.contactText}>Bagmari Road, Kolkata - 700054</Text>
         </TouchableOpacity>
       </View>
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_Medium",
     marginBottom: 10,
     textAlign: "center",
-    color: "#333",
+    color: "#2d78ff",
   },
   contactRow: {
     flexDirection: "row",
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
   },
   button: {
-    backgroundColor: "#007BFF",
+    backgroundColor: "#2d78ff",
     paddingVertical: 12,
     borderRadius: 5,
     alignItems: "center",

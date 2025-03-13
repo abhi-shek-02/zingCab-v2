@@ -271,9 +271,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     // fontWeight: "bold",
     fontFamily: "Poppins_Medium",
-    color: "#2C66E3",
+    color: "#2d78ff",
     marginBottom: 10,
-    color: "#black",
+    // color: "#black",
   },
   subheading: {
     fontSize: 14,

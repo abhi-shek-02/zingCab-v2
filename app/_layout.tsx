@@ -328,6 +328,24 @@ export default function RootLayout() {
             headerTitleAlign: "center",
           }}
         />
+         <Stack.Screen
+          name="bookingConfirmationScreen"
+          options={{
+            headerShown: false, // Ensure the header is visible
+            title: "", // Custom title
+            headerStyle: {
+              // backgroundColor: "#2C66E3", // Change background color
+            },
+            headerShadowVisible: false,
+            headerTintColor: "#2C66E3", // Change text/icon color
+            headerTitleStyle: {
+              // fontWeight: "700", // Customize title font style
+              fontFamily: "Poppins_Medium",
+              fontSize: 17,
+            },
+            headerTitleAlign: "center",
+          }}
+        />
         {/* /feedBack */}
       </Stack>
       <StatusBar style="auto" />
