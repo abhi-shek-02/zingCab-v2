@@ -11,10 +11,11 @@ import {
 } from "react-native";
 import OTPTextInput from "react-native-otp-textinput";
 import { useNavigation } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 const OTPScreen = () => {
   const [otp, setOtp] = useState("");
   const [timer, setTimer] = useState(30);
-
+  const router = useRouter();
   useEffect(() => {
     const interval = setInterval(() => {
       if (timer > 0) {
@@ -77,7 +78,7 @@ const OTPScreen = () => {
           onPress={() => {
             try {
               //   navigation.navigate("(tabs)/index");
-              navigation.navigate(`(index)`); // Replace 'home' with the correct tab name
+              router.navigate("/");
             } catch (e) {
               console.log("E", e);
             }
