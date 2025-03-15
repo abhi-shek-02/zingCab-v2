@@ -168,6 +168,28 @@ export default function TabLayout() {
         tabBarShowLabel: false, // No labels for side tabs
       }}
     >
+       <Tabs.Screen
+        name="index"
+        options={{
+          tabBarIcon: ({ color }) => (
+            <View style={{ flex: 1, alignItems: "center" }}>
+              <Ionicons name="home" size={24} color="#0057FF" />
+              <Text
+                style={{
+                  color: "#959595",
+                  fontSize: 11,
+                  marginTop: 5,
+                  textAlign: "center",
+                  width: "100%",
+                  fontFamily:'Poppins_Medium',
+                }}
+              >
+                Home
+              </Text>
+            </View>
+          ),
+        }}
+      />
       {/* Left Tab - My Rides */}
       <Tabs.Screen
         name="explore"
@@ -209,38 +231,7 @@ export default function TabLayout() {
       />
 
       {/* Center Floating Button - Home Icon with Yellow Label */}
-      <Tabs.Screen
-        name="index"
-        options={{
-          tabBarIcon: () => (
-            <View style={{ alignItems: "center", marginBottom: 25 }}>
-              {/* Floating Home Icon */}
-              <View
-                style={{
-                  width: 70,
-                  height: 70,
-                  backgroundColor: "#0057FF",
-
-                  borderRadius: 35,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  shadowColor: "#2C66E3",
-                  shadowOffset: { width: 0, height: 4 },
-                  shadowOpacity: 0.3,
-                  shadowRadius: 6,
-                  elevation: 10,
-                }}
-              >
-                <Ionicons name="home" size={40} color="white" />
-              </View>
-              {/* Home Label in Yellow */}
-              <Text style={{ color: "#959595", fontSize: 10, marginTop: 5,fontFamily:'Poppins_Medium', }}>
-                Home
-              </Text>
-            </View>
-          ),
-        }}
-      />
+     
 
       {/* Right Tab - Profile */}
       <Tabs.Screen

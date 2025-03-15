@@ -78,7 +78,10 @@ const OTPScreen = () => {
           onPress={() => {
             try {
               //   navigation.navigate("(tabs)/index");
-              router.navigate("/");
+              router.navigate({
+                pathname: "/",
+                params: { userVerified: true },
+              });
             } catch (e) {
               console.log("E", e);
             }
