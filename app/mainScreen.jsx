@@ -404,19 +404,24 @@ export default function MainScreen() {
                 rideLottie: require("../assets/A2.json"),
               },
               {
+                title: "Rental",
+                rideLottie: require("../assets/V3.json"),
+              },
+              {
                 title: "Airport Rides",
                 rideLottie: require("../assets/AirportRide.json"),
               },
             ]?.map((item, index) => {
               return (
-                <View
+                <TouchableOpacity
                   style={{
-                    height: "80%",
-                    width: "30%",
+                    height: "82%",
+                    width: "25%",
                     justifyContent: "center",
                     alignItems: "center",
                     backgroundColor: "white",
-                    margin: 10,
+                    // margin: 10,
+                    marginHorizontal: 4,
                     borderRadius: 10,
                     // shadowColor: "#2C66E3",
                     // shadowOffset: { width: 0, height: 4 },
@@ -476,8 +481,8 @@ export default function MainScreen() {
                         loop
                         style={{
                           alignContent: "center",
-                          width: 80,
-                          height: 100,
+                          width: 65,
+                          height: 65,
                         }} // Adjust size
                       />
                     </View>
@@ -488,14 +493,14 @@ export default function MainScreen() {
                         flex: 0.3,
                         justifyContent: "center",
                         alignItems: "center",
-                        fontSize: 11,
+                        fontSize: 10,
                         fontFamily: "Poppins_Medium",
                       }}
                     >
                       {item?.title}
                     </Text>
                   </View>
-                </View>
+                </TouchableOpacity>
               );
             })}
           </View>
@@ -651,7 +656,7 @@ export default function MainScreen() {
                           paddingTop: 8,
                           fontFamily: "Poppins_Regular",
                           fontSize: 11,
-                          fontWeight: "600",
+                          // fontWeight: "600",
                         }}
                       >
                         {item?.location}
@@ -729,7 +734,7 @@ export default function MainScreen() {
                         style={{
                           paddingTop: 8,
                           fontFamily: "Poppins_Regular",
-                          fontSize: 12.5,
+                          fontSize: 12,
                           // fontWeight: "600",
                         }}
                       >

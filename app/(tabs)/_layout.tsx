@@ -140,11 +140,9 @@
 //     </Svg>
 //   );
 // };
-
 import { Tabs } from "expo-router";
 import { View, Text } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // Icons from Ionicons
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { Feather } from "@expo/vector-icons"; // Icons from Feather
 import { mainColor } from "@/constants/Colors";
 export default function TabLayout() {
   return (
@@ -157,72 +155,31 @@ export default function TabLayout() {
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           position: "absolute",
-          shadowColor: "#2C66E3",
+          shadowColor: "#2d78ff",
           shadowOffset: { width: 0, height: 4 },
           shadowOpacity: 0.2,
           shadowRadius: 5,
           elevation: 10,
           borderColor: "white",
-         
         },
         tabBarShowLabel: false, // No labels for side tabs
       }}
     >
-       <Tabs.Screen
-        name="index"
-        options={{
-          tabBarIcon: ({ color }) => (
-            <View style={{ flex: 1, alignItems: "center" }}>
-              <Ionicons name="home" size={24} color="#0057FF" />
-              <Text
-                style={{
-                  color: "#959595",
-                  fontSize: 11,
-                  marginTop: 5,
-                  textAlign: "center",
-                  width: "100%",
-                  fontFamily:'Poppins_Medium',
-                }}
-              >
-                Home
-              </Text>
-            </View>
-          ),
-        }}
-      />
       {/* Left Tab - My Rides */}
       <Tabs.Screen
         name="explore"
         options={{
-          headerShown: true, // Ensure the header is visible
-          title: "My Rides", // Custom title
-          headerStyle: {
-            backgroundColor: mainColor, // Change background color
-          },
+          headerShown: true,
+          title: "My Rides",
+          headerStyle: { backgroundColor: mainColor },
           headerShadowVisible: false,
-          headerTintColor: "#fff", // Change text/icon color
-          headerTitleStyle: {
-            fontWeight: "700", // Customize title font style
-            fontSize: 17,
-          },
+          headerTintColor: "#fff",
+          headerTitleStyle: { fontWeight: "700", fontSize: 17 },
           headerTitleAlign: "center",
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ focused }) => (
             <View style={{ flex: 1, alignItems: "center" }}>
-              <FontAwesome6
-                name="road-circle-check"
-                size={24}
-                color="#0057FF"
-              />
-              <Text
-                style={{
-                  color: "#959595",
-                  fontSize: 11,
-                  marginTop: 5,
-                  textAlign: "center",
-                  width: "100%",
-                  fontFamily:'Poppins_Medium',
-                }}
-              >
+              <Feather name="navigation" size={24} color={focused ? "#2d78ff" : "#959595"} />
+              <Text style={[styles.label, { color: focused ? "#2d78ff" : "#959595" }]}>
                 Ride
               </Text>
             </View>
@@ -230,27 +187,29 @@ export default function TabLayout() {
         }}
       />
 
-      {/* Center Floating Button - Home Icon with Yellow Label */}
-     
+      {/* Center Floating Button - Home */}
+      <Tabs.Screen
+        name="index"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View style={{ flex: 1, alignItems: "center" }}>
+              <Feather name="home" size={24} color={focused ? "#2d78ff" : "#959595"} />
+              <Text style={[styles.label, { color: focused ? "#2d78ff" : "#959595" }]}>
+                Home
+              </Text>
+            </View>
+          ),
+        }}
+      />
 
       {/* Right Tab - Profile */}
       <Tabs.Screen
         name="profile"
         options={{
-          tabBarLabel: "My Account", // Use tabBarLabel instead of title
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ focused }) => (
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Ionicons name="person" size={24} color="#0057FF" />
-              <Text
-                style={{
-                  color: "#959595",
-                  fontSize: 11,
-                  marginTop: 5,
-                  textAlign: "center",
-                  width: "100%",
-                  fontFamily:'Poppins_Medium',
-                }}
-              >
+              <Feather name="user" size={24} color={focused ? "#2d78ff" : "#959595"} />
+              <Text style={[styles.label, { color: focused ? "#2d78ff" : "#959595" }]}>
                 Profile
               </Text>
             </View>
@@ -260,3 +219,13 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
+const styles = {
+  label: {
+    fontSize: 11,
+    marginTop: 5,
+    textAlign: "center",
+    width: "100%",
+    fontFamily: "Poppins_Medium",
+  },
+};
