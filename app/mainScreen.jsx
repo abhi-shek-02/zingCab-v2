@@ -385,9 +385,7 @@ export default function MainScreen() {
           </Text>
           <View
             style={{
-              // backgroundColor: "grey",
               width: "90%",
-              // height: 80,
               top: 15,
               flexDirection: "row",
               justifyContent: "center",
@@ -397,108 +395,101 @@ export default function MainScreen() {
             {[
               {
                 title: "Outstation",
-                rideLottie: require("../assets/A3.json"),
+                rideLottie: require("../assets/V3.json"),
+                // subRideLottie: require("../assets/H1.json"),
               },
               {
                 title: "Round Trip",
-                rideLottie: require("../assets/A2.json"),
+                rideLottie: require("../assets/V3.json"),
+                subRideLottie: require("../assets/luggage.json"),
               },
               {
                 title: "Rental",
                 rideLottie: require("../assets/V3.json"),
+                subRideLottie: require("../assets/H2.json"),
               },
               {
                 title: "Airport Rides",
-                rideLottie: require("../assets/AirportRide.json"),
+                rideLottie: require("../assets/V3.json"),
+                subRideLottie: require("../assets/H1.json"),
               },
             ]?.map((item, index) => {
               return (
                 <TouchableOpacity
+                  key={index}
                   style={{
                     height: "82%",
-                    width: "25%",
+                    width: "25.5%",
                     justifyContent: "center",
                     alignItems: "center",
                     backgroundColor: "white",
-                    // margin: 10,
-                    marginHorizontal: 4,
+                    marginHorizontal: 3,
                     borderRadius: 10,
-                    // shadowColor: "#2C66E3",
-                    // shadowOffset: { width: 0, height: 4 },
-                    // shadowOpacity: 0.2,
-                    // shadowRadius: 5,
-
-                    // // Shadow for Android
-                    // elevation: 5,
                     borderColor: "#dbdbdb75",
                     borderWidth: 1.5,
                   }}
                 >
+                  <Text
+                    style={{
+                      color: "#435890",
+                      flex: 0.6,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      fontSize: 11,
+                      fontFamily: "Poppins_Medium",
+                      // backgroundColor: "red",
+                      marginTop: 10,
+                      // top: -1,
+                    }}
+                  >
+                    {item?.title}
+                  </Text>
                   <View
                     style={{
                       flex: 1,
                       justifyContent: "center",
                       alignItems: "center",
+                      position: "relative", // Allows absolute positioning inside
+                      // backgroundColor: "red",
                     }}
                   >
-                    {/* <View
-                      style={{
-                        flex: 0.3,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      {index == 1 && (
-                        <Text
-                          style={{
-                            fontSize: 11,
-                            color: "#212529",
-                            marginTop: 3,
-                          }}
-                        >
-                          Extra slots
-                        </Text>
-                      )}{" "}
-                      {index == 2 && (
-                        <Text style={{ fontSize: 11, marginTop: 3 }}>
-                          Upto 50% off
-                        </Text>
-                      )}
-                    </View> */}
-                    {/* fffr */}
+                    {/* Overlayed Lottie Animation */}
                     <View
                       style={{
-                        flex: 1,
+                        position: "absolute",
                         justifyContent: "center",
                         alignItems: "center",
-                        // backgroundColor: "red",
+                        top: -25,
                       }}
                     >
                       <LottieView
-                        source={item.rideLottie} // Replace with your JSON file path
-                        // source={require("../assets/AirportRide.json")}
+                        // source={require("../assets/H1.json")}
+                        source={item.rideLottie}
                         autoPlay
                         loop
                         style={{
-                          alignContent: "center",
-                          width: 65,
+                          width: 80,
                           height: 65,
-                        }} // Adjust size
+                        }}
                       />
                     </View>
-                    <Text
+
+                    {/* Main Ride Animation Below */}
+                    <LottieView
+                      // source={item.rideLottie}
+                      source={item.subRideLottie}
+                      autoPlay
+                      loop
                       style={{
-                        // fontWeight: "bold",
-                        color: "#435890",
-                        flex: 0.3,
-                        justifyContent: "center",
-                        alignItems: "center",
-                        fontSize: 10,
-                        fontFamily: "Poppins_Medium",
+                        width: 70,
+                        height:
+                          item.title === "Rental" || item.title === "Round Trip"
+                            ? 35
+                            : 65, // Conditional height
+                        // top: 8,
+                        left: -15,
                       }}
-                    >
-                      {item?.title}
-                    </Text>
+                    />
                   </View>
                 </TouchableOpacity>
               );
@@ -509,7 +500,7 @@ export default function MainScreen() {
         <View
           style={{
             // flex: 1,
-            marginTop: 30,
+            marginTop: 20,
             justifyContent: "center",
             alignItems: "center",
             // marginBottom: 105,
@@ -520,21 +511,23 @@ export default function MainScreen() {
             style={{
               // flex: 0.3,
               // height: "20%",
-              width: "95%",
+              width: "100%",
               justifyContent: "center",
               alignItems: "center",
               backgroundColor: "#F5FEFF",
-              margin: 10,
-              borderRadius: 10,
+              margin: 5,
+              // borderRadius: 10,
               shadowColor: "#2C66E3",
               shadowOffset: { width: 0, height: 4 },
               shadowOpacity: 0.2,
               shadowRadius: 5,
-              height: 40,
+              height: 50,
               // Shadow for Android
-              elevation: 5,
+              // elevation: 5,
               marginTop: 10,
               // padding:10,
+              borderColor: "#dbdbdb75",
+              // borderWidth: 1,
             }}
           >
             <View
@@ -556,7 +549,7 @@ export default function MainScreen() {
                   alignContent: "center",
                 }}
               >
-                <LottieView
+                {/* <LottieView
                   source={require("../assets/Location.json")} // Replace with your JSON file path
                   // source={require("../assets/AirportRide.json")}
                   autoPlay
@@ -567,6 +560,18 @@ export default function MainScreen() {
                     height: 100,
                     alignSelf: "center",
                   }} // Adjust size
+                /> */}
+                <Image
+                  // source={require("../assets/images/women.webp")} // Use require() for local images
+                  source={require("../assets/images/imgeWomen.png")}
+                  style={{
+                    width: 60,
+                    height: 60,
+                    // alignSelf: "center",
+                    // resizeMode: "contain",
+                    padding: 10,
+                    marginLeft: 10,
+                  }}
                 />
               </View>
               <View
@@ -581,6 +586,7 @@ export default function MainScreen() {
                     // fontWeight: "600",
                     fontFamily: "Poppins_Medium",
                     fontSize: 13,
+                    marginLeft: 10,
                   }}
                 >
                   Explore Bengal like never before
@@ -600,7 +606,7 @@ export default function MainScreen() {
             </View>
           </TouchableOpacity>
 
-          <View style={{ height: 120 }}>
+          <View style={{ height: 110 }}>
             <FlatList
               data={ListData}
               horizontal
@@ -611,7 +617,7 @@ export default function MainScreen() {
                     style={{
                       marginHorizontal: 0,
                       padding: 10,
-                      height: 120,
+                      height: 105,
                       justifyContent: "center",
                       alignItems: "center",
                       backgroundColor: "#E0F2FE",
@@ -639,8 +645,8 @@ export default function MainScreen() {
                         <Image
                           source={{ uri: item.image }}
                           style={{
-                            width: 80,
-                            height: 80,
+                            width: 65,
+                            height: 65,
                             borderRadius: 50,
                             borderWidth: 5,
                             borderColor: "#fff",
@@ -668,9 +674,9 @@ export default function MainScreen() {
               keyExtractor={(item) => item.id}
             />
           </View>
-          <View
+          {/* <View
             style={{ borderRadius: 0.5, width: "100%", height: 1, padding: 1 }}
-          ></View>
+          ></View> */}
           <View style={{ height: 90 }}>
             <FlatList
               data={ListDatas}
