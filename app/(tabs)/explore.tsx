@@ -7,145 +7,15 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import { Card, Divider } from "react-native-paper";
-
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import LottieView from "lottie-react-native";
-import { useNavigation } from "@react-navigation/native";
 import { mainColor } from "@/constants/Colors";
 
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
+
+import OngoingScreen from '../ongoingScreen'
+import ScheduledScreen from '../scheduledScreen'
+import PastScreen from '../pastScreen'
 const Tab = createMaterialTopTabNavigator();
-
-const OngoingScreen = () => (
-  <ScrollView
-    style={{
-      flex: 1,
-      backgroundColor: "#fff",
-      padding: 10,
-    }}
-    contentContainerStyle={{
-      flex: 1, // Ensures the container takes full height
-      justifyContent: "center",
-      alignItems: "center",
-    }}
-  >
-    <LottieView
-      source={require("../../assets/A2.json")}
-      autoPlay
-      loop
-      style={{
-        width: "100%",
-        height: 200,
-        alignSelf: "center",
-      }}
-    />
-
-    <Text
-      style={{
-        textAlign: "center",
-        marginTop: 10,
-        fontSize: 15,
-        padding: 15,
-        // fontWeight: "600",
-        fontFamily:'Poppins_Medium',
-        color: "#8292B6",
-      }}
-    >
-      No ongoing rides at the moment
-    </Text>
-  </ScrollView>
-);
-
-const ScheduledScreen = () => {
-  const navigation = useNavigation();
-  return (
-    <ScrollView
-      style={{
-        flex: 1,
-        backgroundColor: "#fff",
-        padding: 10,
-      }}
-      contentContainerStyle={{
-        flex: 1, // Ensures the container takes full height
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <LottieView
-        source={require("../../assets/A3.json")}
-        autoPlay
-        loop
-        style={{
-          width: "100%",
-          height: 200,
-          alignSelf: "center",
-        }}
-      />
-
-      <Text
-        style={{
-          textAlign: "center",
-          marginTop: 10,
-          fontSize: 15,
-          paddingTop: 15,
-          fontWeight: "600",
-          paddingBottom: 10,
-          fontFamily:'Poppins_Medium',
-          color: "#8292B6",
-        }}
-      >
-        No Scheduled rides at the moment
-      </Text>
-      <Text style={{ fontFamily:'Poppins_Regular',color:'#202329'}}>Ready to take your next ride?</Text>
-      <TouchableOpacity
-        style={styles.truecallerButton}
-        onPress={() => navigation.navigate("bookingScreen")}
-      >
-        <Text style={styles.truecallerText}>Ready, let's schedule!</Text>
-      </TouchableOpacity>
-    </ScrollView>
-  );
-};
-
-const PastScreen = () => (
-  <ScrollView
-    style={{
-      flex: 1,
-      backgroundColor: "#fff",
-      padding: 10,
-    }}
-    contentContainerStyle={{
-      flex: 1, // Ensures the container takes full height
-      justifyContent: "center",
-      alignItems: "center",
-    }}
-  >
-    <LottieView
-      source={require("../../assets/Location.json")}
-      autoPlay
-      loop
-      style={{
-        width: "100%",
-        height: 200,
-        alignSelf: "center",
-      }}
-    />
-
-    <Text
-      style={{
-        textAlign: "center",
-        marginTop: 10,
-        fontSize: 15,
-        padding: 15,
-        fontWeight: "600",
-        fontFamily:'Poppins_Medium',
-        color: "#8292B6",
-      }}
-    >
-      You haven't taken a ride with us yet
-    </Text>
-  </ScrollView>
-);
 
 export default function TabTwoScreen() {
   return (
