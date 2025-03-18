@@ -954,6 +954,7 @@ const OneWayScreen = () => {
                   width: "100%",
                 }}
               >
+                {/* Title */}
                 <Text
                   style={{
                     fontSize: 20,
@@ -972,71 +973,83 @@ const OneWayScreen = () => {
                     borderRadius: 10,
                     padding: 15,
                     width: "100%",
-                    position: "relative",
                   }}
                 >
-                  {/* Pickup & Drop Section */}
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <FontAwesome5
-                      name={
-                        isPickUpFromAirport
-                          ? "map-marker-alt"
-                          : "map-marker-alt"
-                      }
-                      size={20}
-                      color="white"
-                    />
-                    <View style={{ marginLeft: 10 }}>
-                      <Text style={{ color: "#fff", fontSize: 12 }}>
-                        Pickup
-                      </Text>
-                      <Text
-                        style={{
-                          color: "#fff",
-                          fontSize: 14,
-                          fontFamily: "Poppins_Regular",
-                        }}
-                      >
-                        {isPickUpFromAirport
-                          ? "IGI Airport, Delhi"
-                          : "Ambience Mall, Gurgaon"}
-                      </Text>
-                    </View>
-                  </View>
-
-                  {/* Vertical Line */}
+                  {/* Address Container */}
                   <View
                     style={{
-                      height: 20,
-                      borderLeftWidth: 1.5,
-                      borderLeftColor: "#fff",
-                      marginLeft: 10,
-                      marginVertical: 5,
+                      backgroundColor: "rgba(255,255,255,0.2)",
+                      padding: 12,
+                      borderRadius: 10,
                     }}
-                  />
+                  >
+                    {/* Pickup Section */}
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <FontAwesome5
+                        name="map-marker-alt"
+                        size={20}
+                        color="white"
+                      />
+                      <View style={{ marginLeft: 10 }}>
+                        <Text style={{ color: "#fff", fontSize: 12 }}>
+                          Pickup
+                        </Text>
+                        <Text
+                          style={{
+                            color: "#fff",
+                            fontSize: 14,
+                            fontFamily: "Poppins_Regular",
+                          }}
+                        >
+                          {isPickUpFromAirport
+                            ? "IGI Airport, Delhi"
+                            : "Ambience Mall, Gurgaon"}
+                        </Text>
+                      </View>
+                    </View>
 
-                  {/* Drop Icon & Address */}
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <FontAwesome5
-                      name={
-                        isPickUpFromAirport ? "map-marker-alt" : "plane-arrival"
-                      }
-                      size={20}
-                      color="white"
+                    {/* Vertical Line */}
+                    <View
+                      style={{
+                        height: 20,
+                        borderLeftWidth: 1.5,
+                        borderLeftColor: "#fff",
+                        marginLeft: 10,
+                        marginVertical: 5,
+                      }}
                     />
-                    <View style={{ marginLeft: 10 }}>
-                      <Text style={{ color: "#fff", fontSize: 12 }}>Drop</Text>
-                      <Text
-                        style={{
-                          color: "#fff",
-                          fontSize: 14,
-                          fontFamily: "Poppins_Regular",
-                        }}
-                      >
-                        {isPickUpFromAirport
-                          ? "Ambience Mall, Gurgaon"
-                          : "IGI Airport, Delhi"}
-                      </Text>
+
+                    {/* Drop Section */}
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <FontAwesome5
+                        name={
+                          isPickUpFromAirport
+                            ? "map-marker-alt"
+                            : "plane-arrival"
+                        }
+                        size={20}
+                        color="white"
+                      />
+                      <View style={{ marginLeft: 10 }}>
+                        <Text style={{ color: "#fff", fontSize: 12 }}>
+                          Drop
+                        </Text>
+                        <Text
+                          style={{
+                            color: "#fff",
+                            fontSize: 14,
+                            fontFamily: "Poppins_Regular",
+                          }}
+                        >
+                          {isPickUpFromAirport
+                            ? "Ambience Mall, Gurgaon"
+                            : "IGI Airport, Delhi"}
+                        </Text>
+                      </View>
                     </View>
                   </View>
 
@@ -1044,7 +1057,7 @@ const OneWayScreen = () => {
                   <View
                     style={{
                       flexDirection: "row",
-                      justifyContent: "space-between",
+                      justifyContent: "center",
                       marginTop: 15,
                     }}
                   >

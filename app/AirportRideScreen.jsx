@@ -929,7 +929,7 @@ const AirportRideScreen = () => {
                   <View
                     style={{
                       flexDirection: "row",
-                      justifyContent: "space-between",
+                      justifyContent: "center",
                       marginTop: 15,
                     }}
                   >
