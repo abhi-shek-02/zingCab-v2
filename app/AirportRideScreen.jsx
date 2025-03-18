@@ -844,69 +844,87 @@ const AirportRideScreen = () => {
                     position: "relative",
                   }}
                 >
-                  {/* Pickup & Drop Section */}
-                  <View style={{ flexDirection: "row", alignItems: "center", }}>
-                    <FontAwesome5
-                      name={
-                        isPickUpFromAirport ? "plane-arrival" : "map-marker-alt"
-                      }
-                      size={20}
-                      color="white"
-                    />
-                    <View style={{ marginLeft: 10 }}>
-                      <Text style={{ color: "#fff", fontSize: 12 }}>
-                        Pickup
-                      </Text>
-                      <Text
-                        style={{
-                          color: "#fff",
-                          fontSize: 14,
-                          fontFamily: "Poppins_Regular",
-                        }}
-                      >
-                        {isPickUpFromAirport
-                          ? "IGI Airport, Delhi"
-                          : "Ambience Mall, Gurgaon"}
-                      </Text>
-                    </View>
-                  </View>
-
-                  {/* Vertical Line */}
                   <View
                     style={{
-                      height: 20,
-                      borderLeftWidth: 1.5,
-                      borderLeftColor: "#fff",
-                      marginLeft: 10,
-                      marginVertical: 5,
+                      backgroundColor: "rgba(255,255,255,0.2)",
+                      borderRadius: 10,
+                      padding: 10,
+                      marginTop: 5,
                     }}
-                  />
+                  >
+                    {/* Pickup & Drop Section */}
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <FontAwesome5
+                        name={
+                          isPickUpFromAirport
+                            ? "plane-arrival"
+                            : "map-marker-alt"
+                        }
+                        size={20}
+                        color="white"
+                      />
+                      <View style={{ marginLeft: 10 }}>
+                        <Text style={{ color: "#fff", fontSize: 12 }}>
+                          Pickup
+                        </Text>
+                        <Text
+                          style={{
+                            color: "#fff",
+                            fontSize: 14,
+                            fontFamily: "Poppins_Regular",
+                          }}
+                        >
+                          {isPickUpFromAirport
+                            ? "IGI Airport, Delhi"
+                            : "Ambience Mall, Gurgaon"}
+                        </Text>
+                      </View>
+                    </View>
 
-                  {/* Drop Icon & Address */}
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <FontAwesome5
-                      name={
-                        isPickUpFromAirport ? "map-marker-alt" : "plane-arrival"
-                      }
-                      size={20}
-                      color="white"
+                    {/* Vertical Line */}
+                    <View
+                      style={{
+                        height: 20,
+                        borderLeftWidth: 1.5,
+                        borderLeftColor: "#fff",
+                        marginLeft: 10,
+                        marginVertical: 5,
+                      }}
                     />
-                    <View style={{ marginLeft: 10 }}>
-                      <Text style={{ color: "#fff", fontSize: 12 }}>Drop</Text>
-                      <Text
-                        style={{
-                          color: "#fff",
-                          fontSize: 14,
-                          fontFamily: "Poppins_Regular",
-                        }}
-                      >
-                        {isPickUpFromAirport
-                          ? "Ambience Mall, Gurgaon"
-                          : "IGI Airport, Delhi"}
-                      </Text>
+
+                    {/* Drop Icon & Address */}
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <FontAwesome5
+                        name={
+                          isPickUpFromAirport
+                            ? "map-marker-alt"
+                            : "plane-arrival"
+                        }
+                        size={20}
+                        color="white"
+                      />
+                      <View style={{ marginLeft: 10 }}>
+                        <Text style={{ color: "#fff", fontSize: 12 }}>
+                          Drop
+                        </Text>
+                        <Text
+                          style={{
+                            color: "#fff",
+                            fontSize: 14,
+                            fontFamily: "Poppins_Regular",
+                          }}
+                        >
+                          {isPickUpFromAirport
+                            ? "Ambience Mall, Gurgaon"
+                            : "IGI Airport, Delhi"}
+                        </Text>
+                      </View>
                     </View>
                   </View>
-
                   {/* Pickup Date & Time */}
                   <View
                     style={{
