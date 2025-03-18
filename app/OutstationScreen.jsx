@@ -19,7 +19,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
 import { mainColor } from "@/constants/Colors";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 import { Button } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { Animated } from "react-native";
@@ -219,6 +219,8 @@ const OneWayScreen = () => {
   const [drop, setDrop] = useState("");
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
+  const [isPickUpFromAirport, setIsPickUpFromAirport] = useState(true);
+
   const TripForm = () => {
     const [pickup, setPickup] = useState("");
 
@@ -940,7 +942,6 @@ const OneWayScreen = () => {
                 justifyContent: "flex-end",
                 alignItems: "center",
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
-                // height: 800,
               }}
             >
               <View
@@ -951,112 +952,186 @@ const OneWayScreen = () => {
                   borderTopRightRadius: 20,
                   alignItems: "center",
                   width: "100%",
-                  // height: 500,
                 }}
               >
-                {/* Booking Summary */}
                 <Text
                   style={{
                     fontSize: 20,
                     fontFamily: "Poppins_Medium",
-                    marginBottom: 15,
                     color: "#007AFF",
+                    marginBottom: 15,
                   }}
                 >
                   Booking Details
                 </Text>
 
-                <View style={{ width: "100%", marginBottom: 15 }}>
-                  <Text
+                {/* Ticket Container */}
+                <View
+                  style={{
+                    backgroundColor: "#2d78ff",
+                    borderRadius: 10,
+                    padding: 15,
+                    width: "100%",
+                    position: "relative",
+                  }}
+                >
+                  {/* Pickup & Drop Section */}
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <FontAwesome5
+                      name={
+                        isPickUpFromAirport
+                          ? "map-marker-alt"
+                          : "map-marker-alt"
+                      }
+                      size={20}
+                      color="white"
+                    />
+                    <View style={{ marginLeft: 10 }}>
+                      <Text style={{ color: "#fff", fontSize: 12 }}>
+                        Pickup
+                      </Text>
+                      <Text
+                        style={{
+                          color: "#fff",
+                          fontSize: 14,
+                          fontFamily: "Poppins_Regular",
+                        }}
+                      >
+                        {isPickUpFromAirport
+                          ? "IGI Airport, Delhi"
+                          : "Ambience Mall, Gurgaon"}
+                      </Text>
+                    </View>
+                  </View>
+
+                  {/* Vertical Line */}
+                  <View
                     style={{
-                      fontSize: 16,
-                      color: "#666",
-                      fontFamily: "Poppins_Regular",
+                      height: 20,
+                      borderLeftWidth: 1.5,
+                      borderLeftColor: "#fff",
+                      marginLeft: 10,
+                      marginVertical: 5,
+                    }}
+                  />
+
+                  {/* Drop Icon & Address */}
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <FontAwesome5
+                      name={
+                        isPickUpFromAirport ? "map-marker-alt" : "plane-arrival"
+                      }
+                      size={20}
+                      color="white"
+                    />
+                    <View style={{ marginLeft: 10 }}>
+                      <Text style={{ color: "#fff", fontSize: 12 }}>Drop</Text>
+                      <Text
+                        style={{
+                          color: "#fff",
+                          fontSize: 14,
+                          fontFamily: "Poppins_Regular",
+                        }}
+                      >
+                        {isPickUpFromAirport
+                          ? "Ambience Mall, Gurgaon"
+                          : "IGI Airport, Delhi"}
+                      </Text>
+                    </View>
+                  </View>
+
+                  {/* Pickup Date & Time */}
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      marginTop: 15,
                     }}
                   >
-                    Selected Package
-                  </Text>
-                  <Text
+                    <View style={{ alignItems: "center" }}>
+                      <Text style={{ color: "#fff", fontSize: 12 }}>
+                        Pickup Date & Time
+                      </Text>
+                      <Text
+                        style={{
+                          color: "#fff",
+                          fontSize: 14,
+                          fontFamily: "Poppins_Medium",
+                        }}
+                      >
+                        20/04/25 - 7:30 AM
+                      </Text>
+                    </View>
+                  </View>
+
+                  {/* Dotted Line with Cutouts */}
+                  <View
                     style={{
-                      fontSize: 18,
-                      fontFamily: "Poppins_Medium",
-                      color: "#2d78ff",
+                      borderBottomWidth: 1,
+                      borderBottomColor: "#fff",
+                      borderStyle: "dashed",
+                      marginVertical: 10,
+                      position: "relative",
                     }}
                   >
-                    3 hrs / 30 km
-                  </Text>
+                    {/* Left Side Cutout */}
+                    <View
+                      style={{
+                        width: 20,
+                        height: 20,
+                        backgroundColor: "white",
+                        borderRadius: 10,
+                        position: "absolute",
+                        left: -23,
+                        top: -10,
+                      }}
+                    />
+                    {/* Right Side Cutout */}
+                    <View
+                      style={{
+                        width: 20,
+                        height: 20,
+                        backgroundColor: "white",
+                        borderRadius: 10,
+                        position: "absolute",
+                        right: -23,
+                        top: -10,
+                      }}
+                    />
+                  </View>
+
+                  {/* Fare Details */}
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      // justifyContent:'center'
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text style={{ color: "#fff", fontSize: 14 }}>
+                      Zing Classic (Sedan for 4)
+                    </Text>
+
+                    <Text
+                      style={{
+                        color: "#fff",
+                        fontSize: 19,
+                        fontFamily: "Poppins_Medium",
+                      }}
+                    >
+                      ₹ 1200
+                    </Text>
+                  </View>
                 </View>
 
-                <View style={{ width: "100%", marginBottom: 15 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "#666",
-                      fontFamily: "Poppins_Regular",
-                    }}
-                  >
-                    Date & Time:
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      // fontWeight: "600",
-                      fontFamily: "Poppins_Medium",
-                    }}
-                  >
-                    March 12, 2025 - 12:00 AM
-                  </Text>
-                </View>
-
-                <View style={{ width: "100%", marginBottom: 15 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "#666",
-                      fontFamily: "Poppins_Regular",
-                    }}
-                  >
-                    Vehicle Category:
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      // fontWeight: "600",
-                      fontFamily: "Poppins_Medium",
-                    }}
-                  >
-                    Zing Classic (Sedan, 4 Seater)
-                  </Text>
-                </View>
-
-                <View style={{ width: "100%", marginBottom: 20 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "#666",
-                      fontFamily: "Poppins_Regular",
-                    }}
-                  >
-                    Total Fare:
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 22,
-                      // fontWeight: "bold",
-                      color: "#2d78ff",
-                      fontFamily: "Poppins_Medium",
-                    }}
-                  >
-                    ₹800
-                  </Text>
-                </View>
-
-                {/* Button Row */}
+                {/* Buttons */}
                 <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
                     width: "100%",
+                    marginTop: 15,
                   }}
                 >
                   <TouchableOpacity
@@ -1092,11 +1167,15 @@ const OneWayScreen = () => {
                     onPress={() => {
                       setModalVisible(false);
                       navigation.navigate("bookingConfirmationScreen", {
-                        date: "13 July",
-                        time: "8:30 AM",
-                        pickup: "Ambience Mall",
-                        drop: "Gate 1 Huda City",
-                        fare: 149,
+                        date: "20 April",
+                        time: "7:30 AM",
+                        pickup: isPickUpFromAirport
+                          ? "IGI Airport, Delhi"
+                          : "Ambience Mall, Gurgaon",
+                        drop: isPickUpFromAirport
+                          ? "Ambience Mall, Gurgaon"
+                          : "IGI Airport, Delhi",
+                        fare: 1200,
                       });
                     }}
                   >
@@ -1126,13 +1205,10 @@ const RoundTripScreen = () => {
   const [selectedTab, setSelectedTab] = useState("Rides");
   const [selectedSubTab, setSelectedSubTab] = useState(true);
   const [pickup, setPickup] = useState("");
-  const [drop, setDrop] = useState("");
+  const [dropLocations, setDropLocations] = useState([""]);
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const TripForm = () => {
-    const [pickup, setPickup] = useState("");
-    const [dropLocations, setDropLocations] = useState([""]);
-
     const addDropLocation = () => {
       if (dropLocations.length < 4) {
         setDropLocations([...dropLocations, ""]);
@@ -1369,6 +1445,12 @@ const RoundTripScreen = () => {
       })
     ).start();
   }, []);
+
+  const [pickupDate, setPickupDate] = useState("20/04/25");
+  const [pickupTime, setPickupTime] = useState("7:30 AM");
+  const [returnDate, setReturnDate] = useState("22/04/25");
+  const [returnTime, setReturnTime] = useState("6:00 PM");
+  const [fare, setFare] = useState(2400); // Updated fare for round-trip
   return (
     <ScrollView
       style={{
@@ -1817,7 +1899,6 @@ const RoundTripScreen = () => {
                 justifyContent: "flex-end",
                 alignItems: "center",
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
-                // height: 800,
               }}
             >
               <View
@@ -1828,112 +1909,209 @@ const RoundTripScreen = () => {
                   borderTopRightRadius: 20,
                   alignItems: "center",
                   width: "100%",
-                  // height: 500,
                 }}
               >
-                {/* Booking Summary */}
                 <Text
                   style={{
                     fontSize: 20,
                     fontFamily: "Poppins_Medium",
-                    marginBottom: 15,
                     color: "#007AFF",
+                    marginBottom: 15,
                   }}
                 >
-                  Booking Details
+                  Booking Details (Round Trip)
                 </Text>
 
-                <View style={{ width: "100%", marginBottom: 15 }}>
-                  <Text
+                {/* Ticket Container */}
+                <View
+                  style={{
+                    backgroundColor: "#2d78ff",
+                    borderRadius: 10,
+                    padding: 15,
+                    width: "100%",
+                    position: "relative",
+                  }}
+                >
+                  {/* Pickup Location */}
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <FontAwesome5
+                      name="map-marker-alt"
+                      size={20}
+                      color="white"
+                    />
+                    <View style={{ marginLeft: 10 }}>
+                      <Text style={{ color: "#fff", fontSize: 12 }}>
+                        Pickup
+                      </Text>
+                      <Text
+                        style={{
+                          color: "#fff",
+                          fontSize: 14,
+                          fontFamily: "Poppins_Regular",
+                        }}
+                      >
+                        {pickup}
+                      </Text>
+                    </View>
+                  </View>
+
+                  {/* Vertical Line */}
+                  <View
                     style={{
-                      fontSize: 16,
-                      color: "#666",
-                      fontFamily: "Poppins_Regular",
+                      height: 20,
+                      borderLeftWidth: 1.5,
+                      borderLeftColor: "#fff",
+                      marginLeft: 10,
+                      marginVertical: 5,
+                    }}
+                  />
+
+                  {/* Drop Locations */}
+                  {dropLocations?.map((drop, index) => (
+                    <View
+                      key={index}
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        marginBottom: 10,
+                      }}
+                    >
+                      <FontAwesome5
+                        name="map-marker-alt"
+                        size={20}
+                        color="white"
+                      />
+                      <View style={{ marginLeft: 10 }}>
+                        <Text
+                          style={{
+                            color: "#fff",
+                            fontSize: 12,
+                          }}
+                        >
+                          Drop {index + 1}
+                        </Text>
+                        <Text
+                          style={{
+                            color: "#fff",
+                            fontSize: 14,
+                            fontFamily: "Poppins_Regular",
+                          }}
+                        >
+                          {drop}
+                        </Text>
+                      </View>
+                    </View>
+                  ))}
+
+                  {/* Pickup & Return Date */}
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      marginTop: 15,
                     }}
                   >
-                    Selected Package
-                  </Text>
-                  <Text
+                    <View style={{ alignItems: "center" }}>
+                      <Text
+                        style={{
+                          color: "#fff",
+                          fontSize: 12,
+                        }}
+                      >
+                        Pickup Date & Time
+                      </Text>
+                      <Text
+                        style={{
+                          color: "#fff",
+                          fontSize: 16,
+                          fontFamily: "Poppins_Medium",
+                        }}
+                      >
+                        {pickupDate} - {pickupTime}
+                      </Text>
+                    </View>
+
+                    <View style={{ alignItems: "center" }}>
+                      <Text style={{ color: "#fff", fontSize: 12 }}>
+                        Return Date
+                      </Text>
+                      <Text
+                        style={{
+                          color: "#fff",
+                          fontSize: 16,
+                          fontFamily: "Poppins_Medium",
+                        }}
+                      >
+                        {returnDate}
+                      </Text>
+                    </View>
+                  </View>
+
+                  {/* Dotted Line with Cutouts */}
+                  <View
                     style={{
-                      fontSize: 18,
-                      fontFamily: "Poppins_Medium",
-                      color: "#2d78ff",
+                      borderBottomWidth: 1,
+                      borderBottomColor: "#fff",
+                      borderStyle: "dashed",
+                      marginVertical: 10,
+                      position: "relative",
                     }}
                   >
-                    3 hrs / 30 km
-                  </Text>
+                    <View
+                      style={{
+                        width: 20,
+                        height: 20,
+                        backgroundColor: "white",
+                        borderRadius: 10,
+                        position: "absolute",
+                        left: -23,
+                        top: -10,
+                      }}
+                    />
+                    <View
+                      style={{
+                        width: 20,
+                        height: 20,
+                        backgroundColor: "white",
+                        borderRadius: 10,
+                        position: "absolute",
+                        right: -23,
+                        top: -10,
+                      }}
+                    />
+                  </View>
+
+                  {/* Fare Details */}
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text style={{ color: "#fff", fontSize: 14 }}>
+                      Zing Classic (Sedan for 4)
+                    </Text>
+
+                    <Text
+                      style={{
+                        color: "#fff",
+                        fontSize: 19,
+                        fontFamily: "Poppins_Medium",
+                      }}
+                    >
+                      ₹ {fare}
+                    </Text>
+                  </View>
                 </View>
 
-                <View style={{ width: "100%", marginBottom: 15 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "#666",
-                      fontFamily: "Poppins_Regular",
-                    }}
-                  >
-                    Date & Time:
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      // fontWeight: "600",
-                      fontFamily: "Poppins_Medium",
-                    }}
-                  >
-                    March 12, 2025 - 12:00 AM
-                  </Text>
-                </View>
-
-                <View style={{ width: "100%", marginBottom: 15 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "#666",
-                      fontFamily: "Poppins_Regular",
-                    }}
-                  >
-                    Vehicle Category:
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      // fontWeight: "600",
-                      fontFamily: "Poppins_Medium",
-                    }}
-                  >
-                    Zing Classic (Sedan, 4 Seater)
-                  </Text>
-                </View>
-
-                <View style={{ width: "100%", marginBottom: 20 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "#666",
-                      fontFamily: "Poppins_Regular",
-                    }}
-                  >
-                    Total Fare:
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 22,
-                      // fontWeight: "bold",
-                      color: "#2d78ff",
-                      fontFamily: "Poppins_Medium",
-                    }}
-                  >
-                    ₹800
-                  </Text>
-                </View>
-
-                {/* Button Row */}
+                {/* Buttons */}
                 <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
                     width: "100%",
+                    marginTop: 15,
                   }}
                 >
                   <TouchableOpacity
@@ -1969,11 +2147,13 @@ const RoundTripScreen = () => {
                     onPress={() => {
                       setModalVisible(false);
                       navigation.navigate("bookingConfirmationScreen", {
-                        date: "13 July",
-                        time: "8:30 AM",
-                        pickup: "Ambience Mall",
-                        drop: "Gate 1 Huda City",
-                        fare: 149,
+                        pickup,
+                        dropLocations,
+                        pickupDate,
+                        pickupTime,
+                        returnDate,
+                        returnTime,
+                        fare,
                       });
                     }}
                   >

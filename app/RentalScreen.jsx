@@ -1016,7 +1016,6 @@ const RentalScreen = () => {
                 justifyContent: "flex-end",
                 alignItems: "center",
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
-                // height: 800,
               }}
             >
               <View
@@ -1027,112 +1026,160 @@ const RentalScreen = () => {
                   borderTopRightRadius: 20,
                   alignItems: "center",
                   width: "100%",
-                  // height: 500,
                 }}
               >
-                {/* Booking Summary */}
                 <Text
                   style={{
                     fontSize: 20,
                     fontFamily: "Poppins_Medium",
-                    marginBottom: 15,
                     color: "#007AFF",
+                    marginBottom: 15,
                   }}
                 >
                   Booking Details
                 </Text>
 
-                <View style={{ width: "100%", marginBottom: 15 }}>
-                  <Text
+                {/* Ticket Container */}
+                <View
+                  style={{
+                    backgroundColor: "#2d78ff",
+                    borderRadius: 10,
+                    padding: 15,
+                    width: "100%",
+                    position: "relative",
+                  }}
+                >
+                  {/* Top Section */}
+                  <View
                     style={{
-                      fontSize: 16,
-                      color: "#666",
-                      fontFamily: "Poppins_Regular",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
                   >
-                    Selected Package
-                  </Text>
-                  <Text
+                    <View style={{ alignItems: "center" }}>
+                      <Text style={{ color: "#fff", fontSize: 14 }}>
+                        Selected Package
+                      </Text>
+                      <Text
+                        style={{
+                          color: "#fff",
+                          fontSize: 18,
+                          fontFamily: "Poppins_Medium",
+                        }}
+                      >
+                        8 hrs / 80 km
+                      </Text>
+                    </View>
+
+                    <View style={{ alignItems: "center" }}>
+                      <Text style={{ color: "#fff", fontSize: 12 }}>
+                        Pickup Date & Time
+                      </Text>
+                      <Text
+                        style={{
+                          color: "#fff",
+                          fontSize: 14,
+                          fontFamily: "Poppins_Regular",
+                        }}
+                      >
+                        20/04/25 - 7:30 AM
+                      </Text>
+                    </View>
+                  </View>
+
+                  {/* Pickup Address Section */}
+                  <View
                     style={{
-                      fontSize: 18,
-                      fontFamily: "Poppins_Medium",
-                      color: "#2d78ff",
+                      backgroundColor: "rgba(255,255,255,0.2)",
+                      padding: 10,
+                      borderRadius: 5,
+                      marginTop: 10,
                     }}
                   >
-                    3 hrs / 30 km
-                  </Text>
+                    <Text style={{ color: "#fff", fontSize: 12 }}>
+                      Pickup Address:
+                    </Text>
+                    <Text
+                      style={{
+                        color: "#fff",
+                        fontSize: 14,
+                        fontFamily: "Poppins_Regular",
+                        marginTop: 2,
+                      }}
+                    >
+                      Ambience Mall{" "}
+                    </Text>
+                  </View>
+
+                  {/* Dotted Line with Cutouts */}
+                  <View
+                    style={{
+                      borderBottomWidth: 1,
+                      borderBottomColor: "#fff",
+                      borderStyle: "dashed",
+                      marginVertical: 10,
+                      position: "relative",
+                    }}
+                  >
+                    {/* Left Side Cutout */}
+                    <View
+                      style={{
+                        width: 20,
+                        height: 20,
+                        backgroundColor: "white",
+                        borderRadius: 10,
+                        position: "absolute",
+                        left: -23,
+                        top: -10,
+                      }}
+                    />
+
+                    {/* Right Side Cutout */}
+                    <View
+                      style={{
+                        width: 20,
+                        height: 20,
+                        backgroundColor: "white",
+                        borderRadius: 10,
+                        position: "absolute",
+                        right: -23,
+                        top: -10,
+                      }}
+                    />
+                  </View>
+
+                  {/* Bottom Section */}
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text style={{ color: "#fff", fontSize: 14 }}>
+                      Zing Classic (Sedan for 4)
+                    </Text>
+
+                    <Text
+                      style={{
+                        color: "#fff",
+                        fontSize: 16,
+                        fontFamily: "Poppins_Medium",
+                      }}
+                    >
+                      ₹ 800
+                    </Text>
+                  </View>
                 </View>
 
-                <View style={{ width: "100%", marginBottom: 15 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "#666",
-                      fontFamily: "Poppins_Regular",
-                    }}
-                  >
-                    Date & Time:
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      // fontWeight: "600",
-                      fontFamily: "Poppins_Medium",
-                    }}
-                  >
-                    March 12, 2025 - 12:00 AM
-                  </Text>
-                </View>
-
-                <View style={{ width: "100%", marginBottom: 15 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "#666",
-                      fontFamily: "Poppins_Regular",
-                    }}
-                  >
-                    Vehicle Category:
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      // fontWeight: "600",
-                      fontFamily: "Poppins_Medium",
-                    }}
-                  >
-                    Zing Classic (Sedan, 4 Seater)
-                  </Text>
-                </View>
-
-                <View style={{ width: "100%", marginBottom: 20 }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "#666",
-                      fontFamily: "Poppins_Regular",
-                    }}
-                  >
-                    Total Fare:
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 22,
-                      // fontWeight: "bold",
-                      color: "#2d78ff",
-                      fontFamily: "Poppins_Medium",
-                    }}
-                  >
-                    ₹800
-                  </Text>
-                </View>
-
-                {/* Button Row */}
+                {/* Buttons */}
                 <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
                     width: "100%",
+                    marginTop: 15,
                   }}
                 >
                   <TouchableOpacity
