@@ -394,21 +394,25 @@ export default function MainScreen() {
           >
             {[
               {
+                id: 1,
                 title: "Outstation",
                 rideLottie: require("../assets/V3.json"),
                 // subRideLottie: require("../assets/H1.json"),
               },
               {
+                id: 2,
                 title: "Round Trip",
                 rideLottie: require("../assets/V3.json"),
                 subRideLottie: require("../assets/luggage.json"),
               },
               {
+                id: 3,
                 title: "Rental",
                 rideLottie: require("../assets/V3.json"),
                 subRideLottie: require("../assets/H2.json"),
               },
               {
+                id: 4,
                 title: "Airport Rides",
                 rideLottie: require("../assets/V3.json"),
                 subRideLottie: require("../assets/H1.json"),
@@ -428,6 +432,9 @@ export default function MainScreen() {
                     borderColor: "#dbdbdb75",
                     borderWidth: 1.5,
                   }}
+                  onPress={() =>
+                    navigation.navigate("bookingScreen", { selectedItem: item })
+                  }
                 >
                   <Text
                     style={{
@@ -648,7 +655,7 @@ export default function MainScreen() {
                             width: 65,
                             height: 65,
                             borderRadius: 50,
-                            borderWidth: 5,
+                            borderWidth: 3,
                             borderColor: "#fff",
                             // elevation: 5,
                             justifyContent: "center",
@@ -659,7 +666,7 @@ export default function MainScreen() {
 
                       <Text
                         style={{
-                          paddingTop: 8,
+                          paddingTop: 5,
                           fontFamily: "Poppins_Regular",
                           fontSize: 11,
                           // fontWeight: "600",
