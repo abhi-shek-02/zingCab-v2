@@ -474,6 +474,7 @@ export default function MainScreen() {
                         source={item.rideLottie}
                         autoPlay
                         loop
+                        speed={1.5}
                         style={{
                           width: 80,
                           height: 65,

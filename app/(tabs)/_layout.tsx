@@ -1,4 +1,3 @@
-
 import { Tabs } from "expo-router";
 import { View, Text } from "react-native";
 import { Feather } from "@expo/vector-icons"; // Icons from Feather
@@ -25,6 +24,30 @@ export default function TabLayout() {
       }}
     >
       {/* Left Tab - My Rides */}
+
+      <Tabs.Screen
+        name="index"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View style={{ flex: 1, alignItems: "center" }}>
+              <Feather
+                name="home"
+                size={24}
+                color={focused ? "#2d78ff" : "#959595"}
+              />
+              <Text
+                style={[
+                  styles.label,
+                  { color: focused ? "#2d78ff" : "#959595" },
+                ]}
+              >
+                Home
+              </Text>
+            </View>
+          ),
+        }}
+      />
+
       <Tabs.Screen
         name="explore"
         options={{
@@ -37,8 +60,17 @@ export default function TabLayout() {
           headerTitleAlign: "center",
           tabBarIcon: ({ focused }) => (
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Feather name="navigation" size={24} color={focused ? "#2d78ff" : "#959595"} />
-              <Text style={[styles.label, { color: focused ? "#2d78ff" : "#959595" }]}>
+              <Feather
+                name="navigation"
+                size={24}
+                color={focused ? "#2d78ff" : "#959595"}
+              />
+              <Text
+                style={[
+                  styles.label,
+                  { color: focused ? "#2d78ff" : "#959595" },
+                ]}
+              >
                 Ride
               </Text>
             </View>
@@ -47,7 +79,7 @@ export default function TabLayout() {
       />
 
       {/* Center Floating Button - Home */}
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="index"
         options={{
           tabBarIcon: ({ focused }) => (
@@ -59,7 +91,7 @@ export default function TabLayout() {
             </View>
           ),
         }}
-      />
+      /> */}
 
       {/* Right Tab - Profile */}
       <Tabs.Screen
@@ -67,8 +99,17 @@ export default function TabLayout() {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ flex: 1, alignItems: "center" }}>
-              <Feather name="user" size={24} color={focused ? "#2d78ff" : "#959595"} />
-              <Text style={[styles.label, { color: focused ? "#2d78ff" : "#959595" }]}>
+              <Feather
+                name="user"
+                size={24}
+                color={focused ? "#2d78ff" : "#959595"}
+              />
+              <Text
+                style={[
+                  styles.label,
+                  { color: focused ? "#2d78ff" : "#959595" },
+                ]}
+              >
                 Profile
               </Text>
             </View>
