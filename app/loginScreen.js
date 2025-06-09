@@ -148,24 +148,27 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     color: "#fff",
-    fontWeight: "bold",
+    // fontWeight: "bold",
     textAlign: "center",
     backgroundColor: "#4EBFAC",
     width: "100%",
     padding: 10,
     fontSize: 15,
     borderRadius: 50,
+    fontFamily: "Poppins_Medium",
   },
   badgeSubText: {
     color: "#505052",
     fontSize: 14,
     textAlign: "center",
-    fontWeight: "700",
+    // fontWeight: "700",
     padding: 10,
+    fontFamily: "Poppins_Medium",
   },
   title: {
     fontSize: 22,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Poppins_Medium",
     textAlign: "center",
     marginTop: 10,
   },
@@ -173,6 +176,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     color: "#007AFF",
     fontSize: 20,
+    fontFamily: "Poppins_Medium",
   },
   subText: {
     fontSize: 14,
@@ -180,6 +184,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 15,
     marginTop: 5,
+    fontFamily: "Poppins_Regular",
   },
   carouselContainer: {
     alignItems: "center",
@@ -206,12 +211,14 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 14,
     textAlign: "center",
+    fontFamily: "Poppins_Medium",
   },
   promoDiscount: {
     color: "#fff",
     fontSize: 16,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     textAlign: "center",
+    fontFamily: "Poppins_Medium",
   },
   inputContainer: {
     flexDirection: "row",
@@ -229,12 +236,14 @@ const styles = StyleSheet.create({
   },
   countryCode: {
     fontSize: 16,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Poppins_Medium",
     marginRight: 8,
   },
   input: {
     flex: 1,
     fontSize: 16,
+    fontFamily: "Poppins_Medium",
   },
   truecallerButton: {
     backgroundColor: "#E9F4FF",
@@ -246,6 +255,7 @@ const styles = StyleSheet.create({
   truecallerText: {
     color: "#007AFF",
     fontSize: 16,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Poppins_Medium",
   },
 });

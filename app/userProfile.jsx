@@ -8,7 +8,12 @@ import {
   ScrollView,
   TextInput,
 } from "react-native";
-import { MaterialIcons, FontAwesome5, Entypo } from "@expo/vector-icons";
+import {
+  MaterialIcons,
+  FontAwesome5,
+  Entypo,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 const UserProfile = () => {
   const [user, setUser] = useState({
@@ -82,7 +87,18 @@ const UserProfile = () => {
               borderBottomColor: "#ddd",
             }}
           >
-            <Text style={{ fontSize: 18, marginRight: 10 }}>📛</Text>
+            <MaterialCommunityIcons
+              name="account-circle"
+              size={20}
+              color="#2d78ff"
+              style={{
+                // alignItems: "center",
+                // height: "90%",
+                padding: 5,
+                // width: "10%",
+                marginRight: 13,
+              }}
+            />
             <Text style={{ flex: 1, fontSize: 16 }}>{user.name}</Text>
           </View>
 
@@ -96,7 +112,18 @@ const UserProfile = () => {
               borderBottomColor: "#ddd",
             }}
           >
-            <Text style={{ fontSize: 18, marginRight: 10 }}>📱</Text>
+            <MaterialCommunityIcons
+              name="phone-in-talk"
+              size={20}
+              color="#2d78ff"
+              style={{
+                // alignItems: "center",
+                // height: "90%",
+                padding: 5,
+                // width: "10%",
+                marginRight: 13,
+              }}
+            />
             <Text style={{ flex: 1, fontSize: 16, color: "gray" }}>
               {user.phoneNumber}
             </Text>
@@ -112,7 +139,18 @@ const UserProfile = () => {
               borderBottomColor: "#ddd",
             }}
           >
-            <Text style={{ fontSize: 18, marginRight: 10 }}>📧</Text>
+            <MaterialCommunityIcons
+              name="email-open-outline"
+              size={20}
+              color="#2d78ff"
+              style={{
+                // alignItems: "center",
+                // height: "90%",
+                padding: 5,
+                // width: "10%",
+                marginRight: 13,
+              }}
+            />
             <Text style={{ flex: 1, fontSize: 16 }}>{user.emailID}</Text>
           </View>
 
@@ -126,7 +164,18 @@ const UserProfile = () => {
               borderBottomColor: "#ddd",
             }}
           >
-            <Text style={{ fontSize: 18, marginRight: 10 }}>⚧️</Text>
+            <MaterialCommunityIcons
+              name="gender-transgender"
+              size={20}
+              color="#2d78ff"
+              style={{
+                // alignItems: "center",
+                // height: "90%",
+                padding: 5,
+                // width: "10%",
+                marginRight: 13,
+              }}
+            />
             <Text style={{ flex: 1, fontSize: 16 }}>{user.gender}</Text>
           </View>
 
@@ -138,7 +187,18 @@ const UserProfile = () => {
               paddingVertical: 10,
             }}
           >
-            <Text style={{ fontSize: 18, marginRight: 10 }}>🎂</Text>
+            <MaterialCommunityIcons
+              name="update"
+              size={20}
+              color="#2d78ff"
+              style={{
+                // alignItems: "center",
+                // height: "90%",
+                padding: 5,
+                // width: "10%",
+                marginRight: 13,
+              }}
+            />
             <Text style={{ flex: 1, fontSize: 16 }}>{user.dob}</Text>
           </View>
         </View>
@@ -243,7 +303,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   truecallerText: {
-    color: "#007AFF",
+    color: "#2d78ff",
     fontSize: 16,
     fontWeight: "bold",
   },
