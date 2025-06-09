@@ -150,13 +150,15 @@ const styles = StyleSheet.create({
   },
   otpTitle: {
     fontSize: 18,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "Poppins_Medium",
     marginBottom: 5,
   },
   phoneNumberRow: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,
+    fontFamily: "Poppins_Medium",
   },
   phoneText: {
     color: "#555",
